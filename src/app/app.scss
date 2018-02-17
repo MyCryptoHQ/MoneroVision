@@ -1,0 +1,20 @@
+@import 'src/sass/mixins/index';
+@import 'src/sass/variables/index';
+
+.App {
+	text-align: center;
+	&-header {
+		padding: 16px;
+		background-color: $bg-color;
+	}
+	&-title {
+		font-size: 32px;
+		font-weight: 300;
+		color: white;
+	}
+	&-intro {
+		span {
+			@include mono;
+		}
+	}
+}
