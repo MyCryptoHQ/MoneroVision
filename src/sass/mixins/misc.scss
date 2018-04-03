@@ -1,0 +1,14 @@
+@mixin input-reset {
+	background: none;
+	border: none;
+}
+
+@mixin nc-rotate($degrees, $rotation) {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation});
+	transform: rotate($degrees);
+}
+
+@mixin nc-flip($horiz, $vert, $rotation) {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation});
+	transform: scale($horiz, $vert);
+}

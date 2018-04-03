@@ -1,0 +1,23 @@
+@import 'src/sass/variables/index';
+@import 'src/sass/mixins/index';
+
+.Search {
+	@include input-reset;
+	font-weight: 400;
+	font-size: 16px;
+	color: white;
+	border-radius: $border-radius;
+	padding: 12px 1rem;
+	width: 100%;
+	max-width: 768px;
+	margin: 0 3rem;
+	background-color: lighten($primary-color, 6%);
+	transition: box-shadow $transition;
+	&::placeholder {
+		color: white;
+		text-align: center;
+	}
+	&:focus {
+		box-shadow: $box-shadow;
+	}
+}

@@ -4,8 +4,10 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { rootReducer } from 'reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import App from 'app'
+import App from 'app/app'
 import 'what-input'
+import 'typeface-roboto-mono'
+import 'typeface-roboto'
 import 'sass/styles.scss'
 
 const store = createStore(rootReducer, composeWithDevTools())

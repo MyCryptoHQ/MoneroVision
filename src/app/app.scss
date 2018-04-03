@@ -2,19 +2,15 @@
 @import 'src/sass/variables/index';
 
 .App {
-	text-align: center;
-	&-header {
-		padding: 16px;
-		background-color: $bg-color;
-	}
-	&-title {
-		font-size: 32px;
-		font-weight: 300;
-		color: white;
-	}
-	&-intro {
-		span {
-			@include mono;
-		}
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: center;
+	height: inherit;
+	&-body {
+		padding: 4rem 2rem;
+		margin-top: 4.125rem;
+		max-width: 1024px;
+		width: 100%;
 	}
 }

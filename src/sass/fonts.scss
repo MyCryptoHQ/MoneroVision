@@ -1,14 +1,98 @@
+@import './icons.scss';
+@import 'src/sass/mixins/index';
+@import 'src/sass/variables/index';
+
+/* --------------------------------
+
+icons Web Font - nucleoapp.com/
+License - nucleoapp.com/license/
+
+-------------------------------- */
+
+$font-path: '../../assets/fonts/';
+
 @font-face {
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 300;
-  src: url('../../assets/fonts/Roboto-Mono-Light.woff2') format('woff2'),
-    url('../../assets/fonts/Roboto-Mono-Light.woff') format('woff');
+	font-family: 'icons';
+	src: url($font-path+'/icons.woff2') format('woff2'), url($font-path+'/icons.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-@font-face {
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../assets/fonts/Roboto-Mono-Regular.woff2') format('woff2'),
-    url('../../assets/fonts/Roboto-Mono-Regular.woff') format('woff');
+
+/*------------------------
+	base class definition
+-------------------------*/
+
+.nc-icon {
+	display: inline-block;
+	font: normal normal normal $base-font-size / 1 'icons';
+	font-size: inherit;
+	text-transform: none;
+	// line-height: inherit;
+	/* Better Font Rendering */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	&.nc-logo-github {
+		color: #191717;
+	}
+	&.nc-logo-twitter {
+		color: #69ace0;
+	}
+}
+
+/*------------------------
+  change icon size
+-------------------------*/
+
+.nc-icon.lg {
+	font-size: 1.33333333em;
+	vertical-align: -16%;
+}
+
+.nc-icon.x2 {
+	font-size: 2em;
+}
+
+.nc-icon.x3 {
+	font-size: 3em;
+}
+
+/*------------------------
+  spinning icons
+-------------------------*/
+
+.nc-icon.spin {
+	animation: nc-icon-spin 2s infinite linear;
+}
+
+@keyframes nc-icon-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/*------------------------
+  rotated/flipped icons
+-------------------------*/
+
+.nc-icon.rotate-90 {
+	@include nc-rotate(90deg, 1);
+}
+
+.nc-icon.rotate-180 {
+	@include nc-rotate(180deg, 2);
+}
+
+.nc-icon.rotate-270 {
+	@include nc-rotate(270deg, 3);
+}
+
+.nc-icon.flip-y {
+	@include nc-flip(-1, 1, 0);
+}
+.nc-icon.flip-x {
+	@include nc-flip(1, -1, 2);
 }

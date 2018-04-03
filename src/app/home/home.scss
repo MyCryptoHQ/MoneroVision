@@ -1,0 +1,43 @@
+@import 'src/sass/variables/index';
+@import 'src/sass/mixins/index';
+
+.New-User-CTA {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	&-text-wrapper {
+		margin-right: 4rem;
+	}
+	&-title {
+		font-size: 30px;
+		font-weight: 400;
+		color: #5f6478;
+		white-space: nowrap;
+		margin-bottom: 0.5rem;
+	}
+	&-text {
+		font-size: 16px;
+		color: #828799;
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+		border-bottom: 1px solid $border-color;
+	}
+	&-link-wrapper {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+	&-link {
+		display: block;
+		font-size: 16px;
+		font-weight: 500;
+		color: #77bdf7;
+	}
+	&-graph {
+		margin: 0.5rem 0;
+		border: 1px solid $border-color;
+		border-radius: $border-radius;
+		height: inherit;
+		width: 133%;
+	}
+}

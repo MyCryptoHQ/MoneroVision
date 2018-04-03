@@ -1,0 +1,6 @@
+@import 'src/sass/mixins/index';
+@import 'src/sass/variables/index';
+
+.MemPool {
+	@include DefaultTable;
+}

@@ -1,0 +1,81 @@
+@import 'src/sass/mixins/index';
+@import 'src/sass/variables/index';
+
+.Select-node {
+	position: relative;
+	&-button {
+		@include button($primary-color);
+	}
+	&-dropdown {
+		position: absolute;
+		background-color: #fff;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		border: 1px solid $border-color;
+		min-width: 225px;
+		right: 0;
+		border-radius: $border-radius;
+		box-shadow: $box-shadow;
+	}
+	&-nodes {
+		font-size: 16px;
+		font-weight: 400;
+		color: #5f6478;
+		text-align: right;
+		margin: 1rem 0;
+		min-height: 82px;
+	}
+	&-node {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		cursor: pointer;
+		padding: 0.5rem 1.5rem;
+		transition: background-color $transition;
+		> .settings {
+			@include icon-button(#5f6478);
+			margin-left: -0.5rem;
+			opacity: 0;
+			&:focus {
+				opacity: 1;
+			}
+		}
+		> .selected-marker {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 4px;
+			height: 100%;
+			transition: background-color $transition;
+			background-color: transparent;
+		}
+		&.selected {
+			background-color: $hover-color;
+			> .selected-marker {
+				background-color: $secondary-color;
+			}
+			> .settings {
+				opacity: 0.6;
+			}
+		}
+		&:hover {
+			background-color: $hover-color;
+			&:not(.selected) > .settings {
+				opacity: 0.3;
+			}
+		}
+	}
+	&-add {
+		@include button($secondary-color);
+		margin: 1rem;
+		margin-top: 0;
+	}
+}
+
+.Add-Node,
+.Configure-Node {
+	width: 460px;
+}
