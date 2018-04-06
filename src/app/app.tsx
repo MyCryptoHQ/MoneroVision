@@ -16,7 +16,7 @@ const App = () => (
 			<div className="App-body">
 				<Switch>
 					<Route exact path="/" component={Home} />
-					<Route path="/tx/:transaction" component={TxDetails} />
+					<Route path="/tx/:transaction" onChange={() => console.log('foo')} component={TxDetails} />
 					<Route path="/block/:block" component={BlockDetails} />
 				</Switch>
 			</div>

@@ -37,7 +37,7 @@ export const MemPool = () => {
 								</td>
 								<td>{(transaction.tx_fee / 1000000000000).toFixed(3)}</td>
 								<td>{toKB(transaction.tx_size)}</td>
-								<td>{calculateAge(transaction.timestamp_utc + ' GMT')}</td>
+								<td>{calculateAge(transaction.timestamp_utc + ' UTC')}</td>
 							</tr>
 						) : null
 					})}

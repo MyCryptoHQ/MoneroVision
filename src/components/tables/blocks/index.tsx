@@ -41,7 +41,7 @@ export const Blocks = () => {
 								</td>
 								<td>{block.txs.length}</td>
 								<td>{toKB(block.size)}</td>
-								<td>{calculateAge(block.timestamp_utc + ' GMT')}</td>
+								<td>{calculateAge(block.timestamp_utc + ' UTC')}</td>
 							</tr>
 						) : null
 					})}

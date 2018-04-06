@@ -1,30 +1,66 @@
 import * as React from 'react'
 import './add-node.scss'
-import { Modal, Props as ModalProps } from 'components/modals'
+import { Modal, Props as ModalProps, Button } from 'components/modals'
 import { Input } from 'components/forms/input'
 import { Omit } from 'utils/types'
+import { connect } from 'react-redux'
+import { addNode, AddNodeType } from 'redux/nodes/actions'
 
-type Props = Omit<ModalProps, 'title'>
+type OwnProps = Omit<ModalProps, 'title' | 'buttons'>
+
+interface DispatchProps {
+	addNode: AddNodeType
+}
+
+type Props = OwnProps & DispatchProps
 
 interface State {
 	name: string
 	url: string
 }
 
-export class AddNode extends React.Component<Props, State> {
+class AddNodeClass extends React.Component<Props, State> {
 	public state = {
 		name: '',
 		url: '',
+	}
+
+	public resetInputs() {
+		this.setState({ name: '', url: '' })
 	}
 
 	public onChange = (key: string, value: string) => {
 		this.setState({ ...this.state, [key]: value })
 	}
 
+	public onComplete = () => {
+		const { name, url } = this.state
+		this.props.addNode({ name, url })
+		this.props.closeModal()
+	}
+
 	public render() {
 		const { name, url } = this.state
+		const buttons: Button[] = [
+			{
+				text: 'Confirm',
+				type: 'primary',
+				onClick: () => {
+					this.onComplete()
+					this.resetInputs()
+				},
+			},
+			{
+				text: 'Cancel',
+				type: 'secondary',
+				onClick: () => {
+					this.props.closeModal()
+					this.resetInputs()
+				},
+			},
+		]
 		return (
-			<Modal {...this.props} className="Add-Node" contentLabel="Add Node" title="Add Node">
+			<Modal {...this.props} buttons={buttons} className="Add-Node" contentLabel="Add Node" title="Add Node">
 				<div className="Modal-info">
 					<i className="nc-icon nc-ic_info_24px" />
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu ligula varius, interdum nibh in.</p>
@@ -47,3 +83,5 @@ export class AddNode extends React.Component<Props, State> {
 		)
 	}
 }
+
+export const AddNode = connect(null, { addNode })(AddNodeClass)

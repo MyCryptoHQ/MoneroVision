@@ -2,7 +2,7 @@ import * as React from 'react'
 import * as ReactModal from 'react-modal'
 import './modal.scss'
 
-interface Button {
+export interface Button {
 	text: string
 	type: 'primary' | 'secondary' | 'warning'
 	onClick(): void
@@ -17,8 +17,7 @@ const Button: React.StatelessComponent<Button> = ({ text, type, onClick }) => (
 export interface Props extends ReactModal.Props {
 	title: string
 	closeModal(): void
-	onComplete(): void
-	buttons?: Button | Button[]
+	buttons: Button | Button[]
 }
 
 interface State {
@@ -28,12 +27,7 @@ interface State {
 export class Modal extends React.Component<Props, State> {
 	private appElement = document.getElementById('root') as HTMLElement
 	public render() {
-		const { title, closeModal, onComplete, buttons, children } = this.props
-
-		const defaultButtons: Button[] = [
-			{ text: 'Confirm', type: 'primary', onClick: onComplete },
-			{ text: 'Cancel', type: 'secondary', onClick: closeModal },
-		]
+		const { title, closeModal, buttons, children } = this.props
 
 		return (
 			<ReactModal
@@ -53,14 +47,10 @@ export class Modal extends React.Component<Props, State> {
 				</div>
 				<div className="Modal-body">{children}</div>
 				<div className="Modal-footer">
-					{!!buttons ? (
-						Array.isArray(buttons) ? (
-							buttons.map(button => <Button key={button.text} {...button} />)
-						) : (
-							<Button {...buttons} />
-						)
+					{Array.isArray(buttons) ? (
+						buttons.map(button => <Button key={button.text} {...button} />)
 					) : (
-						defaultButtons.map(button => <Button key={button.text} {...button} />)
+						<Button {...buttons} />
 					)}
 				</div>
 			</ReactModal>

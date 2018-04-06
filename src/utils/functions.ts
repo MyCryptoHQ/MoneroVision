@@ -14,3 +14,18 @@ export const toKB = (bytes: number | string) => {
 	typeof bytes === 'string' ? (bytesInt = parseInt(bytes)) : (bytesInt = bytes)
 	return bytesInt / 1000 + ' kB'
 }
+
+export const formatApiDateStrings = (str: string) => {
+	const s = str.split(' ')
+	return s[0].replace(/-/g, ' / ') + ' – ' + s[1] + ' UTC'
+}
+
+export const createReducer = (initialState: any, handlers: any) => {
+	return (state = initialState, action: any) => {
+		if (handlers.hasOwnProperty(action.type)) {
+			return handlers[action.type](state, action)
+		} else {
+			return state
+		}
+	}
+}

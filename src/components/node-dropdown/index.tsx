@@ -4,14 +4,21 @@ import { OutsideAlerter } from 'components/outside-click'
 import { SelectNode } from './components'
 import { ConfigureNode } from '../modals/configure-node'
 import { AddNode } from 'components/modals/add-node'
+import { connect } from 'react-redux'
+import { Node } from 'redux/nodes/actions'
 
 interface State {
 	isDropdownOpen: boolean
 	isSettingsModalOpen: boolean
 	isAddNodeModalOpen: boolean
+	configureNode: Node | null
 }
 
-export class NodeDropdown extends React.Component<{}, State> {
+interface DispatchProps {}
+
+type Props = DispatchProps
+
+class NodeDropdownClass extends React.Component<Props, State> {
 	constructor(props: any) {
 		super(props)
 		// React v16.3 createRef() API, until @types/react have updated cast as 'any'
@@ -21,6 +28,7 @@ export class NodeDropdown extends React.Component<{}, State> {
 		isDropdownOpen: false,
 		isSettingsModalOpen: false,
 		isAddNodeModalOpen: false,
+		configureNode: null,
 	}
 
 	public openButton: any
@@ -37,14 +45,26 @@ export class NodeDropdown extends React.Component<{}, State> {
 		this.setState({ isAddNodeModalOpen: !this.state.isAddNodeModalOpen })
 	}
 
+	public selectConfigureNode = (node: Node) => {
+		this.setState({ configureNode: node })
+	}
+
+	public addNode = () => {
+		this.toggleDropdown()
+		this.toggleAddNode()
+	}
+
 	public render() {
 		const {
 			toggleDropdown,
 			toggleSettings,
 			toggleAddNode,
-			state: { isDropdownOpen, isSettingsModalOpen, isAddNodeModalOpen },
+			selectConfigureNode,
+			addNode,
+			state: { isDropdownOpen, isSettingsModalOpen, isAddNodeModalOpen, configureNode },
 			openButton,
 		} = this
+
 		return (
 			<div className="Select-node">
 				<button className="Select-node-button" onClick={toggleDropdown} ref={this.openButton}>
@@ -53,23 +73,27 @@ export class NodeDropdown extends React.Component<{}, State> {
 				{isDropdownOpen && (
 					<OutsideAlerter onClick={toggleDropdown} exception={openButton.current}>
 						<div className="Select-node-dropdown">
-							<SelectNode toggleModal={toggleSettings} toggleDropdown={toggleDropdown} />
+							<SelectNode
+								toggleModal={toggleSettings}
+								toggleDropdown={toggleDropdown}
+								configureNode={selectConfigureNode}
+							/>
 							<div className="flex-spacer" />
-							<button
-								className="Select-node-add"
-								onClick={() => {
-									toggleDropdown()
-									toggleAddNode()
-								}}
-							>
+							<button className="Select-node-add" onClick={addNode}>
 								Add
 							</button>
 						</div>
 					</OutsideAlerter>
 				)}
-				<ConfigureNode isOpen={isSettingsModalOpen} closeModal={toggleSettings} onComplete={toggleSettings} />
-				<AddNode isOpen={isAddNodeModalOpen} closeModal={toggleAddNode} onComplete={toggleAddNode} />
+				<ConfigureNode
+					node={configureNode}
+					isOpen={isSettingsModalOpen && !!configureNode}
+					closeModal={toggleSettings}
+				/>
+				<AddNode isOpen={isAddNodeModalOpen} closeModal={toggleAddNode} />
 			</div>
 		)
 	}
 }
+
+export const NodeDropdown = connect(null, {})(NodeDropdownClass)
