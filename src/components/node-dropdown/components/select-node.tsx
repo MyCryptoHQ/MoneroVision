@@ -30,7 +30,7 @@ type Props = OwnProps & StateProps & DispatchProps
 class SelectNodeClass extends React.Component<Props> {
 	public selectNode = (e: any) => {
 		e.preventDefault()
-		this.setState({ selectedNode: e.target.getAttribute('data-node') })
+		this.props.selectNode(e.target.getAttribute('data-node'))
 		Array.from(e.target.parentNode.childNodes, (node: Element) => {
 			return node.classList.remove('selected')
 		})
@@ -57,9 +57,11 @@ class SelectNodeClass extends React.Component<Props> {
 							data-node={node.name}
 						>
 							<div className="selected-marker" />
-							<button className="settings" onClick={() => this.openModal(node)}>
-								<i className="nc-icon nc-ic_settings_24px" />
-							</button>
+							{node.name !== 'Default' && (
+								<button className="settings" onClick={() => this.openModal(node)}>
+									<i className="nc-icon nc-ic_settings_24px" />
+								</button>
+							)}
 							<div className="flex-spacer" />
 							<p>{node.name}</p>
 						</NodeOption>

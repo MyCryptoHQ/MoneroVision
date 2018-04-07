@@ -1,6 +1,6 @@
 @import 'src/sass/variables/index';
 
-@mixin Details {
+.Details {
 	&-header {
 		display: flex;
 		flex-direction: row;
@@ -40,19 +40,21 @@
 			}
 			&-content {
 				width: 100%;
-				&-input {
+				margin-right: -6rem;
+				&-input,
+				> a {
 					display: inline-flex;
 					flex-direction: column;
 					flex-wrap: nowrap;
 					margin-bottom: 2rem;
-					margin-right: 2rem;
+					margin-right: 6rem;
 					word-wrap: break-word;
 					word-break: break-all;
 					p {
 						color: #828799;
 						font-weight: 400;
 						font-size: 1rem;
-						padding-right: 3rem;
+						// padding-right: 3rem;
 						&:first-child {
 							color: #5f6478;
 						}
@@ -60,6 +62,7 @@
 				}
 			}
 			&-table {
+				margin-right: 0;
 				&:not(:last-child) {
 					margin-bottom: 2rem;
 				}

@@ -23,6 +23,7 @@
     "@types/react-hot-loader": "^3.0.6",
     "@types/react-modal": "^3.1.2",
     "@types/react-redux": "^5.0.15",
+    "@types/react-router": "^4.0.23",
     "@types/react-router-dom": "^4.2.5",
     "@types/webpack-env": "^1.13.5",
     "babel-loader": "^7.1.4",

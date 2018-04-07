@@ -7,6 +7,7 @@ $table-cell-padding: 3rem;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
+	min-height: 19rem;
 	&-header {
 		display: flex;
 		flex-direction: row;
@@ -20,6 +21,7 @@ $table-cell-padding: 3rem;
 		font-size: 20px;
 		font-weight: 500;
 		color: #5f6478;
+		margin-right: 0.5rem;
 	}
 	&-view-all {
 		@include button($secondary-color);

@@ -6,8 +6,8 @@ import { Nav } from 'app/nav'
 import { Footer } from 'app/footer'
 import { Home } from 'app/home'
 import { BrowserRouter } from 'react-router-dom'
-import { TxDetails } from 'app/tx-details'
-import { BlockDetails } from 'app/block-details'
+import { TxDetails } from 'app/details/tx-details'
+import { BlockDetails } from 'app/details/block-details'
 
 const App = () => (
 	<BrowserRouter>
