@@ -70,16 +70,15 @@ export class TxDetailsClass extends React.Component<Props, State> {
 										<p>Extra</p>
 										<p>{transaction.extra}</p>
 									</div>
-									{transaction.payment_id ||
-										(transaction.payment_id8 && (
-											<>
-												<br />
-												<div className="Details-body-section-content-input">
-													<p>Payment ID</p>
-													<p>{transaction.payment_id || transaction.payment_id8}</p>
-												</div>
-											</>
-										))}
+									{(transaction.payment_id || transaction.payment_id8) && (
+										<>
+											<br />
+											<div className="Details-body-section-content-input">
+												<p>Payment ID</p>
+												<p>{transaction.payment_id || transaction.payment_id8}</p>
+											</div>
+										</>
+									)}
 									<br />
 									<div className="Details-body-section-content-input">
 										<p>Fee</p>
