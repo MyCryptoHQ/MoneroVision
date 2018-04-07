@@ -5,12 +5,14 @@ import './app.scss'
 import { Nav } from 'app/nav'
 import { Footer } from 'app/footer'
 import { Home } from 'app/home'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { TxDetails } from 'app/details/tx-details'
 import { BlockDetails } from 'app/details/block-details'
 
+const Router = process.env.NODE_ENV === 'production' ? HashRouter : BrowserRouter
+
 const App = () => (
-	<BrowserRouter>
+	<Router>
 		<div className="App">
 			<Nav />
 			<div className="App-body">
@@ -23,7 +25,7 @@ const App = () => (
 			<div className="flex-spacer" />
 			<Footer />
 		</div>
-	</BrowserRouter>
+	</Router>
 )
 
 export default hot(module)(App)
