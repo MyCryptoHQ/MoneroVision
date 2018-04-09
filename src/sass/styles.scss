@@ -65,6 +65,7 @@ span {
 	box-shadow: $box-shadow;
 	width: 100%;
 	padding: 1rem 2rem;
+	overflow: hidden;
 	&:not(:last-child) {
 		margin-bottom: 3rem;
 	}

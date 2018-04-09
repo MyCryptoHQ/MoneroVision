@@ -8,6 +8,8 @@ import { Home } from 'app/home'
 import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { TxDetails } from 'app/details/tx-details'
 import { BlockDetails } from 'app/details/block-details'
+import { MemPool } from 'components/tables/mempool'
+import { Blocks } from 'components/tables/blocks'
 
 const Router = process.env.NODE_ENV === 'production' ? HashRouter : BrowserRouter
 
@@ -18,7 +20,9 @@ const App = () => (
 			<div className="App-body">
 				<Switch>
 					<Route exact path="/" component={Home} />
-					<Route path="/tx/:transaction" onChange={() => console.log('foo')} component={TxDetails} />
+					<Route path="/mempool" render={() => <MemPool paginated={true} />} />
+					<Route path="/blocks" render={() => <Blocks paginated={true} />} />
+					<Route path="/tx/:transaction" component={TxDetails} />
 					<Route path="/block/:block" component={BlockDetails} />
 				</Switch>
 			</div>

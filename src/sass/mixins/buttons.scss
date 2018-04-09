@@ -3,7 +3,6 @@
 @mixin button-reset {
 	background: none;
 	border: none;
-	cursor: pointer;
 	margin: 0;
 	padding: 0;
 }
@@ -23,7 +22,8 @@
 		margin-left: 0.5rem;
 	}
 	transition: background-color $transition;
-	&:hover {
+	&:hover:not([disabled]) {
+		cursor: pointer;
 		background-color: lighten($bg-color, 8%);
 	}
 	&:active {
@@ -37,7 +37,7 @@
 
 @mixin button-secondary {
 	color: #999999;
-	&:hover {
+	&:hover:not([disabled]) {
 		background-color: darken(white, 3%);
 	}
 	&:active {
@@ -50,13 +50,13 @@
 	border: none;
 	color: $color;
 	display: flex;
-	cursor: pointer;
 	padding: 0.5rem;
 	border-radius: 50%;
 	transition: opacity $transition, background-color 150ms ease-out;
 	opacity: 0.4;
-	&:hover {
+	&:hover:not([disabled]) {
 		opacity: 1 !important;
+		cursor: pointer;
 	}
 	&:active {
 		background-color: $hover-color;

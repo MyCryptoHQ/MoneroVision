@@ -1,54 +1,77 @@
 import * as React from 'react'
-import './mempool.scss'
-import { calculateAge, toKB } from 'utils/functions'
+import '../tables.scss'
+import { calculateAge, toKB, fetchAsync } from 'utils/functions'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { AppState } from 'redux/root-reducer'
 import { NodeState } from 'redux/nodes/reducer'
 import { Node } from 'redux/nodes/actions'
 
-class MemPoolClass extends React.Component<NodeState, any> {
+interface OwnProps {
+	paginated?: boolean
+}
+
+type Props = OwnProps & NodeState
+
+class MemPoolClass extends React.Component<Props, any> {
 	public state = {
-		data: { total: null, transactions: [], pending: false },
+		data: { txs_no: 0, txs: [], pending: false },
+		limit: this.props.paginated ? 25 : 5,
+		page: 0,
 	}
 
 	public componentDidMount() {
 		this.fetchData()
 	}
 
-	public fetchData = () => {
+	public fetchData = async () => {
+		const { limit, page } = this.state
 		const { nodes, selectedNode } = this.props
 		const node = nodes.find(node => node.name === selectedNode) as Node
-
 		this.setState({ data: { ...this.state.data, pending: true } })
-		fetch(node.url + '/api/mempool?limit=5')
-			.then(response => {
-				if (response.ok) {
-					return response.json()
-				}
-				this.setState({ data: { ...this.state.data, pending: false } })
-				throw new Error('error fetching mempool')
-			})
+		fetchAsync(node.url + `/api/mempool?limit=${limit}&page=${page}`)
 			.then(json => {
-				const { txs_no, txs } = json.data
-				this.setState({ data: { total: txs_no, transactions: txs, pending: false } })
+				const { txs_no, txs, page } = json.data
+				this.setState({ data: { txs_no, txs, pending: false }, page })
 			})
 			.catch(error => {
-				console.log(error)
+				this.setState({ data: { ...this.state.data, pending: false } })
+				console.log(error.message)
 			})
 	}
 
+	public incrementPage = () => {
+		this.setState({ page: this.state.page + 1 })
+	}
+
+	public decrementPage = () => {
+		if (this.state.page > 0) {
+			this.setState({ page: this.state.page - 1 })
+		}
+	}
+
 	render() {
-		const { data } = this.state
+		const { paginated } = this.props
+		const { data: { txs, txs_no, pending }, limit, page } = this.state
 		return (
-			<div className="MemPool card">
+			<div className={`MemPool card ${paginated && 'paginated'}`}>
 				<div className="MemPool-header">
-					<h2 className="MemPool-title">MemPool</h2> <span className="MemPool-title"> ({data.total})</span>
+					<h2 className="MemPool-title">MemPool</h2>{' '}
+					{!paginated &&
+						txs.length >= 5 && (
+							<span className="MemPool-size">
+								({txs.length} of {txs_no})
+							</span>
+						)}
 					<div className="flex-spacer" />
-					<button className="MemPool-refresh">
+					<button className="MemPool-refresh" onClick={this.fetchData}>
 						<i className="nc-icon nc-ic_refresh_24px" />
 					</button>
-					<button className="MemPool-view-all">View All</button>
+					{!paginated && (
+						<Link to="/mempool" className="MemPool-view-all">
+							View All
+						</Link>
+					)}
 				</div>
 				<table className="MemPool-table">
 					<thead className="MemPool-table-head">
@@ -60,7 +83,7 @@ class MemPoolClass extends React.Component<NodeState, any> {
 						</tr>
 					</thead>
 					<tbody className="MemPool-table-body">
-						{data.transactions.map((transaction: any) => (
+						{txs.map((transaction: any) => (
 							<tr key={transaction.tx_hash}>
 								<td>
 									<div className="truncate">
@@ -76,6 +99,29 @@ class MemPoolClass extends React.Component<NodeState, any> {
 						))}
 					</tbody>
 				</table>
+				<div className="flex-spacer" />
+				{!!paginated && (
+					<div className="MemPool-table-footer">
+						<div className="flex-spacer" />
+						<p className="MemPool-table-footer-pages">
+							{limit * page + 1}-{limit * page + txs.length} of {txs_no}
+						</p>
+						<button
+							className="MemPool-table-footer-paginate"
+							onClick={this.fetchData}
+							disabled={txs_no <= limit || pending}
+						>
+							<i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+						</button>
+						<button
+							className="MemPool-table-footer-paginate"
+							onClick={this.fetchData}
+							disabled={txs_no <= limit || pending}
+						>
+							<i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+						</button>
+					</div>
+				)}
 			</div>
 		)
 	}
