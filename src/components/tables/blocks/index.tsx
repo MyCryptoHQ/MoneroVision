@@ -1,25 +1,60 @@
 import * as React from 'react'
-import '../tables.scss'
+import '../table.scss'
 import { calculateAge, toKB, fetchAsync } from 'utils/functions'
 import { Link } from 'react-router-dom'
 import { AppState } from 'redux/root-reducer'
 import { connect } from 'react-redux'
 import { NodeState } from 'redux/nodes/reducer'
 import { Node } from 'redux/nodes/actions'
+import { RouteComponentProps } from 'react-router'
+
+// URLSearchParams API Polyfill: https://github.com/WebReflection/url-search-params
+if ('searchParams' in HTMLAnchorElement.prototype) {
+	require('url-search-params')
+}
 
 interface OwnProps {
 	paginated?: boolean
+	history?: RouteComponentProps<any>['history']
+	location?: RouteComponentProps<any>['location']
 }
 
 type Props = OwnProps & NodeState
 
-type State = any
+type State = {
+	data: { current_height: number; blocks: any[]; pending: boolean }
+	limit: number
+	page: number
+}
 
 class BlocksClass extends React.Component<Props, State> {
 	public state = {
 		data: { current_height: 0, blocks: [], pending: false },
 		limit: this.props.paginated ? 25 : 5,
 		page: 0,
+	}
+
+	public componentWillMount() {
+		if (this.props.location) {
+			const queryStr = new URLSearchParams(this.props.location.search)
+			let queries: any = {}
+			for (var pair of queryStr.entries()) {
+				queries[pair[0]] = pair[1]
+			}
+			if (queries.page) {
+				this.setState({
+					...this.state,
+					page: queries.page,
+				})
+			}
+
+			if (queries.limit) {
+				this.setState({
+					...this.state,
+					limit: queries.limit,
+				})
+			}
+		}
 	}
 
 	public componentDidMount() {
@@ -50,11 +85,23 @@ class BlocksClass extends React.Component<Props, State> {
 
 	public incrementPage = () => {
 		this.setState({ page: this.state.page + 1 })
+		if (this.props.history) {
+			this.props.history.push({
+				pathname: 'blocks',
+				search: 'page=' + (this.state.page + 1),
+			})
+		}
 	}
 
 	public decrementPage = () => {
 		if (this.state.page > 0) {
 			this.setState({ page: this.state.page - 1 })
+			if (this.props.history) {
+				this.props.history.push({
+					pathname: 'blocks',
+					search: 'page=' + (this.state.page - 1),
+				})
+			}
 		}
 	}
 
@@ -105,6 +152,7 @@ class BlocksClass extends React.Component<Props, State> {
 						))}
 					</tbody>
 				</table>
+				<div className="flex-spacer" />
 				{!!paginated && (
 					<div className="MemPool-table-footer">
 						<div className="flex-spacer" />

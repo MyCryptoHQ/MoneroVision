@@ -31,13 +31,13 @@ export const selectNode = (name: string): SelectNodeAction => {
 
 export interface EditNodeAction {
 	type: TypeKeys.EDIT_NODE
-	payload: Node
+	payload: { index: number; node: Node }
 }
 export type EditNodeType = typeof editNode
-export const editNode = (node: Node): EditNodeAction => {
+export const editNode = (index: number, node: Node): EditNodeAction => {
 	return {
 		type: TypeKeys.EDIT_NODE,
-		payload: node,
+		payload: { index, node },
 	}
 }
 

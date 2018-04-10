@@ -1,19 +1,27 @@
 import * as React from 'react'
-import '../tables.scss'
+import '../table.scss'
 import { calculateAge, toKB, fetchAsync } from 'utils/functions'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { AppState } from 'redux/root-reducer'
 import { NodeState } from 'redux/nodes/reducer'
 import { Node } from 'redux/nodes/actions'
+import { RouteProps } from 'react-router'
 
 interface OwnProps {
 	paginated?: boolean
+	location?: RouteProps['location']
 }
 
 type Props = OwnProps & NodeState
 
-class MemPoolClass extends React.Component<Props, any> {
+interface State {
+	data: { txs_no: number; txs: any[]; pending: boolean }
+	limit: number
+	page: number
+}
+
+class MemPoolClass extends React.Component<Props, State> {
 	public state = {
 		data: { txs_no: 0, txs: [], pending: false },
 		limit: this.props.paginated ? 25 : 5,
@@ -22,6 +30,12 @@ class MemPoolClass extends React.Component<Props, any> {
 
 	public componentDidMount() {
 		this.fetchData()
+	}
+
+	public componentDidUpdate(_prevProps: Props, prevState: State) {
+		if (prevState.page !== this.state.page && !this.state.data.pending) {
+			this.fetchData()
+		}
 	}
 
 	public fetchData = async () => {
@@ -108,14 +122,14 @@ class MemPoolClass extends React.Component<Props, any> {
 						</p>
 						<button
 							className="MemPool-table-footer-paginate"
-							onClick={this.fetchData}
+							onClick={this.decrementPage}
 							disabled={txs_no <= limit || pending}
 						>
 							<i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
 						</button>
 						<button
 							className="MemPool-table-footer-paginate"
-							onClick={this.fetchData}
+							onClick={this.incrementPage}
 							disabled={txs_no <= limit || pending}
 						>
 							<i className="nc-icon nc-ic_keyboard_arrow_right_24px" />

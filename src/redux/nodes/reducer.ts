@@ -16,8 +16,9 @@ function addNode(state: NodeState, action: AddNodeAction): NodeState {
 	return { ...state, nodes: [...state.nodes, action.payload] }
 }
 function editNode(state: NodeState, action: EditNodeAction): NodeState {
-	console.log(action)
-	return { ...state }
+	const { index, node } = action.payload
+	const nodes = [...state.nodes.slice(0, index), node, ...state.nodes.slice(index + 1)]
+	return { ...state, nodes }
 }
 function selectNode(state: NodeState, action: SelectNodeAction): NodeState {
 	return { ...state, selectedNode: action.payload }

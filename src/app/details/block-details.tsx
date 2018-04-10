@@ -49,7 +49,6 @@ export class BlockDetailsClass extends React.Component<Props, State> {
 
 	render() {
 		const block = this.state.data.block as any
-		console.log(block)
 		return (
 			<div className="Details card">
 				{!!block ? (

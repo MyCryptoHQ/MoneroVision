@@ -5,10 +5,15 @@ import { Input } from 'components/forms/input'
 import { Omit } from 'utils/types'
 import { connect } from 'react-redux'
 import { Node, editNode, removeNode, RemoveNodeType, EditNodeType } from 'redux/nodes/actions'
+import { AppState } from 'redux/root-reducer'
+import { NodeState } from 'redux/nodes/reducer'
 
 interface State {
-	name: string
-	url: string
+	node: {
+		name: string
+		url: string
+	}
+	index: number
 }
 
 interface OwnProps extends Omit<ModalProps, 'title' | 'buttons'> {
@@ -20,11 +25,27 @@ interface DispatchProps {
 	removeNode: RemoveNodeType
 }
 
-type Props = OwnProps & DispatchProps
+type Props = OwnProps & NodeState & DispatchProps
 
 class ConfigureNodeClass extends React.Component<Props, State> {
+	public state = {
+		node: {
+			name: '',
+			url: '',
+		},
+		index: -1,
+	}
+
+	public componentDidUpdate(_prevProps: Props) {
+		if (_prevProps !== this.props) {
+			const index = this.props.nodes.indexOf(this.props.node as Node)
+			const { name, url } = this.props.node as Node
+			this.setState({ node: { name, url }, index })
+		}
+	}
+
 	public onChange = (key: string, value: string) => {
-		this.setState({ ...this.state, [key]: value })
+		this.setState({ ...this.state, node: { ...this.state.node, [key]: value } })
 	}
 
 	public onComplete = () => {
@@ -32,14 +53,14 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 	}
 
 	public render() {
-		const { node } = this.props
+		const { node, index } = this.state
 		const buttons: Button[] = [
 			{
 				text: 'Confirm',
 				type: 'primary',
 				onClick: () => {
+					this.props.editNode(index, node)
 					this.onComplete()
-					// this.resetInputs()
 				},
 			},
 			{
@@ -47,7 +68,6 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 				type: 'secondary',
 				onClick: () => {
 					this.props.closeModal()
-					// this.resetInputs()
 				},
 			},
 		]
@@ -78,4 +98,11 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 	}
 }
 
-export const ConfigureNode = connect(null, { editNode, removeNode })(ConfigureNodeClass)
+const mapStateToProps = (state: AppState) => {
+	return {
+		selectedNode: state.nodes.selectedNode,
+		nodes: state.nodes.nodes,
+	}
+}
+
+export const ConfigureNode = connect(mapStateToProps, { editNode, removeNode })(ConfigureNodeClass)

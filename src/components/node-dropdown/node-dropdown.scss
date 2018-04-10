@@ -35,7 +35,7 @@
 		padding: 0.5rem 1.5rem;
 		height: 3rem;
 		transition: background-color $transition;
-		> .settings {
+		button.settings {
 			@include icon-button(#5f6478);
 			margin-left: -0.5rem;
 			opacity: 0;
@@ -57,13 +57,13 @@
 			> .selected-marker {
 				background-color: $secondary-color;
 			}
-			> .settings {
+			button.settings {
 				opacity: 0.6;
 			}
 		}
 		&:hover {
 			background-color: $hover-color;
-			&:not(.selected) > .settings {
+			&:not(.selected) button.settings {
 				opacity: 0.3;
 			}
 		}

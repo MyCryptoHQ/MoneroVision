@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './node-dropdown.scss'
 import { OutsideAlerter } from 'components/outside-click'
-import { SelectNode } from './components'
+import { SelectNode } from './components/select-node'
 import { ConfigureNode } from '../modals/configure-node'
 import { AddNode } from 'components/modals/add-node'
 import { connect } from 'react-redux'
@@ -11,7 +11,7 @@ interface State {
 	isDropdownOpen: boolean
 	isSettingsModalOpen: boolean
 	isAddNodeModalOpen: boolean
-	configureNode: Node | null
+	configureNode: Node
 }
 
 interface DispatchProps {}
@@ -28,7 +28,7 @@ class NodeDropdownClass extends React.Component<Props, State> {
 		isDropdownOpen: false,
 		isSettingsModalOpen: false,
 		isAddNodeModalOpen: false,
-		configureNode: null,
+		configureNode: { name: '', url: '' },
 	}
 
 	public openButton: any

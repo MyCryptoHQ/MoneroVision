@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
-import { Route, Switch } from 'react-router'
+import { Route, Switch, withRouter, Redirect } from 'react-router'
 import './app.scss'
 import { Nav } from 'app/nav'
 import { Footer } from 'app/footer'
@@ -13,19 +13,33 @@ import { Blocks } from 'components/tables/blocks'
 
 const Router = process.env.NODE_ENV === 'production' ? HashRouter : BrowserRouter
 
+export const RouteNotFound = () => <Redirect to={{ state: { error: true } }} />
+
+const CaptureRouteNotFound = withRouter(({ children, location }: any) => {
+	return location && location.state && location.state.error ? <div>foo bar</div> : (children as JSX.Element)
+})
+
 const App = () => (
 	<Router>
 		<div className="App">
 			<Nav />
-			<div className="App-body">
-				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route path="/mempool" render={() => <MemPool paginated={true} />} />
-					<Route path="/blocks" render={() => <Blocks paginated={true} />} />
-					<Route path="/tx/:transaction" component={TxDetails} />
-					<Route path="/block/:block" component={BlockDetails} />
-				</Switch>
-			</div>
+			<main className="App-body">
+				<CaptureRouteNotFound>
+					<Switch>
+						{/* These routes are 'exact' because they have no subroutes, except for path='/' */}
+						<Route exact path="/" component={Home} />
+						<Route exact path="/mempool" render={({ location }) => <MemPool paginated={true} location={location} />} />
+						<Route
+							exact
+							path="/blocks"
+							render={({ history, location }) => <Blocks paginated={true} history={history} location={location} />}
+						/>
+						<Route exact path="/tx/:transaction" component={TxDetails} />
+						<Route exact path="/block/:block" component={BlockDetails} />
+						<RouteNotFound />
+					</Switch>
+				</CaptureRouteNotFound>
+			</main>
 			<div className="flex-spacer" />
 			<Footer />
 		</div>

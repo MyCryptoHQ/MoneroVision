@@ -48,7 +48,6 @@ export class TxDetailsClass extends React.Component<Props, State> {
 
 	render() {
 		const transaction = this.state.data.transaction as any
-		console.log(transaction)
 		return (
 			<div className="Details card">
 				{!!transaction ? (
@@ -116,7 +115,6 @@ export class TxDetailsClass extends React.Component<Props, State> {
 										</thead>
 										<tbody>
 											{transaction.inputs.map((input: any, i: number) => {
-												console.log(input)
 												return (
 													<tr key={i}>
 														<td>{input.key_image}</td>
