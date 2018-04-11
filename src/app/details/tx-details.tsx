@@ -25,6 +25,12 @@ export class TxDetailsClass extends React.Component<Props, State> {
 		this.fetchTransaction()
 	}
 
+	public componentDidUpdate(prevProps: Props) {
+		if (prevProps.location.pathname !== this.props.location.pathname) {
+			this.fetchTransaction()
+		}
+	}
+
 	public fetchTransaction = () => {
 		const { nodes, selectedNode } = this.props
 		const node = nodes.find(node => node.name === selectedNode) as Node

@@ -36,8 +36,8 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 		index: -1,
 	}
 
-	public componentDidUpdate(_prevProps: Props) {
-		if (_prevProps !== this.props) {
+	public componentDidUpdate(prevProps: Props) {
+		if (prevProps !== this.props) {
 			const index = this.props.nodes.indexOf(this.props.node as Node)
 			const { name, url } = this.props.node as Node
 			this.setState({ node: { name, url }, index })

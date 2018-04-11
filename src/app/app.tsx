@@ -1,29 +1,33 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
-import { Route, Switch, withRouter, Redirect } from 'react-router'
+import { Route, Switch, withRouter, Redirect, Router } from 'react-router'
 import './app.scss'
 import { Nav } from 'app/nav'
 import { Footer } from 'app/footer'
 import { Home } from 'app/home'
-import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { TxDetails } from 'app/details/tx-details'
 import { BlockDetails } from 'app/details/block-details'
 import { MemPool } from 'components/tables/mempool'
 import { Blocks } from 'components/tables/blocks'
-
-const Router = process.env.NODE_ENV === 'production' ? HashRouter : BrowserRouter
+import { createBrowserHistory, createHashHistory } from 'history'
+import { PageNotFound } from 'app/page-not-found'
 
 export const RouteNotFound = () => <Redirect to={{ state: { error: true } }} />
 
 const CaptureRouteNotFound = withRouter(({ children, location }: any) => {
-	return location && location.state && location.state.error ? <div>foo bar</div> : (children as JSX.Element)
+	return location && location.state && location.state.error ? <PageNotFound /> : (children as JSX.Element)
+})
+
+const history = process.env.NODE_ENV === 'production' ? createHashHistory() : createBrowserHistory()
+history.listen(() => {
+	window.scrollTo(0, 0)
 })
 
 const App = () => (
-	<Router>
+	<Router history={history}>
 		<div className="App">
 			<Nav />
-			<main className="App-body">
+			<main id="App-body" className="App-body">
 				<CaptureRouteNotFound>
 					<Switch>
 						{/* These routes are 'exact' because they have no subroutes, except for path='/' */}

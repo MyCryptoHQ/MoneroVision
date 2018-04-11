@@ -26,6 +26,12 @@ export class BlockDetailsClass extends React.Component<Props, State> {
 		this.fetchBlock()
 	}
 
+	public componentDidUpdate(prevProps: Props) {
+		if (prevProps.location.pathname !== this.props.location.pathname) {
+			this.fetchBlock()
+		}
+	}
+
 	public fetchBlock = () => {
 		const { nodes, selectedNode } = this.props
 		const node = nodes.find(node => node.name === selectedNode) as Node
@@ -104,7 +110,7 @@ export class BlockDetailsClass extends React.Component<Props, State> {
 											return (
 												<tr key={i}>
 													<td>
-														<Link to={`tx/${transaction.tx_hash}`}>{transaction.tx_hash}</Link>
+														<Link to={`/tx/${transaction.tx_hash}`}>{transaction.tx_hash}</Link>
 													</td>
 													<td>{toKB(transaction.tx_size)}</td>
 												</tr>
