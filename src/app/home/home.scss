@@ -5,6 +5,8 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	// This is an exception, it allows for the linegraph tooltips to appear outside the card when overflow occurs
+	overflow: visible !important;
 	&-text-wrapper {
 		margin-right: 4rem;
 	}

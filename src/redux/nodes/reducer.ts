@@ -21,7 +21,7 @@ function editNode(state: NodeState, action: EditNodeAction): NodeState {
 	return { ...state, nodes }
 }
 function selectNode(state: NodeState, action: SelectNodeAction): NodeState {
-	return { ...state, selectedNode: action.payload }
+	return { ...state, selectedNode: !!action.payload ? action.payload : 'Default' }
 }
 function removeNode(state: NodeState, action: RemoveNodeAction): NodeState {
 	console.log(action)

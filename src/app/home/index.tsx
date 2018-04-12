@@ -2,6 +2,7 @@ import * as React from 'react'
 import './home.scss'
 import { MemPool } from 'components/tables/mempool'
 import { Blocks } from 'components/tables/blocks'
+import { MoneroGraph } from 'components/line-graph/xmr'
 
 export const Home = () => (
 	<>
@@ -19,7 +20,7 @@ export const Home = () => (
 					</a>
 				</div>
 			</div>
-			<div className="New-User-CTA-graph" />
+			<MoneroGraph width={400} height={150} />
 		</section>
 		<MemPool />
 		<Blocks />

@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"dependencies": {
 		"history": "^4.7.2",
+		"moment": "^2.22.0",
 		"react": "^16.3.0",
 		"react-dom": "^16.3.0",
 		"react-hot-loader": "^4.0.0",
