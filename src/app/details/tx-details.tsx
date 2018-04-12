@@ -1,11 +1,12 @@
 import * as React from 'react';
 import './details.scss';
-import { formatApiDateStrings, toKB } from 'utils/functions';
+import { formatApiDateStrings, toKB, fetchAsync } from 'utils/functions';
 import { connect } from 'react-redux';
 import { AppState } from 'redux/root-reducer';
 import { NodeState } from 'redux/nodes/reducer';
 import { RouteComponentProps } from 'react-router';
 import { Node } from 'redux/nodes/actions';
+import { minutesUntilMined } from 'utils/heuristic';
 
 type Props = NodeState & RouteComponentProps<{ transaction: string }>;
 
@@ -13,15 +14,18 @@ interface State {
   data: {
     transaction: any;
     pending: boolean;
+    confirmationDuration: number | null;
   };
 }
 
 export class TxDetailsClass extends React.Component<Props, State> {
   public state = {
-    data: { transaction: null, pending: false }
+    data: { transaction: null, pending: false, confirmationDuration: null }
   };
 
   public componentWillMount() {
+    this.setState({ data: { ...this.state.data, pending: true } });
+    this.setConfirmationDuration();
     this.fetchTransaction();
   }
 
@@ -30,6 +34,21 @@ export class TxDetailsClass extends React.Component<Props, State> {
       this.fetchTransaction();
     }
   }
+
+  public setConfirmationDuration = () => {
+    fetchAsync(`https://xmrchain.net/api/mempool?limit=${10000}&page=${0}`).then(json => {
+      try {
+        const confirmationDuration = minutesUntilMined(
+          this.props.match.params.transaction,
+          json.data.txs
+        );
+        this.setState({ data: { ...this.state.data, confirmationDuration } });
+      } catch (e) {
+        this.setState({ data: { ...this.state.data, pending: false } });
+      }
+      // const {txs_no, txs, page} = json.data
+    });
+  };
 
   public fetchTransaction = () => {
     const { nodes, selectedNode } = this.props;
@@ -45,7 +64,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
         throw new Error('error fetching mempool');
       })
       .then(json => {
-        this.setState({ data: { transaction: json.data, pending: false } });
+        this.setState({ data: { ...this.state.data, transaction: json.data, pending: false } });
       })
       .catch(error => {
         console.log(error);
@@ -61,9 +80,12 @@ export class TxDetailsClass extends React.Component<Props, State> {
             <div className="Details-header">
               <h1 className="Details-header-title">Transaction Details</h1>
               <div className="flex-spacer" />
-              <p className="Details-header-timestamp">
+              <div className="Details-header-timestamp">
+                {this.state.data.confirmationDuration && (
+                  <h3>Expected Confirmation: {this.state.data.confirmationDuration} minutes</h3>
+                )}{' '}
                 {formatApiDateStrings(transaction.timestamp_utc)}
-              </p>
+              </div>
             </div>
             <div className="Details-body">
               <div className="Details-body-section">
