@@ -37,6 +37,12 @@
 		"favicons-webpack-plugin": "0.0.7",
 		"file-loader": "^1.1.11",
 		"html-webpack-plugin": "^3.0.6",
+		"husky": "^0.14.3",
+		"lint-staged": "^7.0.4",
+		"tslint": "5.9.1",
+		"tslint-config-prettier": "1.10.0",
+		"tslint-microsoft-contrib": "5.0.3",
+		"tslint-react": "3.5.1",
 		"node-sass": "^4.7.2",
 		"redux-devtools-extension": "^2.13.2",
 		"resolve-url-loader": "^2.3.0",
@@ -52,17 +58,19 @@
 		"webpack-merge": "^4.1.2"
 	},
 	"scripts": {
+		"tscheck": "tsc --noEmit",
+		"tslint": "tslint --project .",
+		"prepush": "npm run tscheck",
+		"precommit": "lint-staged",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack-dev-server --mode development --config ./webpack_config/webpack.dev.js",
 		"build": "webpack --mode production --config webpack_config/webpack.prod.js -p"
 	},
+	"precommit": "lint-staged",
 	"lint-staged": {
-		"*.{ts,tsx}": [
-			"prettier --write --config ./.prettierrc --config-precedence file-override",
-			"git add"
-		]
+		"*.{ts,tsx}": ["prettier --write --config ./.prettierrc --config-precedence file-override", "git add"]
 	},
-	"prepush": "npm run tslint && npm run tscheck",
+	"prepush": "npm run tscheck",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/MyCryptoHQ/React-Typescript-Web3.git"
