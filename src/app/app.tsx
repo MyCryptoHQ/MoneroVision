@@ -24,7 +24,7 @@ const CaptureRouteNotFound = withRouter(({ children, location }: any) => {
 
 const h = process.env.NODE_ENV === 'production' ? createHashHistory() : createBrowserHistory();
 
-(history as any).listen(() => {
+h.listen(() => {
   window.scrollTo(0, 0);
 });
 
