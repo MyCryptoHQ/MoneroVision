@@ -15,6 +15,7 @@
     "prefer-method-signature": true,
     "arrow-parens": false,
     "no-unnecessary-type-assertion": true,
+    "no-unused-expressions": [true, "allow-fast-null-checks"],
     "array-type": [true, "array"],
     "jsx-no-lambda": false,
     "interface-name": false,
