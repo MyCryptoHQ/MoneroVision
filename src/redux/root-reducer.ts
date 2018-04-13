@@ -1,10 +1,10 @@
-import { nodeReducer, NodeState } from './nodes/reducer'
-import { combineReducers } from 'redux'
+import { nodeReducer, NodeState } from './nodes/reducer';
+import { combineReducers } from 'redux';
 
 export interface AppState {
-	nodes: NodeState
+  nodes: NodeState;
 }
 
 export const rootReducer = combineReducers<AppState>({
-	nodes: nodeReducer,
-})
+  nodes: nodeReducer
+});
