@@ -7,6 +7,7 @@ import { NodeState } from 'redux/nodes/reducer';
 import { RouteComponentProps } from 'react-router';
 import { Node } from 'redux/nodes/actions';
 import { minutesUntilMined } from 'utils/heuristic';
+import { Link } from 'react-router-dom';
 
 type Props = NodeState & RouteComponentProps<{ transaction: string }>;
 
@@ -87,7 +88,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                 {this.state.data.confirmationDuration && (
                   <h3>Expected Confirmation: {this.state.data.confirmationDuration} minutes</h3>
                 )}{' '}
-                {formatApiDateStrings(transaction.timestamp_utc)}
+                {formatApiDateStrings(transaction.timestamp)}
               </div>
             </div>
             <div className="Details-body">
@@ -118,6 +119,29 @@ export class TxDetailsClass extends React.Component<Props, State> {
                   </div>
                 </div>
               </div>
+              {!!transaction.block_height && (
+                <div className="Details-body-section">
+                  <p className="Details-body-section-title">Block</p>
+                  <div className="Details-body-section-content">
+                    <div className="Details-body-section-content-input">
+                      <p>Confirmations</p>
+                      <p>{transaction.current_height - transaction.block_height}</p>
+                    </div>
+                    <div className="Details-body-section-content-input">
+                      <p>Block Height</p>
+                      <Link to={`/block/${transaction.block_height}`}>
+                        {transaction.block_height}
+                      </Link>
+                    </div>
+                    <div className="Details-body-section-content-input">
+                      <p>Current Height</p>
+                      <Link to={`/block/${transaction.current_height - 1}`}>
+                        {transaction.current_height - 1}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="Details-body-section">
                 <p className="Details-body-section-title">Misc</p>
                 <div className="Details-body-section-content">

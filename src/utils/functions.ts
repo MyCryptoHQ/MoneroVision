@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export const calculateAge = (start: string) => {
   const timestampUTC = +new Date(start);
   const nowUTC = new Date().toUTCString();
@@ -22,8 +24,10 @@ export const toKB = (bytes: number | string) => {
 };
 
 export const formatApiDateStrings = (str: string) => {
-  const s = str.split(' ');
-  return s[0].replace(/-/g, ' / ') + ' – ' + s[1] + ' UTC';
+  return moment
+    .unix(parseInt(str, 10))
+    .utc()
+    .format('YYYY / MM / DD – HH:MM UTC');
 };
 
 export const createReducer = (initialState: any, handlers: any) => {
