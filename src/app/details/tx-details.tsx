@@ -36,18 +36,21 @@ export class TxDetailsClass extends React.Component<Props, State> {
   }
 
   public setConfirmationDuration = () => {
-    fetchAsync(`https://xmrchain.net/api/mempool?limit=${10000}&page=${0}`).then(json => {
-      try {
-        const confirmationDuration = minutesUntilMined(
-          this.props.match.params.transaction,
-          json.data.txs
-        );
-        this.setState({ data: { ...this.state.data, confirmationDuration } });
-      } catch (e) {
-        this.setState({ data: { ...this.state.data, pending: false } });
-      }
-      // const {txs_no, txs, page} = json.data
-    });
+    const txHash = this.props.match.params.transaction;
+    let mempool: any[];
+    let blocks: any[];
+    const getMempool = fetchAsync(`https://xmrchain.net/api/mempool?limit=${10000}&page=${0}`).then(
+      json => (mempool = json.data.txs)
+    );
+    const getBlocks = fetchAsync(
+      `https://xmrchain.net/api/transactions?limit=${100}&page=${0}`
+    ).then(json => (blocks = json.data.blocks));
+
+    Promise.all([getMempool, getBlocks])
+      .then(() => minutesUntilMined(txHash, mempool, blocks))
+      .then(duration =>
+        this.setState({ data: { ...this.state.data, confirmationDuration: duration } })
+      );
   };
 
   public fetchTransaction = () => {

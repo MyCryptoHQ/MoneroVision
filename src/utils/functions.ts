@@ -8,7 +8,11 @@ export const calculateAge = (start: string) => {
   const diffSecs = Math.round(diffMs / 1000); // seconds
   return !!diffDays
     ? diffDays + 'd'
-    : !!diffHrs ? diffHrs + 'h' : !!diffMins ? diffMins + 'm' : diffSecs + 's';
+    : !!diffHrs
+      ? diffHrs + 'h'
+      : !!diffMins
+        ? diffMins + 'm'
+        : diffSecs + 's';
 };
 
 export const toKB = (bytes: number | string) => {
@@ -34,6 +38,6 @@ export const createReducer = (initialState: any, handlers: any) => {
 
 export const fetchAsync = async (url: string) => {
   const response = await fetch(url);
-  const data = await response.json();
+  const data = response.json();
   return data;
 };
