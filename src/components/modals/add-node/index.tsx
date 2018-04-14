@@ -16,13 +16,17 @@ type Props = OwnProps & DispatchProps;
 
 interface State {
   name: string;
+  nameError: string;
   url: string;
+  urlError: string;
 }
 
 class AddNodeClass extends React.Component<Props, State> {
   public state = {
     name: '',
-    url: ''
+    url: '',
+    nameError: '',
+    urlError: ''
   };
 
   public resetInputs() {
@@ -33,14 +37,43 @@ class AddNodeClass extends React.Component<Props, State> {
     this.setState({ ...this.state, [key]: value });
   };
 
-  public onComplete = () => {
-    const { name, url } = this.state;
-    this.props.addNode({ name, url });
+  public closeModal = () => {
+    this.setState({ nameError: '' });
+    this.setState({ urlError: '' });
     this.props.closeModal();
   };
 
-  public render() {
+  public onComplete = () => {
     const { name, url } = this.state;
+
+    this.setInputErrors();
+    if (name.length > 0 && url.length > 0) {
+      this.props.addNode({ name, url });
+      this.closeModal();
+    }
+  };
+
+  public setInputErrors = () => {
+    const { name, url } = this.state;
+    if (name.length < 1) {
+      this.setState({ nameError: 'A name is required' });
+    } else {
+      this.setState({ nameError: '' });
+    }
+
+    if (url.length < 1) {
+      this.setState({
+        urlError: 'A url is required'
+      });
+    } else {
+      this.setState({
+        urlError: ''
+      });
+    }
+  };
+
+  public render() {
+    const { name, nameError, url, urlError } = this.state;
     const buttons: Button[] = [
       {
         text: 'Confirm',
@@ -54,7 +87,7 @@ class AddNodeClass extends React.Component<Props, State> {
         text: 'Cancel',
         type: 'secondary',
         onClick: () => {
-          this.props.closeModal();
+          this.closeModal();
           this.resetInputs();
         }
       }
@@ -67,13 +100,11 @@ class AddNodeClass extends React.Component<Props, State> {
         contentLabel="Add Node"
         title="Add Node"
       >
-        {/* <div className="Modal-info">
-					<i className="nc-icon nc-ic_info_24px" />
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu ligula varius, interdum nibh in.</p>
-				</div> */}
         <Input
           type="text"
           label="Name"
+          required={true}
+          error={nameError}
           placeholder="Custom Node"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('name', e.target.value)
@@ -83,6 +114,8 @@ class AddNodeClass extends React.Component<Props, State> {
         <Input
           type="text"
           label="URL"
+          required={true}
+          error={urlError}
           placeholder="https://example.com"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('url', e.target.value)

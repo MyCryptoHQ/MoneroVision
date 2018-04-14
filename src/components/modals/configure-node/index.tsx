@@ -74,17 +74,27 @@ class ConfigureNodeClass extends React.Component<Props, State> {
         urlError: 'A url is required'
       });
     } else {
-      this.setState({
-        urlError: ''
-      });
+      this.setState({ urlError: '' });
     }
+  };
+
+  public resetInputs() {
+    const { name, url } = this.props.node as Node;
+    this.setState({ node: { name, url } });
+  }
+
+  public closeModal = () => {
+    this.setState({ nameError: '' });
+    this.setState({ urlError: '' });
+    this.resetInputs();
+    this.props.closeModal();
   };
 
   public onComplete = () => {
     const { name, url } = this.state.node;
     this.setInputErrors();
     if (name.length > 0 && url.length > 0) {
-      this.props.closeModal();
+      this.closeModal();
     }
   };
 
@@ -103,7 +113,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
         text: 'Cancel',
         type: 'secondary',
         onClick: () => {
-          this.props.closeModal();
+          this.closeModal();
         }
       },
       {
@@ -113,7 +123,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
         onClick: () => {
           this.props.removeNode(index);
           this.props.selectNode('Default');
-          this.props.closeModal();
+          this.closeModal();
         }
       }
     ];
