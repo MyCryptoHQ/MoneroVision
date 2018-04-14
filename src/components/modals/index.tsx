@@ -5,11 +5,12 @@ import './modal.scss';
 export interface Button {
   text: string;
   type: 'primary' | 'secondary' | 'warning';
+  className?: string;
   onClick(): void;
 }
 
-const Button: React.StatelessComponent<Button> = ({ text, type, onClick }) => (
-  <button className={`Modal-button ${type}`} onClick={onClick}>
+const Button: React.StatelessComponent<Button> = ({ text, type, className, onClick }) => (
+  <button className={`Modal-button ${type} ${className}`} onClick={onClick}>
     {text}
   </button>
 );
@@ -48,7 +49,18 @@ export class Modal extends React.Component<Props, State> {
         <div className="Modal-body">{children}</div>
         <div className="Modal-footer">
           {Array.isArray(buttons) ? (
-            buttons.map(button => <Button key={button.text} {...button} />)
+            buttons.map(
+              (button, i: number) =>
+                i === 2 ? (
+                  // aligns fist to buttons to right, all others are to the left, behind the spacer
+                  <React.Fragment key={button.text}>
+                    <div className="flex-spacer" />
+                    <Button {...button} />
+                  </React.Fragment>
+                ) : (
+                  <Button key={button.text} {...button} />
+                )
+            )
           ) : (
             <Button {...buttons} />
           )}

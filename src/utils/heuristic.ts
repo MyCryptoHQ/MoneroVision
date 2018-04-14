@@ -11,7 +11,6 @@ interface Transaction {
 }
 
 function getNumberOfBlocksToProcessSize(txsTotalSize: number, blockSizeLimit = 350000): number {
-  console.log(blockSizeLimit);
   if (blockSizeLimit > txsTotalSize) {
     return 1;
   } else {
@@ -28,7 +27,6 @@ function findTx(txHash: string, mempool: Transaction[]): Transaction | undefined
 const getBlockSizeLimit = (blocks: Block[]) => {
   // max block size is 2x the median size of last 100 blocks
   // confirmed by XMR Core Team https://www.reddit.com/r/Monero/comments/3u3b2x/can_someone_explain_how_monero_deals_with/
-  console.log(blocks[49], blocks[49].size * 2);
   return blocks[49].size * 2;
 };
 

@@ -114,7 +114,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                   <br />
                   <div className="Details-body-section-content-input">
                     <p>Fee</p>
-                    <p>{(transaction.tx_fee / 1000000000000).toFixed(3)}</p>
+                    <p>{(transaction.tx_fee / 1000000000000).toFixed(3)} / kB</p>
                   </div>
                 </div>
               </div>

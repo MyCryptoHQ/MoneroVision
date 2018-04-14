@@ -45,14 +45,17 @@ class SelectClass extends React.Component<Props> {
   };
 
   public render() {
-    const { select } = this;
     const { nodes, selectedNode } = this.props;
     return (
       <ul className="Select-node-nodes">
         {nodes.map(node => {
           return (
-            <A11yClick key={node.name} onClick={select} data-node={node.name}>
-              <div className={`Select-node-node ${selectedNode === node.name ? 'selected' : ''}`}>
+            <A11yClick key={Math.random()} onClick={this.select}>
+              <div
+                className={`Select-node-node ${selectedNode === node.name ? 'selected' : ''}`}
+                data-node={node.name}
+                tabIndex={0}
+              >
                 <div className="selected-marker" />
                 {node.name !== 'Default' && (
                   <A11yClick onClick={(e: any) => this.openModal(e, node)}>

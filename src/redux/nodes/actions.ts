@@ -43,12 +43,12 @@ export const editNode = (index: number, node: Node): EditNodeAction => {
 
 export interface RemoveNodeAction {
   type: TypeKeys.REMOVE_NODE;
-  payload: Node;
+  payload: number;
 }
 export type RemoveNodeType = typeof removeNode;
-export const removeNode = (node: Node): RemoveNodeAction => {
+export const removeNode = (index: number): RemoveNodeAction => {
   return {
     type: TypeKeys.REMOVE_NODE,
-    payload: node
+    payload: index
   };
 };

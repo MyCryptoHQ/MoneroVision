@@ -1,31 +1,46 @@
 @import 'src/sass/variables/index';
 
 .Input {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	&:not(:last-child) {
-		margin-bottom: 0.5rem;
-	}
-	&-label {
-		font-size: 1rem;
-		font-weight: 400;
-		color: #636a7d;
-		margin: 0.5rem 0;
-	}
-	&-input {
-		font-size: 1rem;
-		font-weight: 400;
-		color: #636a7d;
-		padding: 1rem 1.5rem;
-		border-radius: $border-radius;
-		border: 1px solid $border-color;
-		transition: border-color $transition;
-		&:focus {
-			border-color: $secondary-color;
-		}
-		&::placeholder {
-			color: #d9d9d9;
-		}
-	}
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+  &-label {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #636a7d;
+    margin: 0.5rem 0;
+  }
+  &-input {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #636a7d;
+    padding: 1rem 1.5rem;
+    border-radius: $border-radius;
+    border: 1px solid $border-dark-color;
+    box-shadow: inset 0 1px 0 0 rgba(63, 63, 68, 0.05);
+    transition: border-color $transition, box-shadow $transition;
+    &:focus {
+      border-color: $secondary-color;
+      box-shadow: inset 0 0 0 1px $secondary-color;
+    }
+    &::placeholder {
+      color: #d9d9d9;
+    }
+  }
+
+  &-error {
+    color: $error-color;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  &.error {
+    .Input-input {
+      border-color: $error-color;
+      box-shadow: inset 0 0 0 1px $error-color;
+    }
+  }
 }
