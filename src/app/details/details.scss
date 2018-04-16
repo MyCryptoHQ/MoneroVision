@@ -1,98 +1,130 @@
 @import 'src/sass/variables/index';
 
 .Details {
-	&-header {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: center;
-		padding: 1rem 2rem;
-		margin: -1rem -2rem;
-		margin-bottom: 2rem;
-		border-bottom: 1px solid $border-color;
-		&-title {
-			font-size: 1.25rem;
-			font-weight: 400;
-			color: #5f6478;
-		}
-		&-timestamp {
-			font-size: 1rem;
-			font-weight: 400;
-			color: #828799;
-		}
-	}
-	&-body {
-		min-height: 3rem;
-		&-section {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			&:not(:last-child) {
-				margin-bottom: 2rem;
-				border-bottom: 1px solid $border-color;
-			}
-			&-title {
-				font-size: 1rem;
-				font-weight: 400;
-				color: #5f6478;
-				width: 100px;
-				margin-right: 3rem;
-			}
-			&-content {
-				width: 100%;
-				margin-right: -6rem;
-				&-input,
-				> a {
-					display: inline-flex;
-					flex-direction: column;
-					flex-wrap: nowrap;
-					margin-bottom: 2rem;
-					margin-right: 6rem;
-					word-wrap: break-word;
-					word-break: break-all;
-					p {
-						color: #828799;
-						font-weight: 400;
-						font-size: 1rem;
-						&:first-child {
-							color: #5f6478;
-						}
-					}
-				}
-			}
-			&-table {
-				margin-right: 0;
-				&:not(:last-child) {
-					margin-bottom: 2rem;
-				}
-				th {
-					font-size: 1rem;
-					font-weight: 400;
-					color: #5f6478;
-					padding-bottom: 1rem;
-					padding-left: 1rem;
-					border-bottom: 1px solid $border-color;
-					text-align: right;
-					&:first-child {
-						text-align: left;
-						padding-left: 0;
-						padding-right: 1rem;
-					}
-				}
-				td {
-					font-size: 1rem;
-					font-weight: 400;
-					padding: 1rem 0rem;
-					color: #828799;
-					text-align: right;
-					&:first-child {
-						text-align: left;
-					}
-				}
-				tr:not(:last-child) > td {
-					border-bottom: 1px solid $border-color;
-				}
-			}
-		}
-	}
+  &-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin: -1rem -2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid $border-color;
+    &-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #5f6478;
+    }
+    &-timestamp {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #828799;
+    }
+  }
+  &-body {
+    min-height: 3rem;
+    &-section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      @media screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid $border-color;
+      }
+      &-title {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #5f6478;
+        width: 100px;
+        @media screen and (max-width: 900px) {
+          width: 100%;
+        }
+        margin-right: 3rem;
+
+        @media screen and (max-width: 900px) {
+          font-size: 1.25rem;
+          font-weight: 500;
+          margin-bottom: 1rem;
+          margin-right: 0;
+        }
+      }
+      &-content {
+        width: 100%;
+        // margin-right: -6rem;
+        &-input,
+        > a {
+          display: inline-flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          word-wrap: break-word;
+          word-break: break-all;
+          margin-bottom: 2rem;
+          @media screen and (max-width: 900px) {
+            margin-bottom: 2rem;
+          }
+          &:not(:last-child) {
+            margin-right: 6rem;
+            @media screen and (max-width: 900px) {
+              &.hash,
+              &.extra {
+                margin-right: 0;
+              }
+              margin-right: 3rem;
+            }
+          }
+          p {
+            color: #828799;
+            font-weight: 400;
+            font-size: 1rem;
+            &:first-child {
+              color: #5f6478;
+            }
+          }
+        }
+      }
+      &-table {
+        margin-right: 0;
+        table-layout: fixed;
+        &:not(:last-child) {
+          margin-bottom: 2rem;
+        }
+        th {
+          font-size: 1rem;
+          font-weight: 400;
+          color: #5f6478;
+          padding-bottom: 1rem;
+          padding-left: 1rem;
+          border-bottom: 1px solid $border-color;
+          text-align: right;
+          &:first-child {
+            text-align: left;
+            padding-left: 0;
+            padding-right: 1rem;
+          }
+        }
+        td {
+          font-size: 1rem;
+          font-weight: 400;
+          padding: 1rem 0rem;
+          color: #828799;
+          text-align: right;
+          word-wrap: break-word;
+          &:first-child {
+            text-align: left;
+          }
+          &:not(:last-child) {
+            padding-right: 2rem;
+          }
+        }
+        tr:not(:last-child) > td {
+          border-bottom: 1px solid $border-color;
+        }
+      }
+    }
+  }
 }

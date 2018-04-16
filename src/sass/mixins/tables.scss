@@ -4,83 +4,83 @@
 $table-cell-padding: 3rem;
 
 @mixin DefaultTable {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	min-height: 19rem;
-	&-header {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: center;
-	}
-	&-title {
-		font-size: 20px;
-		font-weight: 500;
-		color: #5f6478;
-		margin-right: 0.5rem;
-	}
-	&-view-all {
-		@include button($secondary-color);
-		@include button-primary;
-		margin-left: 1rem;
-		line-height: 1.15;
-	}
-	&-refresh {
-		@include icon-button(#5f6478);
-		font-size: 1.5rem;
-		margin-left: 1rem;
-		line-height: 1.15;
-	}
-	&-table {
-		border-collapse: collapse;
-	}
-	&-table-head {
-		> tr > th {
-			padding: 1rem 0;
-			font-size: 1rem;
-			font-weight: 400;
-			color: #5f6478;
-			border-bottom: 1px solid $border-color;
-			white-space: nowrap;
-			text-align: left;
-			&:not(:first-child) {
-				text-align: right;
-				padding-left: $table-cell-padding;
-			}
-		}
-	}
-	&-table-body {
-		> tr {
-			&:not(:last-child) {
-				> td {
-					border-bottom: 1px solid $border-color;
-				}
-			}
-			> td {
-				color: #828799;
-				padding: 1rem 0;
-				box-sizing: content-box;
-				white-space: nowrap;
-				text-align: left;
-				&:not(:first-child) {
-					padding-left: $table-cell-padding;
-					text-align: right;
-				}
-			}
-		}
-	}
-	.truncate {
-		display: table;
-		table-layout: fixed;
-		width: 100%;
-		line-height: 1;
-	}
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  min-height: 19rem;
+  &-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  &-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #5f6478;
+    margin-right: 0.5rem;
+  }
+  &-view-all {
+    @include button($secondary-color);
+    @include button-primary;
+    margin-left: 1rem;
+    line-height: 1.15;
+  }
+  &-refresh {
+    @include icon-button(#5f6478);
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    line-height: 1.15;
+  }
+  &-table {
+    border-collapse: collapse;
+  }
+  &-table-head {
+    > tr > th {
+      padding: 1rem 0;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #5f6478;
+      border-bottom: 1px solid $border-color;
+      white-space: nowrap;
+      text-align: left;
+      &:not(:first-child) {
+        text-align: right;
+        padding-left: $table-cell-padding;
+      }
+    }
+  }
+  &-table-body {
+    > tr {
+      &:not(:last-child) {
+        > td {
+          border-bottom: 1px solid $border-color;
+        }
+      }
+      > td {
+        color: #828799;
+        padding: 1rem 0;
+        box-sizing: content-box;
+        white-space: nowrap;
+        text-align: left;
+        &:not(:first-child) {
+          padding-left: $table-cell-padding;
+          text-align: right;
+        }
+      }
+    }
+  }
+  .truncate {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    line-height: 1;
+  }
 
-	.truncated {
-		overflow-x: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		color: $secondary-color;
-	}
+  .truncated {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $secondary-color;
+  }
 }

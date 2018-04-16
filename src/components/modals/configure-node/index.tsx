@@ -106,7 +106,6 @@ class ConfigureNodeClass extends React.Component<Props, State> {
         type: 'primary',
         onClick: () => {
           this.props.editNode(index, node);
-          this.onComplete();
         }
       },
       {

@@ -110,7 +110,11 @@ export class BlockDetailsClass extends React.Component<Props, State> {
                       return (
                         <tr key={i}>
                           <td>
-                            <Link to={`/tx/${transaction.tx_hash}`}>{transaction.tx_hash}</Link>
+                            <div className="truncate">
+                              <div className="truncated">
+                                <Link to={`/tx/${transaction.tx_hash}`}>{transaction.tx_hash}</Link>
+                              </div>
+                            </div>
                           </td>
                           <td>{toKB(transaction.tx_size)}</td>
                         </tr>

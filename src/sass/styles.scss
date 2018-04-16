@@ -5,40 +5,40 @@
 
 html,
 body {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	line-height: 1.618;
-	font-size: 16px;
-	font-family: 'roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
-		sans-serif;
-	height: 100%;
-	width: 100%;
-	background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.618;
+  font-size: 16px;
+  font-family: 'roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu,
+    Cantarell, 'Helvetica Neue', sans-serif;
+  height: 100%;
+  width: 100%;
+  background-color: #fafafa;
 }
 
 #root {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	height: inherit;
-	width: inherit;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: inherit;
+  width: inherit;
 }
 
 *,
 *:before,
 *:after {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 ul {
-	padding: 0;
-	list-style: none;
+  padding: 0;
+  list-style: none;
 }
 
 a {
-	color: $secondary-color;
-	text-decoration: none;
+  color: $secondary-color;
+  text-decoration: none;
 }
 
 h1,
@@ -49,28 +49,46 @@ h5,
 h6,
 p,
 span {
-	margin: 0;
+  margin: 0;
 }
 
 /* suppress focus ring on form controls for mouse users */
 [data-whatintent='mouse'] *:focus,
 [data-whatintent='touch'] *:focus {
-	outline: none;
+  outline: none;
 }
 
 .card {
-	border: 1px solid $border-color;
-	border-radius: $border-radius;
-	background-color: white;
-	box-shadow: $box-shadow;
-	width: 100%;
-	padding: 1rem 2rem;
-	overflow: hidden;
-	&:not(:last-child) {
-		margin-bottom: 3rem;
-	}
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  background-color: white;
+  box-shadow: $box-shadow;
+  width: 100%;
+  padding: 1rem 2rem;
+  overflow: hidden;
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem 1.5rem;
+  }
+}
+
+.truncate {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  line-height: 1;
+}
+
+.truncated {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: $secondary-color;
 }
 
 .flex-spacer {
-	flex-grow: 1;
+  flex-grow: 1;
 }

@@ -2,15 +2,22 @@
 @import 'src/sass/variables/index';
 
 .App {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	align-items: center;
-	height: inherit;
-	&-body {
-		padding: 4rem 2rem;
-		margin-top: 4.125rem;
-		max-width: 1024px;
-		width: 100%;
-	}
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: inherit;
+  overflow-x: hidden;
+  &-body {
+    padding: 4rem 2rem;
+    margin-top: 4.125rem;
+    max-width: 1024px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 900px) {
+    &-body {
+      padding: 2rem 1rem;
+    }
+  }
 }

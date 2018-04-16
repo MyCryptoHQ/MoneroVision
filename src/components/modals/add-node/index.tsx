@@ -80,7 +80,6 @@ class AddNodeClass extends React.Component<Props, State> {
         type: 'primary',
         onClick: () => {
           this.onComplete();
-          this.resetInputs();
         }
       },
       {

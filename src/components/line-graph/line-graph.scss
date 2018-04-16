@@ -1,77 +1,77 @@
 @import 'src/sass/variables/index';
 
 .linechart {
-	position: relative;
-	line-height: 0;
-	background-color: white;
-	> svg {
-		background-color: white;
-	}
-	&-path {
-		stroke-width: 2;
-		stroke: #77bdf7;
-		fill: none;
-		stroke-linejoin: round;
-		stroke-linecap: round;
-	}
-	&-axis {
-		> line {
-			stroke-width: 1;
-			color: #eeeeee;
-		}
-	}
-	&-area {
-		padding: 8px;
-		stroke: none;
-		fill: #77bdf7;
-		opacity: 0.15;
-	}
-	&-line {
-		stroke: lighten(#77bdf7, 10%);
-		stroke-width: 2;
-		transition: opacity $transition;
-		opacity: 0;
-	}
-	&-point {
-		fill: white;
-		stroke: #77bdf7;
-		stroke-width: 2;
-		transition: opacity $transition;
-		opacity: 0;
-	}
-	&-tooltip {
-		position: absolute;
-		text-align: center;
-		background-color: #77bdf7;
-		color: white;
-		font-weight: 400;
-		font-size: 0.875rem;
-		line-height: 1;
-		border-radius: 6px;
-		padding: 0.25rem;
-		margin: 0;
-		opacity: 0;
-		transition: opacity $transition;
-		padding: 0.25rem 0.5rem;
-		&.top {
-			top: 0;
-		}
-		&.bottom {
-			color: #77bdf7;
-			background-color: white;
-			border: 1px solid #77bdf7;
-			bottom: 0rem;
-		}
-	}
+  position: relative;
+  line-height: 0;
+  background-color: white;
+  > svg {
+    background-color: white;
+  }
+  &-path {
+    stroke-width: 2;
+    stroke: #77bdf7;
+    fill: none;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  &-axis {
+    > line {
+      stroke-width: 1;
+      color: #eeeeee;
+    }
+  }
+  &-area {
+    padding: 8px;
+    stroke: none;
+    fill: #77bdf7;
+    opacity: 0.15;
+  }
+  &-line {
+    stroke: lighten(#77bdf7, 10%);
+    stroke-width: 2;
+    transition: opacity $transition;
+    opacity: 0;
+  }
+  &-point {
+    fill: white;
+    stroke: #77bdf7;
+    stroke-width: 2;
+    transition: opacity $transition;
+    opacity: 0;
+  }
+  &-tooltip {
+    position: absolute;
+    text-align: center;
+    background-color: #77bdf7;
+    color: white;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1;
+    border-radius: 6px;
+    padding: 0.25rem;
+    margin: 0;
+    opacity: 0;
+    transition: opacity $transition;
+    padding: 0.25rem 0.5rem;
+    &.top {
+      top: 0;
+    }
+    &.bottom {
+      color: #77bdf7;
+      background-color: white;
+      border: 1px solid #77bdf7;
+      bottom: 0rem;
+    }
+  }
 
-	&:hover {
-		cursor: crosshair;
-		.linechart {
-			&-point,
-			&-line,
-			&-tooltip {
-				opacity: 1;
-			}
-		}
-	}
+  &:hover {
+    cursor: crosshair;
+    .linechart {
+      &-point,
+      &-line,
+      &-tooltip {
+        opacity: 1;
+      }
+    }
+  }
 }

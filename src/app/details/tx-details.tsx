@@ -95,24 +95,23 @@ export class TxDetailsClass extends React.Component<Props, State> {
               <div className="Details-body-section">
                 <p className="Details-body-section-title">Transaction</p>
                 <div className="Details-body-section-content">
-                  <div className="Details-body-section-content-input">
+                  <div className="Details-body-section-content-input hash">
                     <p>Hash</p>
                     <p>{transaction.tx_hash}</p>
                   </div>
-                  <div className="Details-body-section-content-input">
+                  <div className="Details-body-section-content-input extra">
                     <p>Extra</p>
                     <p>{transaction.extra}</p>
                   </div>
+                  <br />
                   {(transaction.payment_id || transaction.payment_id8) && (
                     <>
-                      <br />
                       <div className="Details-body-section-content-input">
                         <p>Payment ID</p>
                         <p>{transaction.payment_id || transaction.payment_id8}</p>
                       </div>
                     </>
                   )}
-                  <br />
                   <div className="Details-body-section-content-input">
                     <p>Fee</p>
                     <p>{(transaction.tx_fee / 1000000000000).toFixed(3)} / kB</p>
@@ -167,16 +166,14 @@ export class TxDetailsClass extends React.Component<Props, State> {
                       <tr>
                         <th>Key Image</th>
                         {transaction.tx_version === 1 && <th>Amount</th>}
-                        <th>Mixin</th>
                       </tr>
                     </thead>
                     <tbody>
                       {transaction.inputs.map((input: any, i: number) => {
                         return (
                           <tr key={i}>
-                            <td>{input.key_image}</td>
+                            <td className="">{input.key_image}</td>
                             {transaction.tx_version === 1 && <td>{input.amount}</td>}
-                            <td>{input.mixins.length}</td>
                           </tr>
                         );
                       })}
@@ -190,7 +187,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                   <thead>
                     <tr>
                       <th>Public Key</th>
-                      <th>Amount</th>
+                      {!!transaction.outputs[0].amount && <th>Amount</th>}
                     </tr>
                   </thead>
                   <tbody>
@@ -198,7 +195,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                       return (
                         <tr key={i}>
                           <td>{output.public_key}</td>
-                          <td>{output.amount}</td>
+                          {!!output.amount && <td>{output.amount}</td>}
                         </tr>
                       );
                     })}
