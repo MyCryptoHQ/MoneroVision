@@ -8,12 +8,12 @@
   align-items: center;
   height: inherit;
   overflow-x: hidden;
+  z-index: 1;
   &-body {
     padding: 4rem 2rem;
     margin-top: 4.125rem;
     max-width: 1024px;
     width: 100%;
-    overflow-x: scroll;
   }
 
   @media screen and (max-width: 900px) {
