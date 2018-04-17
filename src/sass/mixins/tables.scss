@@ -15,7 +15,7 @@ $table-cell-padding: 3rem;
     align-items: center;
   }
   &-title {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     color: #5f6478;
     margin-right: 0.5rem;
@@ -69,18 +69,5 @@ $table-cell-padding: 3rem;
         }
       }
     }
-  }
-  .truncate {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    line-height: 1;
-  }
-
-  .truncated {
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: $secondary-color;
   }
 }

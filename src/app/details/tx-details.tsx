@@ -194,7 +194,9 @@ export class TxDetailsClass extends React.Component<Props, State> {
                     {transaction.outputs.map((output: any, i: number) => {
                       return (
                         <tr key={i}>
-                          <td>{output.public_key}</td>
+                          <td>
+                            <div className="wrap">{output.public_key}</div>
+                          </td>
                           {!!output.amount && <td>{output.amount}</td>}
                         </tr>
                       );

@@ -2,80 +2,86 @@
 @import 'src/sass/variables/index';
 
 .Select-node {
-	position: relative;
-	&-button {
-		@include button($primary-color);
-	}
-	&-dropdown {
-		position: absolute;
-		background-color: #fff;
-		display: flex;
-		flex-direction: column;
-		flex-wrap: nowrap;
-		border: 1px solid $border-color;
-		min-width: 225px;
-		right: 0;
-		border-radius: $border-radius;
-		box-shadow: $box-shadow;
-	}
-	&-nodes {
-		font-size: 16px;
-		font-weight: 400;
-		color: #5f6478;
-		text-align: right;
-		margin: 1rem 0;
-	}
-	&-node {
-		position: relative;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		align-items: center;
-		cursor: pointer;
-		padding: 0.5rem 1.5rem;
-		height: 3rem;
-		transition: background-color $transition;
-		button.settings {
-			@include icon-button(#5f6478);
-			margin-left: -0.5rem;
-			opacity: 0;
-			&:focus {
-				opacity: 1;
-			}
-		}
-		> .selected-marker {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 4px;
-			height: 100%;
-			transition: background-color $transition;
-			background-color: transparent;
-		}
-		&.selected {
-			background-color: $hover-color;
-			> .selected-marker {
-				background-color: $secondary-color;
-			}
-			button.settings {
-				opacity: 0.6;
-			}
-		}
-		&:hover {
-			background-color: $hover-color;
-			&:not(.selected) button.settings {
-				opacity: 0.3;
-			}
-		}
-	}
-	&-add {
-		@include button($secondary-color);
-		margin: 1rem;
-		margin-top: 0;
-	}
+  position: relative;
+  &-button {
+    @include button($primary-color);
+  }
+  &-dropdown {
+    position: absolute;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid $border-color;
+    min-width: 225px;
+    right: 0;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+  }
+  &-nodes {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #5f6478;
+    text-align: right;
+    margin: 1rem 0;
+  }
+  &-node {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    height: 3rem;
+    transition: background-color $transition;
+    button.settings {
+      @include icon-button(#5f6478);
+      margin-left: -0.5rem;
+      opacity: 0;
+      &:focus {
+        opacity: 1;
+      }
+    }
+    > p {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 14rem;
+    }
+    > .selected-marker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      transition: background-color $transition;
+      background-color: transparent;
+    }
+    &.selected {
+      background-color: $hover-color;
+      > .selected-marker {
+        background-color: $secondary-color;
+      }
+      button.settings {
+        opacity: 0.6;
+      }
+    }
+    &:hover {
+      background-color: $hover-color;
+      &:not(.selected) button.settings {
+        opacity: 0.3;
+      }
+    }
+  }
+  &-add {
+    @include button($secondary-color);
+    margin: 1rem;
+    margin-top: 0;
+  }
 }
 
 .Add-Node,
 .Configure-Node {
-	width: 460px;
+  width: 460px;
 }

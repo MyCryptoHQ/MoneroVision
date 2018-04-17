@@ -4,20 +4,19 @@ import { OutsideAlerter } from 'components/outside-click';
 import { Select } from './components/select-node';
 import { ConfigureNode } from '../modals/configure-node';
 import { AddNode } from 'components/modals/add-node';
-import { connect } from 'react-redux';
 import { Node } from 'redux/nodes/actions';
 
 interface State {
   isDropdownOpen: boolean;
-  isSettingsModalOpen: boolean;
+  isConfigModalOpen: boolean;
   isAddNodeModalOpen: boolean;
   configureNode: Node;
 }
 
-class NodeDropdownClass extends React.Component<{}, State> {
+export class NodeDropdown extends React.Component<{}, State> {
   public state = {
     isDropdownOpen: false,
-    isSettingsModalOpen: false,
+    isConfigModalOpen: false,
     isAddNodeModalOpen: false,
     configureNode: { name: '', url: '' }
   };
@@ -32,8 +31,8 @@ class NodeDropdownClass extends React.Component<{}, State> {
     this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
   };
 
-  public toggleSettings = () => {
-    this.setState({ isSettingsModalOpen: !this.state.isSettingsModalOpen });
+  public toggleConfig = () => {
+    this.setState({ isConfigModalOpen: !this.state.isConfigModalOpen });
   };
 
   public toggleAddNode = () => {
@@ -52,11 +51,11 @@ class NodeDropdownClass extends React.Component<{}, State> {
   public render() {
     const {
       toggleDropdown,
-      toggleSettings,
+      toggleConfig,
       toggleAddNode,
       selectConfigureNode,
       addNode,
-      state: { isDropdownOpen, isSettingsModalOpen, isAddNodeModalOpen, configureNode },
+      state: { isDropdownOpen, isConfigModalOpen, isAddNodeModalOpen, configureNode },
       openButton
     } = this;
 
@@ -69,8 +68,9 @@ class NodeDropdownClass extends React.Component<{}, State> {
           <OutsideAlerter onClick={toggleDropdown} exception={openButton.current}>
             <div className="Select-node-dropdown">
               <Select
-                toggleModal={toggleSettings}
-                toggleDropdown={toggleDropdown}
+                toggleModal={() => {
+                  toggleConfig(), toggleDropdown();
+                }}
                 configureNode={selectConfigureNode}
               />
               <div className="flex-spacer" />
@@ -82,13 +82,11 @@ class NodeDropdownClass extends React.Component<{}, State> {
         )}
         <ConfigureNode
           node={configureNode}
-          isOpen={isSettingsModalOpen && !!configureNode}
-          closeModal={toggleSettings}
+          isOpen={isConfigModalOpen && !!configureNode}
+          closeModal={toggleConfig}
         />
         <AddNode isOpen={isAddNodeModalOpen} closeModal={toggleAddNode} />
       </div>
     );
   }
 }
-
-export const NodeDropdown = connect(null, {})(NodeDropdownClass);

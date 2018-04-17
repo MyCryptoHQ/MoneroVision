@@ -91,9 +91,12 @@ class ConfigureNodeClass extends React.Component<Props, State> {
   };
 
   public onComplete = () => {
+    const { index, node } = this.state;
     const { name, url } = this.state.node;
     this.setInputErrors();
     if (name.length > 0 && url.length > 0) {
+      this.props.editNode(index, node);
+      this.resetInputs();
       this.closeModal();
     }
   };
@@ -105,7 +108,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
         text: 'Confirm',
         type: 'primary',
         onClick: () => {
-          this.props.editNode(index, node);
+          this.onComplete();
         }
       },
       {

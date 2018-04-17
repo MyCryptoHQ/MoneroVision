@@ -21,9 +21,12 @@ export class Home extends React.Component {
 
   public updateDimensions = () => {
     const clientWidth = document.documentElement.clientWidth;
-    const width = clientWidth < 900 ? clientWidth - 32 : 400;
+    // take rem into account when adjusting width for padding
+    const width =
+      clientWidth < 900 ? (clientWidth > 600 ? clientWidth - 32 : clientWidth - 26) : 400;
     const height = clientWidth > 600 && clientWidth < 900 ? 150 : 100;
-    this.setState({ width, height });
+    // adjust for border width
+    this.setState({ width: width - 2, height });
   };
 
   public render() {

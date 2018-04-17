@@ -65,7 +65,11 @@ class MemPoolClass extends React.Component<Props, State> {
 
   public render() {
     const { paginated } = this.props;
-    const { data: { txs, txs_no, pending }, limit, page } = this.state;
+    const {
+      data: { txs, txs_no, pending },
+      limit,
+      page
+    } = this.state;
     return (
       <div className={`MemPool card ${paginated && 'paginated'}`}>
         <div className="MemPool-header">
@@ -77,6 +81,27 @@ class MemPoolClass extends React.Component<Props, State> {
               </span>
             )}
           <div className="flex-spacer" />
+          {!!paginated && (
+            <>
+              <p className="MemPool-pages">
+                {limit * page + 1}-{limit * page + txs.length} of {txs_no}
+              </p>
+              <button
+                className="MemPool-table-footer-paginate"
+                onClick={this.decrementPage}
+                disabled={txs_no <= limit || pending}
+              >
+                <i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+              </button>
+              <button
+                className="MemPool-table-footer-paginate"
+                onClick={this.incrementPage}
+                disabled={txs_no <= limit || pending}
+              >
+                <i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+              </button>
+            </>
+          )}
           <button className="MemPool-refresh" onClick={this.fetchData}>
             <i className="nc-icon nc-ic_refresh_24px" />
           </button>
@@ -116,7 +141,7 @@ class MemPoolClass extends React.Component<Props, State> {
         {!!paginated && (
           <div className="MemPool-table-footer">
             <div className="flex-spacer" />
-            <p className="MemPool-table-footer-pages">
+            <p className="MemPool-pages">
               {limit * page + 1}-{limit * page + txs.length} of {txs_no}
             </p>
             <button

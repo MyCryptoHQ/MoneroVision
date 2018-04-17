@@ -19,7 +19,7 @@ $table-cell-padding: 3rem;
     align-items: center;
   }
   &-title {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     color: #5f6478;
     margin-right: 0.5rem;
@@ -91,15 +91,15 @@ $table-cell-padding: 3rem;
         font-size: 1.5rem;
         line-height: 1.15;
       }
-      &-pages {
-        color: #999;
-        line-height: 1;
-        font-weight: 300;
-        font-size: 0.875rem;
-        letter-spacing: 0.1rem;
-        margin-right: 0.5rem;
-      }
     }
+  }
+  &-pages {
+    color: #999;
+    line-height: 1;
+    font-weight: 300;
+    font-size: 0.875rem;
+    letter-spacing: 0.1rem;
+    margin-right: 0.5rem;
   }
 }
 
@@ -110,6 +110,11 @@ $table-cell-padding: 3rem;
     font-weight: 400;
     margin-left: 0.5rem;
     @media screen and (max-width: 435px) {
+      display: none;
+    }
+  }
+  .Blocks-header > &-pages {
+    @media screen and (max-width: 450px) {
       display: none;
     }
   }

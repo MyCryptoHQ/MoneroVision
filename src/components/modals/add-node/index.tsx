@@ -40,6 +40,7 @@ class AddNodeClass extends React.Component<Props, State> {
   public closeModal = () => {
     this.setState({ nameError: '' });
     this.setState({ urlError: '' });
+    this.resetInputs();
     this.props.closeModal();
   };
 
@@ -49,6 +50,7 @@ class AddNodeClass extends React.Component<Props, State> {
     this.setInputErrors();
     if (name.length > 0 && url.length > 0) {
       this.props.addNode({ name, url });
+      this.resetInputs();
       this.closeModal();
     }
   };
@@ -87,7 +89,6 @@ class AddNodeClass extends React.Component<Props, State> {
         type: 'secondary',
         onClick: () => {
           this.closeModal();
-          this.resetInputs();
         }
       }
     ];

@@ -15,7 +15,6 @@ import { A11yClick } from './a11y-click';
 
 interface OwnProps {
   toggleModal(): void;
-  toggleDropdown(): void;
   configureNode(node: Node): void;
 }
 
@@ -41,7 +40,6 @@ class SelectClass extends React.Component<Props> {
     e.stopPropagation();
     this.props.configureNode(node);
     this.props.toggleModal();
-    this.props.toggleDropdown();
   };
 
   public render() {

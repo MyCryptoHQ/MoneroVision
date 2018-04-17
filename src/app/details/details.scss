@@ -89,7 +89,7 @@
       }
       &-table {
         margin-right: 0;
-        table-layout: fixed;
+        table-layout: auto;
         &:not(:last-child) {
           margin-bottom: 2rem;
         }
@@ -113,9 +113,12 @@
           padding: 1rem 0rem;
           color: #828799;
           text-align: right;
-          word-wrap: break-word;
+          white-space: nowrap;
+          vertical-align: top;
           &:first-child {
             text-align: left;
+            word-wrap: break-word;
+            white-space: normal;
           }
           &:not(:last-child) {
             padding-right: 2rem;

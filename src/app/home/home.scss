@@ -14,14 +14,14 @@
     flex-wrap: nowrap;
   }
   &-title {
-    font-size: 30px;
+    font-size: 2rem;
     font-weight: 400;
     color: #5f6478;
     white-space: nowrap;
     margin-bottom: 0.5rem;
   }
   &-text {
-    font-size: 16px;
+    font-size: 1rem;
     color: #828799;
     margin-bottom: 1rem;
   }
@@ -34,7 +34,7 @@
   }
   &-link {
     display: block;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     color: #77bdf7;
   }
@@ -57,7 +57,6 @@
       border: none;
       margin: -1rem -1.5rem;
       margin-bottom: 1rem;
-      border-bottom: 1px solid $border-color;
     }
   }
 }

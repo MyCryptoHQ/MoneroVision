@@ -106,12 +106,37 @@ class BlocksClass extends React.Component<Props, State> {
 
   public render() {
     const { paginated } = this.props;
-    const { data: { blocks, current_height, pending }, limit, page } = this.state;
+    const {
+      data: { blocks, current_height, pending },
+      limit,
+      page
+    } = this.state;
     return (
       <div className="Blocks card">
         <div className="Blocks-header">
           <h2 className="Blocks-title">Blocks</h2>
           <div className="flex-spacer" />
+          {!!paginated && (
+            <>
+              <p className="MemPool-pages">
+                {limit * page + 1}-{limit * page + blocks.length} of {current_height}
+              </p>
+              <button
+                className="MemPool-table-footer-paginate"
+                onClick={this.decrementPage}
+                disabled={current_height <= limit || pending}
+              >
+                <i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+              </button>
+              <button
+                className="MemPool-table-footer-paginate"
+                onClick={this.incrementPage}
+                disabled={current_height <= limit || pending}
+              >
+                <i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+              </button>
+            </>
+          )}
           <button className="Blocks-refresh" onClick={this.fetchData}>
             <i className="nc-icon nc-ic_refresh_24px" />
           </button>
@@ -155,7 +180,7 @@ class BlocksClass extends React.Component<Props, State> {
         {!!paginated && (
           <div className="MemPool-table-footer">
             <div className="flex-spacer" />
-            <p className="MemPool-table-footer-pages">
+            <p className="MemPool-pages">
               {limit * page + 1}-{limit * page + blocks.length} of {current_height}
             </p>
             <button
