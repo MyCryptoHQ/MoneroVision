@@ -6,6 +6,11 @@
   &-button {
     @include button($primary-color);
   }
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
   &-dropdown {
     position: absolute;
     background-color: #fff;
@@ -39,6 +44,9 @@
       @include icon-button(#5f6478);
       margin-left: -0.5rem;
       opacity: 0;
+      @media screen and (max-width: 800px) {
+        opacity: 0.6;
+      }
       &:focus {
         opacity: 1;
       }

@@ -2,23 +2,22 @@ import * as React from 'react';
 import './node-dropdown.scss';
 import { OutsideAlerter } from 'components/outside-click';
 import { Select } from './components/select-node';
-import { ConfigureNode } from '../modals/configure-node';
-import { AddNode } from 'components/modals/add-node';
-import { Node } from 'redux/nodes/actions';
+import { connect } from 'react-redux';
+import { openModal, OpenModalType } from 'redux/modals/actions';
+
+interface DispatchProps {
+  openModal: OpenModalType;
+}
+
+type Props = DispatchProps;
 
 interface State {
   isDropdownOpen: boolean;
-  isConfigModalOpen: boolean;
-  isAddNodeModalOpen: boolean;
-  configureNode: Node;
 }
 
-export class NodeDropdown extends React.Component<{}, State> {
+class NodeDropdownClass extends React.Component<Props, State> {
   public state = {
-    isDropdownOpen: false,
-    isConfigModalOpen: false,
-    isAddNodeModalOpen: false,
-    configureNode: { name: '', url: '' }
+    isDropdownOpen: false
   };
   public openButton: any;
   constructor(props: any) {
@@ -31,31 +30,10 @@ export class NodeDropdown extends React.Component<{}, State> {
     this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
   };
 
-  public toggleConfig = () => {
-    this.setState({ isConfigModalOpen: !this.state.isConfigModalOpen });
-  };
-
-  public toggleAddNode = () => {
-    this.setState({ isAddNodeModalOpen: !this.state.isAddNodeModalOpen });
-  };
-
-  public selectConfigureNode = (node: Node) => {
-    this.setState({ configureNode: node });
-  };
-
-  public addNode = () => {
-    this.toggleDropdown();
-    this.toggleAddNode();
-  };
-
   public render() {
     const {
+      state: { isDropdownOpen },
       toggleDropdown,
-      toggleConfig,
-      toggleAddNode,
-      selectConfigureNode,
-      addNode,
-      state: { isDropdownOpen, isConfigModalOpen, isAddNodeModalOpen, configureNode },
       openButton
     } = this;
 
@@ -67,26 +45,13 @@ export class NodeDropdown extends React.Component<{}, State> {
         {isDropdownOpen && (
           <OutsideAlerter onClick={toggleDropdown} exception={openButton.current}>
             <div className="Select-node-dropdown">
-              <Select
-                toggleModal={() => {
-                  toggleConfig(), toggleDropdown();
-                }}
-                configureNode={selectConfigureNode}
-              />
-              <div className="flex-spacer" />
-              <button className="Select-node-add" onClick={addNode}>
-                Add
-              </button>
+              <Select onSelect={toggleDropdown} />
             </div>
           </OutsideAlerter>
         )}
-        <ConfigureNode
-          node={configureNode}
-          isOpen={isConfigModalOpen && !!configureNode}
-          closeModal={toggleConfig}
-        />
-        <AddNode isOpen={isAddNodeModalOpen} closeModal={toggleAddNode} />
       </div>
     );
   }
 }
+
+export const NodeDropdown = connect(null, { openModal })(NodeDropdownClass);

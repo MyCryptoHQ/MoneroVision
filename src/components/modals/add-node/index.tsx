@@ -5,14 +5,21 @@ import { Input } from 'components/forms/input';
 import { Omit } from 'utils/types';
 import { connect } from 'react-redux';
 import { addNode, AddNodeType } from 'redux/nodes/actions';
+import { AppState } from 'redux/root-reducer';
+import { closeModal, CloseModalType } from 'redux/modals/actions';
 
-type OwnProps = Omit<ModalProps, 'title' | 'buttons'>;
+type OwnProps = Omit<ModalProps, 'title' | 'buttons' | 'isOpen'>;
+
+interface StateProps {
+  open: boolean;
+}
 
 interface DispatchProps {
   addNode: AddNodeType;
+  closeModal: CloseModalType;
 }
 
-type Props = OwnProps & DispatchProps;
+type Props = OwnProps & StateProps & DispatchProps;
 
 interface State {
   name: string;
@@ -41,7 +48,7 @@ class AddNodeClass extends React.Component<Props, State> {
     this.setState({ nameError: '' });
     this.setState({ urlError: '' });
     this.resetInputs();
-    this.props.closeModal();
+    this.props.closeModal('add_node');
   };
 
   public onComplete = () => {
@@ -50,7 +57,6 @@ class AddNodeClass extends React.Component<Props, State> {
     this.setInputErrors();
     if (name.length > 0 && url.length > 0) {
       this.props.addNode({ name, url });
-      this.resetInputs();
       this.closeModal();
     }
   };
@@ -75,6 +81,7 @@ class AddNodeClass extends React.Component<Props, State> {
   };
 
   public render() {
+    const { open } = this.props;
     const { name, nameError, url, urlError } = this.state;
     const buttons: Button[] = [
       {
@@ -94,11 +101,12 @@ class AddNodeClass extends React.Component<Props, State> {
     ];
     return (
       <Modal
-        {...this.props}
+        isOpen={open}
         buttons={buttons}
         className="Add-Node"
         contentLabel="Add Node"
         title="Add Node"
+        closeModal={this.closeModal}
       >
         <Input
           type="text"
@@ -127,4 +135,10 @@ class AddNodeClass extends React.Component<Props, State> {
   }
 }
 
-export const AddNode = connect(null, { addNode })(AddNodeClass);
+const mapStateToProps = (state: AppState) => {
+  return {
+    open: state.modals.add_node.open
+  };
+};
+
+export const AddNode = connect(mapStateToProps, { addNode, closeModal })(AddNodeClass);

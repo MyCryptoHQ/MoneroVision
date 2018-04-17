@@ -15,6 +15,7 @@ import {
 } from 'redux/nodes/actions';
 import { AppState } from 'redux/root-reducer';
 import { NodeState } from 'redux/nodes/reducer';
+import { closeModal, CloseModalType, configureNode, ConfigureNodeType } from 'redux/modals/actions';
 
 interface State {
   node: {
@@ -26,17 +27,22 @@ interface State {
   index: number;
 }
 
-interface OwnProps extends Omit<ModalProps, 'title' | 'buttons'> {
-  node: Node | null;
+type OwnProps = Omit<ModalProps, 'title' | 'buttons' | 'isOpen'>;
+
+interface StateProps extends NodeState {
+  open: boolean;
+  node: Node;
 }
 
 interface DispatchProps {
   editNode: EditNodeType;
   removeNode: RemoveNodeType;
   selectNode: SelectNodeType;
+  closeModal: CloseModalType;
+  configureNode: ConfigureNodeType;
 }
 
-type Props = OwnProps & NodeState & DispatchProps;
+type Props = OwnProps & StateProps & DispatchProps;
 
 class ConfigureNodeClass extends React.Component<Props, State> {
   public state = {
@@ -87,7 +93,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
     this.setState({ nameError: '' });
     this.setState({ urlError: '' });
     this.resetInputs();
-    this.props.closeModal();
+    this.props.closeModal('config_node');
   };
 
   public onComplete = () => {
@@ -96,12 +102,12 @@ class ConfigureNodeClass extends React.Component<Props, State> {
     this.setInputErrors();
     if (name.length > 0 && url.length > 0) {
       this.props.editNode(index, node);
-      this.resetInputs();
       this.closeModal();
     }
   };
 
   public render() {
+    const { open } = this.props;
     const { node, index, nameError, urlError } = this.state;
     const buttons: Button[] = [
       {
@@ -123,6 +129,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
         type: 'secondary',
         className: 'delete-node',
         onClick: () => {
+          this.props.configureNode(0);
           this.props.removeNode(index);
           this.props.selectNode('Default');
           this.closeModal();
@@ -131,11 +138,12 @@ class ConfigureNodeClass extends React.Component<Props, State> {
     ];
     return (
       <Modal
-        {...this.props}
+        isOpen={open}
         buttons={buttons}
         className="Configure-Node"
         contentLabel="Configure Node"
         title="Configure Node"
+        closeModal={this.closeModal}
       >
         <Input
           type="text"
@@ -167,10 +175,16 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 const mapStateToProps = (state: AppState) => {
   return {
     selectedNode: state.nodes.selectedNode,
-    nodes: state.nodes.nodes
+    nodes: state.nodes.nodes,
+    open: state.modals.config_node.open,
+    node: state.nodes.nodes[state.modals.config_node.config_node]
   };
 };
 
-export const ConfigureNode = connect(mapStateToProps, { editNode, removeNode, selectNode })(
-  ConfigureNodeClass
-);
+export const ConfigureNode = connect(mapStateToProps, {
+  editNode,
+  removeNode,
+  selectNode,
+  closeModal,
+  configureNode
+})(ConfigureNodeClass);

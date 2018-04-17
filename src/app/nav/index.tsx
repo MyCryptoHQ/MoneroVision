@@ -4,7 +4,7 @@ import { NodeDropdown } from 'components/node-dropdown';
 import { SearchInput } from 'components/search-input';
 import { NavLink } from 'react-router-dom';
 import { OutsideAlerter } from 'components/outside-click';
-// import { Select } from 'components/node-dropdown/components/select-node';
+import { Select } from 'components/node-dropdown/components/select-node';
 
 export class Nav extends React.Component {
   public state = {
@@ -16,6 +16,7 @@ export class Nav extends React.Component {
   };
 
   public render() {
+    const { toggleDrawer } = this;
     const { open } = this.state;
     return (
       <>
@@ -41,10 +42,11 @@ export class Nav extends React.Component {
             <OutsideAlerter onClick={this.toggleDrawer}>
               <nav className="Navigation-Drawer">
                 <header className="Navigation-Drawer-header">
-                  <NavLink to="/" className="Navigation-title" onClick={this.toggleDrawer}>
+                  <NavLink to="/" className="Navigation-title" onClick={toggleDrawer}>
                     Monero Explorer
                   </NavLink>
                 </header>
+                <Select onSelect={toggleDrawer} />
               </nav>
             </OutsideAlerter>
           </aside>

@@ -45,10 +45,13 @@
     position: absolute;
     height: 100%;
     left: 0;
-    width: 280px;
+    width: 240px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 9px;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
     &-header {
       display: flex;
@@ -56,6 +59,10 @@
       padding: 0.75rem 1rem;
       justify-content: center;
       border-bottom: 1px solid transparent;
+    }
+
+    > .Select-node-wrapper {
+      flex-grow: 1;
     }
   }
   &-wrapper {

@@ -11,6 +11,8 @@ import { MemPool } from 'components/tables/mempool';
 import { Blocks } from 'components/tables/blocks';
 import { createBrowserHistory, createHashHistory } from 'history';
 import { PageNotFound } from 'app/page-not-found';
+import { ConfigureNode } from 'components/modals/configure-node';
+import { AddNode } from 'components/modals/add-node';
 
 export const RouteNotFound = () => <Redirect to={{ state: { error: true } }} />;
 
@@ -33,6 +35,8 @@ const App = () => (
     <div className="App">
       <Nav />
       <main id="App-body" className="App-body">
+        <ConfigureNode />
+        <AddNode />
         <CaptureRouteNotFound>
           <Switch>
             {/* These routes are 'exact' because they have no subroutes, except for path='/' */}
