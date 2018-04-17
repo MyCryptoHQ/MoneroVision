@@ -58,9 +58,9 @@ const App = () => (
             <RouteNotFound />
           </Switch>
         </CaptureRouteNotFound>
+        <div className="flex-spacer" />
+        <Footer />
       </main>
-      <div className="flex-spacer" />
-      <Footer />
     </div>
   </Router>
 );
