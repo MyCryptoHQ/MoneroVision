@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { addNode, AddNodeType } from 'redux/nodes/actions';
 import { AppState } from 'redux/root-reducer';
 import { closeModal, CloseModalType } from 'redux/modals/actions';
+import * as ValidUrl from 'valid-url';
+import { fetchAsync } from 'utils/functions';
 
 type OwnProps = Omit<ModalProps, 'title' | 'buttons' | 'isOpen'>;
 
@@ -26,6 +28,8 @@ interface State {
   nameError: string;
   url: string;
   urlError: string;
+  pending: boolean;
+  validUrl: boolean | null;
 }
 
 class AddNodeClass extends React.Component<Props, State> {
@@ -33,7 +37,9 @@ class AddNodeClass extends React.Component<Props, State> {
     name: '',
     url: '',
     nameError: '',
-    urlError: ''
+    urlError: '',
+    pending: false,
+    validUrl: null
   };
 
   public resetInputs() {
@@ -52,37 +58,74 @@ class AddNodeClass extends React.Component<Props, State> {
   };
 
   public onComplete = () => {
-    const { name, url } = this.state;
+    const { name, url, urlError, pending } = this.state;
 
-    this.setInputErrors();
-    if (name.length > 0 && url.length > 0) {
+    this.validateForm();
+    if (name.length > 0 && url.length > 0 && urlError.length === 0 && !pending) {
       this.props.addNode({ name, url });
       this.closeModal();
     }
   };
 
-  public setInputErrors = () => {
+  public validateForm = () => {
+    this.checkInputLength();
+    this.validateURL();
+  };
+
+  public validateURL = (validateAPI = false) => {
+    this.setState({ validUrl: false });
+    if (this.state.url.length > 0) {
+      if (ValidUrl.isWebUri(this.state.url)) {
+        if (!validateAPI) {
+          this.setInputError('url', '');
+        }
+        if (validateAPI && !this.state.validUrl) {
+          this.setState({ pending: true });
+          const url = `${this.state.url}/mempool?limit=${1}&page=${0}`;
+          fetchAsync(url)
+            .then(() => {
+              this.setState({ pending: false });
+              this.setState({ validUrl: true });
+              this.setInputError('url', '');
+            })
+            .catch(error => {
+              console.log(error);
+              this.setState({ pending: false });
+              this.setState({ validUrl: false });
+              this.setInputError(
+                'url',
+                'Unable to connect to node. Make sure your node is configured properly.'
+              );
+            });
+        }
+      } else {
+        this.setInputError('url', 'A valid url is required');
+      }
+    }
+  };
+
+  public checkInputLength = () => {
     const { name, url } = this.state;
     if (name.length < 1) {
-      this.setState({ nameError: 'A name is required' });
+      this.setInputError('name', 'A name is required');
     } else {
-      this.setState({ nameError: '' });
+      this.setInputError('name', '');
     }
 
     if (url.length < 1) {
-      this.setState({
-        urlError: 'A url is required'
-      });
+      this.setInputError('url', 'A url is required');
     } else {
-      this.setState({
-        urlError: ''
-      });
+      this.setInputError('url', '');
     }
+  };
+
+  public setInputError = (input: 'name' | 'url', msg: string) => {
+    this.setState({ [(input + 'Error') as any]: msg });
   };
 
   public render() {
     const { open } = this.props;
-    const { name, nameError, url, urlError } = this.state;
+    const { name, nameError, url, urlError, pending } = this.state;
     const buttons: Button[] = [
       {
         text: 'Confirm',
@@ -120,14 +163,19 @@ class AddNodeClass extends React.Component<Props, State> {
           value={name}
         />
         <Input
+          className={pending ? 'pending' : ''}
           type="text"
           label="URL"
+          inlinelabel={pending ? 'Connecting to node...' : ''}
           required={true}
           error={urlError}
-          placeholder="https://example.com"
+          placeholder="https://api.example.com"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('url', e.target.value)
           }
+          onBlur={() => {
+            this.validateURL(true);
+          }}
           value={url}
         />
       </Modal>

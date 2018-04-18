@@ -37,7 +37,7 @@ export class BlockDetailsClass extends React.Component<Props, State> {
     const node = nodes.find(n => n.name === selectedNode) as Node;
 
     this.setState({ data: { ...this.state.data, pending: true } });
-    fetch(node.url + '/api/block/' + this.props.match.params.block)
+    fetch(node.url + '/block/' + this.props.match.params.block)
       .then(response => {
         if (response.ok) {
           return response.json();

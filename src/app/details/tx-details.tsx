@@ -59,7 +59,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
     const node = nodes.find(n => n.name === selectedNode) as Node;
 
     this.setState({ data: { ...this.state.data, pending: true } });
-    fetch(node.url + '/api/transaction/' + this.props.match.params.transaction)
+    fetch(node.url + '/transaction/' + this.props.match.params.transaction)
       .then(response => {
         if (response.ok) {
           return response.json();

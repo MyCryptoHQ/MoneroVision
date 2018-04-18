@@ -72,7 +72,7 @@ class BlocksClass extends React.Component<Props, State> {
     const node = nodes.find(n => n.name === selectedNode) as Node;
     this.setState({ data: { ...this.state.data, pending: true } });
 
-    fetchAsync(node.url + `/api/transactions?limit=${this.state.limit}&page=${this.state.page}`)
+    fetchAsync(node.url + `/transactions?limit=${this.state.limit}&page=${this.state.page}`)
       .then(json => {
         const { current_height, blocks, page } = json.data;
         this.setState({ data: { current_height, blocks, pending: false }, page });

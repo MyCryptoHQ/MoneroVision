@@ -7,11 +7,23 @@
   &:not(:last-child) {
     margin-bottom: 0.5rem;
   }
+  &-label-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
   &-label {
     font-size: 1rem;
     font-weight: 400;
     color: #636a7d;
     margin: 0.5rem 0;
+  }
+  &-inline-label {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #828799;
+    margin-left: 1rem;
   }
   &-input {
     font-size: 1rem;
@@ -22,6 +34,10 @@
     border: 1px solid $border-dark-color;
     box-shadow: inset 0 1px 0 0 rgba(63, 63, 68, 0.05);
     transition: border-color $transition, box-shadow $transition;
+    &.pending {
+      border-color: $warning-color !important;
+      box-shadow: inset 0 0 0 1px $warning-color !important;
+    }
     &:focus {
       border-color: $secondary-color;
       box-shadow: inset 0 0 0 1px $secondary-color;

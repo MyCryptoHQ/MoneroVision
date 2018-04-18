@@ -42,7 +42,7 @@ class MemPoolClass extends React.Component<Props, State> {
     const { nodes, selectedNode } = this.props;
     const node = nodes.find(n => n.name === selectedNode) as Node;
     this.setState({ data: { ...this.state.data, pending: true } });
-    fetchAsync(node.url + `/api/mempool?limit=${this.state.limit}&page=${this.state.page}`)
+    fetchAsync(node.url + `/mempool?limit=${this.state.limit}&page=${this.state.page}`)
       .then(json => {
         const { txs_no, txs, page } = json.data;
         this.setState({ data: { txs_no, txs, pending: false }, page });
