@@ -1,0 +1,16 @@
+@import 'src/sass/variables/index';
+
+.Pages {
+  color: #999;
+  line-height: 1;
+  font-weight: 300;
+  font-size: 0.875rem;
+  letter-spacing: 0.1rem;
+  margin-right: 0.5rem;
+  opacity: 0;
+  transition: opacity 200ms ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}

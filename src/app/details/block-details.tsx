@@ -7,6 +7,7 @@ import { NodeState } from 'redux/nodes/reducer';
 import { RouteComponentProps } from 'react-router';
 import { Node } from 'redux/nodes/actions';
 import { Link } from 'react-router-dom';
+import { DetailsSkeleton } from './skeleton-details';
 
 type Props = NodeState & RouteComponentProps<{ block: string }>;
 
@@ -126,7 +127,7 @@ export class BlockDetailsClass extends React.Component<Props, State> {
             </div>
           </>
         ) : (
-          <div>transaction doesn't exist</div>
+          <DetailsSkeleton type="block" />
         )}
       </div>
     );

@@ -18,7 +18,7 @@ export class Input extends React.Component<Props> {
             <span className="Input-label">{label}</span>
             {inlinelabel && <span className="Input-inline-label">{inlinelabel}</span>}
           </div>
-          <input {...this.props} className={`Input-input ${className}`} />
+          <input {...this.props} className={`Input-input ${className} size_24px`} />
         </label>
         {!!error && <p className="Input-error">{error}</p>}
       </>

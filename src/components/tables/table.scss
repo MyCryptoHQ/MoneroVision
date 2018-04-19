@@ -9,7 +9,12 @@ $table-cell-padding: 3rem;
   flex-direction: column;
   flex-wrap: nowrap;
   min-height: 19rem;
-  &-pages {
+
+  div.truncated {
+    margin-top: 0.309rem;
+    margin-bottom: 0.309rem;
+  }
+  .Pages {
     @media screen and (max-width: 450px) {
       display: none;
     }
@@ -43,7 +48,7 @@ $table-cell-padding: 3rem;
   }
   &-table {
     display: block;
-    overflow: scroll;
+    overflow: auto;
     border-collapse: collapse;
     &-head {
       > tr > th {
@@ -97,14 +102,6 @@ $table-cell-padding: 3rem;
         line-height: 1.15;
       }
     }
-  }
-  &-pages {
-    color: #999;
-    line-height: 1;
-    font-weight: 300;
-    font-size: 0.875rem;
-    letter-spacing: 0.1rem;
-    margin-right: 0.5rem;
   }
 }
 

@@ -1,0 +1,41 @@
+@import 'src/sass/variables/index';
+
+@mixin RTG-fade {
+  &-animation-enter {
+    opacity: 0.01;
+  }
+  &-animation-enter-active {
+    opacity: 1;
+    transition: opacity $transition;
+  }
+
+  &-animation-exit {
+    opacity: 1;
+  }
+  &-animation-exit-active {
+    opacity: 0.01;
+    transition: opacity $transition;
+  }
+}
+
+@mixin RTG-side-drawer {
+  &-animation-enter {
+    opacity: 0.01;
+    transform: translateX(-240px);
+  }
+  &-animation-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity $transition, transform 250ms;
+  }
+
+  &-animation-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  &-animation-exit-active {
+    opacity: 0.01;
+    transform: translateX(-200px);
+    transition: opacity $transition, transform 250ms;
+  }
+}

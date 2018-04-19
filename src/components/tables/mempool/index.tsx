@@ -7,6 +7,7 @@ import { AppState } from 'redux/root-reducer';
 import { NodeState } from 'redux/nodes/reducer';
 import { Node } from 'redux/nodes/actions';
 import { RouteProps } from 'react-router';
+import { PageCount } from 'components/tables/page-count';
 
 interface OwnProps {
   paginated?: boolean;
@@ -83,27 +84,25 @@ class MemPoolClass extends React.Component<Props, State> {
           <div className="flex-spacer" />
           {!!paginated && (
             <>
-              <p className="MemPool-pages">
-                {limit * page + 1}-{limit * page + txs.length} of {txs_no}
-              </p>
+              <PageCount pending={pending} limit={limit} page={page} itemCount={txs_no} />
               <button
                 className="MemPool-table-footer-paginate"
                 onClick={this.decrementPage}
                 disabled={txs_no <= limit || pending}
               >
-                <i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+                <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
               </button>
               <button
                 className="MemPool-table-footer-paginate"
                 onClick={this.incrementPage}
                 disabled={txs_no <= limit || pending}
               >
-                <i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+                <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
               </button>
             </>
           )}
           <button className="MemPool-refresh" onClick={this.fetchData}>
-            <i className="nc-icon nc-ic_refresh_24px" />
+            <i className="nc-icon nc-ic_refresh_24px size_24px" />
           </button>
           {!paginated && (
             <Link to="/mempool" className="MemPool-view-all">
@@ -121,42 +120,67 @@ class MemPoolClass extends React.Component<Props, State> {
             </tr>
           </thead>
           <tbody className="MemPool-table-body">
-            {txs.map((transaction: any) => (
-              <tr key={transaction.tx_hash}>
-                <td>
-                  <div className="truncate">
-                    <div className="truncated">
-                      <Link to={`/tx/${transaction.tx_hash}`}>{transaction.tx_hash}</Link>
-                    </div>
-                  </div>
-                </td>
-                <td>{(transaction.tx_fee / 1000000000000).toFixed(3)}</td>
-                <td>{toKB(transaction.tx_size)}</td>
-                <td>{calculateAge(transaction.timestamp_utc + ' UTC')}</td>
-              </tr>
-            ))}
+            {pending
+              ? Array(limit)
+                  .fill('')
+                  .map(() => (
+                    <tr
+                      className="MemPool-table-pending-api-data"
+                      aria-hidden={true}
+                      key={Math.random()}
+                    >
+                      <td>
+                        <div className="truncate">
+                          <div className="truncated skeleton">
+                            b27dd24d870823081ac6cb2bce146b420937c445d1f76431ba1e82643b12209b
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="skeleton">0.003</div>
+                      </td>
+                      <td>
+                        <div className="skeleton">13.787 kB</div>
+                      </td>
+                      <td>
+                        <div className="skeleton">3m</div>
+                      </td>
+                    </tr>
+                  ))
+              : txs.map((transaction: any) => (
+                  <tr key={transaction.tx_hash}>
+                    <td>
+                      <div className="truncate">
+                        <div className="truncated">
+                          <Link to={`/tx/${transaction.tx_hash}`}>{transaction.tx_hash}</Link>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{(transaction.tx_fee / 1000000000000).toFixed(3)}</td>
+                    <td>{toKB(transaction.tx_size)}</td>
+                    <td>{calculateAge(transaction.timestamp_utc + ' UTC')}</td>
+                  </tr>
+                ))}
           </tbody>
         </table>
         <div className="flex-spacer" />
         {!!paginated && (
           <div className="MemPool-table-footer">
             <div className="flex-spacer" />
-            <p className="MemPool-pages">
-              {limit * page + 1}-{limit * page + txs.length} of {txs_no}
-            </p>
+            <PageCount pending={pending} limit={limit} page={page} itemCount={txs_no} />
             <button
               className="MemPool-table-footer-paginate"
               onClick={this.decrementPage}
               disabled={txs_no <= limit || pending}
             >
-              <i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+              <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
             </button>
             <button
               className="MemPool-table-footer-paginate"
               onClick={this.incrementPage}
               disabled={txs_no <= limit || pending}
             >
-              <i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+              <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
             </button>
           </div>
         )}

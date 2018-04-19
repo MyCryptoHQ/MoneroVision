@@ -49,7 +49,10 @@ const config = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.sass', '.css'],
-    modules: [paths.src, paths.modules, paths.root]
+    modules: [paths.src, paths.modules, paths.root],
+    alias: {
+      snapsvg: 'snapsvg/dist/snap.svg.js'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({ template: 'public/index.html' }),

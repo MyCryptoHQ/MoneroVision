@@ -71,7 +71,7 @@ class SelectClass extends React.Component<Props> {
                   {node.name !== 'Default' && (
                     <A11yClick onClick={(e: any) => this.openModal(e, node)}>
                       <button className="settings">
-                        <i className="nc-icon nc-ic_settings_24px" />
+                        <i className="nc-icon nc-ic_settings_24px size_16px" />
                       </button>
                     </A11yClick>
                   )}

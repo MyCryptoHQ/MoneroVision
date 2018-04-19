@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { NodeState } from 'redux/nodes/reducer';
 import { Node } from 'redux/nodes/actions';
 import { RouteComponentProps } from 'react-router';
+import { PageCount } from 'components/tables/page-count';
 
 // URLSearchParams API Polyfill: https://github.com/WebReflection/url-search-params
 if ('searchParams' in HTMLAnchorElement.prototype) {
@@ -118,27 +119,25 @@ class BlocksClass extends React.Component<Props, State> {
           <div className="flex-spacer" />
           {!!paginated && (
             <>
-              <p className="MemPool-pages">
-                {limit * page + 1}-{limit * page + blocks.length} of {current_height}
-              </p>
+              <PageCount pending={pending} limit={limit} page={page} itemCount={current_height} />
               <button
                 className="MemPool-table-footer-paginate"
                 onClick={this.decrementPage}
                 disabled={current_height <= limit || pending}
               >
-                <i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+                <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
               </button>
               <button
                 className="MemPool-table-footer-paginate"
                 onClick={this.incrementPage}
                 disabled={current_height <= limit || pending}
               >
-                <i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+                <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
               </button>
             </>
           )}
           <button className="Blocks-refresh" onClick={this.fetchData}>
-            <i className="nc-icon nc-ic_refresh_24px" />
+            <i className="nc-icon nc-ic_refresh_24px size_24px" />
           </button>
           {!paginated && (
             <Link to="/blocks" className="Blocks-view-all">
@@ -157,45 +156,73 @@ class BlocksClass extends React.Component<Props, State> {
             </tr>
           </thead>
           <tbody className="Blocks-table-body">
-            {blocks.map((block: any) => (
-              <tr key={block.hash}>
-                <td>
-                  <Link to={`block/${block.height}`}>{block.height}</Link>
-                </td>
-                <td>
-                  <div className="truncate">
-                    <div className="truncated">
-                      <Link to={`block/${block.hash}`}>{block.hash}</Link>
-                    </div>
-                  </div>
-                </td>
-                <td>{block.txs.length}</td>
-                <td>{toKB(block.size)}</td>
-                <td>{calculateAge(block.timestamp_utc + ' UTC')}</td>
-              </tr>
-            ))}
+            {pending
+              ? Array(limit)
+                  .fill('')
+                  .map(() => (
+                    <tr
+                      className="Blocks-table-pending-api-data"
+                      aria-hidden={true}
+                      key={Math.random()}
+                    >
+                      <td>
+                        <div className="skeleton">1554250</div>
+                      </td>
+                      <td>
+                        <div className="truncate">
+                          <div className="truncated skeleton">
+                            b0a45cab8083019d729f62b70ef5bb063e8b22eaeaa73d64df74bf2befdb8ff1
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="skeleton">19</div>
+                      </td>
+                      <td>
+                        <div className="skeleton">292.146 kB</div>
+                      </td>
+                      <td>
+                        <div className="skeleton">10m</div>
+                      </td>
+                    </tr>
+                  ))
+              : blocks.map((block: any) => (
+                  <tr key={block.hash}>
+                    <td>
+                      <Link to={`block/${block.height}`}>{block.height}</Link>
+                    </td>
+                    <td>
+                      <div className="truncate">
+                        <div className="truncated">
+                          <Link to={`block/${block.hash}`}>{block.hash}</Link>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{block.txs.length}</td>
+                    <td>{toKB(block.size)}</td>
+                    <td>{calculateAge(block.timestamp_utc + ' UTC')}</td>
+                  </tr>
+                ))}
           </tbody>
         </table>
         <div className="flex-spacer" />
         {!!paginated && (
           <div className="MemPool-table-footer">
             <div className="flex-spacer" />
-            <p className="MemPool-pages">
-              {limit * page + 1}-{limit * page + blocks.length} of {current_height}
-            </p>
+            <PageCount pending={pending} limit={limit} page={page} itemCount={current_height} />
             <button
               className="MemPool-table-footer-paginate"
               onClick={this.decrementPage}
               disabled={current_height <= limit || pending}
             >
-              <i className="nc-icon nc-ic_keyboard_arrow_left_24px" />
+              <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
             </button>
             <button
               className="MemPool-table-footer-paginate"
               onClick={this.incrementPage}
               disabled={current_height <= limit || pending}
             >
-              <i className="nc-icon nc-ic_keyboard_arrow_right_24px" />
+              <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
             </button>
           </div>
         )}

@@ -25,7 +25,7 @@ function selectNode(state: NodeState, action: SelectNodeAction): NodeState {
 }
 function removeNode(state: NodeState, action: RemoveNodeAction): NodeState {
   const { payload } = action;
-  const nodes = [...state.nodes.slice(0, payload), ...state.nodes.slice(payload + 1)];
+  const nodes = [...state.nodes.filter((_, i) => i !== payload)];
   return { ...state, nodes };
 }
 

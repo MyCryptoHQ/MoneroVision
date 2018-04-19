@@ -8,6 +8,7 @@ import { RouteComponentProps } from 'react-router';
 import { Node } from 'redux/nodes/actions';
 import { minutesUntilMined } from 'utils/heuristic';
 import { Link } from 'react-router-dom';
+import { DetailsSkeleton } from './skeleton-details';
 
 type Props = NodeState & RouteComponentProps<{ transaction: string }>;
 
@@ -85,9 +86,9 @@ export class TxDetailsClass extends React.Component<Props, State> {
               <h1 className="Details-header-title">Transaction Details</h1>
               <div className="flex-spacer" />
               <div className="Details-header-timestamp">
-                {this.state.data.confirmationDuration && (
+                {/* {this.state.data.confirmationDuration && (
                   <h3>Expected Confirmation: {this.state.data.confirmationDuration} minutes</h3>
-                )}{' '}
+                )} */}
                 {formatApiDateStrings(transaction.timestamp)}
               </div>
             </div>
@@ -110,6 +111,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                         <p>Payment ID</p>
                         <p>{transaction.payment_id || transaction.payment_id8}</p>
                       </div>
+                      <br />
                     </>
                   )}
                   <div className="Details-body-section-content-input">
@@ -207,7 +209,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
             </div>
           </>
         ) : (
-          <div>transaction doesn't exist</div>
+          <DetailsSkeleton type="tx" />
         )}
       </div>
     );

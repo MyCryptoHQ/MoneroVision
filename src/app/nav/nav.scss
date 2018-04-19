@@ -13,18 +13,18 @@
   font-size: 1rem;
   z-index: 1;
   &-Drawer {
+    @include RTG-side-drawer;
     &-wrapper {
       color: #000000de;
       position: fixed;
       top: 0;
       left: 0;
       box-sizing: border-box;
-      width: 100%;
+      width: calc(100% + 240px);
       height: 100%;
-      // pointer-events: none;
       overflow: hidden;
       contain: strict;
-      z-index: 5;
+      z-index: 1;
 
       &:before {
         content: '';

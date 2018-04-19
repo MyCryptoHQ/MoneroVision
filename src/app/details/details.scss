@@ -1,6 +1,15 @@
 @import 'src/sass/variables/index';
 
 .Details {
+  div.skeleton,
+  p.skeleton {
+    margin-top: 0.309rem;
+    margin-bottom: 0.309rem;
+    width: fit-content;
+  }
+  .wrap.skeleton {
+    width: 100%;
+  }
   &-header {
     display: flex;
     flex-direction: row;
@@ -40,10 +49,7 @@
         font-size: 1rem;
         font-weight: 400;
         color: #5f6478;
-        width: 100px;
-        @media screen and (max-width: 900px) {
-          width: 100%;
-        }
+        width: 8rem;
         margin-right: 3rem;
 
         @media screen and (max-width: 900px) {
@@ -55,7 +61,6 @@
       }
       &-content {
         width: 100%;
-        // margin-right: -6rem;
         &-input,
         > a {
           display: inline-flex;

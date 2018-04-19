@@ -14,6 +14,8 @@ interface Props {
 interface State {
   hoverLocation: number | null;
   closestPoint: Point | null;
+  path: string;
+  area: string;
 }
 
 export class LineGraph extends React.Component<Props, State> {
@@ -24,8 +26,28 @@ export class LineGraph extends React.Component<Props, State> {
 
   public state = {
     hoverLocation: null,
-    closestPoint: null
+    closestPoint: null,
+    path: '',
+    area: ''
   };
+
+  public svg: any;
+
+  constructor(props: any) {
+    super(props);
+    // React v16.3 createRef() API, until @types/react have updated cast as 'any'
+    this.svg = (React as any).createRef();
+  }
+
+  public componentWillUpdate(_: Props, prevState: State) {
+    const prevPath = prevState.path;
+    const newPath = this.state.path;
+    const prevArea = this.state.area;
+    const newArea = this.state.area;
+    if (prevPath !== newPath || prevArea !== newArea) {
+      // TODO: figure out how to animate path morph
+    }
+  }
 
   public getX = () => {
     const { data } = this.props;
@@ -56,21 +78,25 @@ export class LineGraph extends React.Component<Props, State> {
 
   public makePath = () => {
     const { data } = this.props;
-    let pathD = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
-    pathD += data.map((point: Point) => {
+    let dPath = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
+    dPath += data.map((point: Point) => {
       const x = this.getSvgX(point[0]);
       const y = this.getSvgY(point[1]);
       return 'L ' + x + ' ' + y + ' ';
     });
 
-    return <path className="linechart-path" d={pathD} />;
+    if (this.state.path !== dPath) {
+      this.setState({ path: dPath });
+    }
+
+    return <path id="path" className="linechart-path" d={dPath} />;
   };
 
   public makeArea = () => {
     const { data } = this.props;
-    let pathD = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
+    let dPath = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
 
-    pathD += data
+    dPath += data
       .map(point => {
         return 'L ' + this.getSvgX(point[0]) + ' ' + this.getSvgY(point[1]) + ' ';
       })
@@ -78,7 +104,7 @@ export class LineGraph extends React.Component<Props, State> {
 
     const x = this.getX();
     const y = this.getY();
-    pathD +=
+    dPath +=
       'L ' +
       this.getSvgX(x.max) +
       ' ' +
@@ -90,7 +116,13 @@ export class LineGraph extends React.Component<Props, State> {
       this.getSvgY(y.min) +
       ' ';
 
-    return <path className="linechart-area" d={pathD} style={{ fill: 'url(#Gradient)' }} />;
+    if (this.state.area !== dPath) {
+      this.setState({ area: dPath });
+    }
+
+    return (
+      <path id="area" className="linechart-area" d={dPath} style={{ fill: 'url(#Gradient)' }} />
+    );
   };
 
   public getCoords = (e: any) => {
@@ -160,6 +192,7 @@ export class LineGraph extends React.Component<Props, State> {
         <svg
           id={id}
           className="linechart-svg"
+          ref={this.svg}
           viewBox={`0 0 ${width} ${height}`}
           width={width}
           height={height}

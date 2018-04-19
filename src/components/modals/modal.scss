@@ -19,6 +19,7 @@
     max-width: 90%;
   }
   max-height: 80%;
+
   > div {
     padding: 1rem 1.5rem;
   }
@@ -96,5 +97,19 @@
     &.warning {
       @include button(#e06b56);
     }
+  }
+}
+
+.ReactModalPortal > div {
+  opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  transition: opacity $transition;
+  &--after-open {
+    opacity: 1;
+  }
+  &--before-close {
+    opacity: 0;
   }
 }

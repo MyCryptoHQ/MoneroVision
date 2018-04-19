@@ -1,0 +1,12 @@
+@import 'src/sass/variables/index';
+
+@mixin skeleton {
+  color: transparent !important;
+  background-color: #e9f3fd;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+@mixin skeleton-transition {
+  transition: color $transition, background-color $transition;
+}

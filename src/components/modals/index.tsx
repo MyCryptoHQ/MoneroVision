@@ -38,12 +38,13 @@ export class Modal extends React.Component<Props, State> {
         overlayClassName="Modal-overlay"
         shouldCloseOnOverlayClick={false}
         onRequestClose={closeModal}
+        closeTimeoutMS={200}
       >
         <div className="Modal-heading">
           <h2 className="Modal-title">{title}</h2>
           <div className="flex-spacer" />
           <button className="Modal-close" onClick={closeModal}>
-            <i className="nc-icon nc-ic_close_24px" />
+            <i className="nc-icon nc-ic_close_24px size_24px" />
           </button>
         </div>
         <div className="Modal-body">{children}</div>

@@ -5,6 +5,7 @@ import { SearchInput } from 'components/search-input';
 import { NavLink } from 'react-router-dom';
 import { OutsideAlerter } from 'components/outside-click';
 import { Select } from 'components/node-dropdown/components/select-node';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export class Nav extends React.Component {
   public state = {
@@ -26,7 +27,7 @@ export class Nav extends React.Component {
               className="Navigation-open-drawer"
               onClick={() => this.setState({ open: true })}
             >
-              <i className="nc-icon nc-ic_menu_24px" />
+              <i className="nc-icon nc-ic_menu_24px size_24px" />
             </button>
             <NavLink to="/" className="Navigation-title">
               Monero Explorer
@@ -37,20 +38,24 @@ export class Nav extends React.Component {
             <NodeDropdown />
           </div>
         </nav>
-        {open && (
-          <aside className="Navigation-Drawer-wrapper">
-            <OutsideAlerter onClick={this.toggleDrawer}>
-              <nav className="Navigation-Drawer">
-                <header className="Navigation-Drawer-header">
-                  <NavLink to="/" className="Navigation-title" onClick={toggleDrawer}>
-                    Monero Explorer
-                  </NavLink>
-                </header>
-                <Select onSelect={toggleDrawer} />
-              </nav>
-            </OutsideAlerter>
-          </aside>
-        )}
+        <TransitionGroup>
+          {open && (
+            <CSSTransition classNames="Navigation-Drawer-animation" timeout={200}>
+              <aside className="Navigation-Drawer-wrapper">
+                <OutsideAlerter onClick={this.toggleDrawer}>
+                  <nav className="Navigation-Drawer">
+                    <header className="Navigation-Drawer-header">
+                      <NavLink to="/" className="Navigation-title" onClick={toggleDrawer}>
+                        Monero Explorer
+                      </NavLink>
+                    </header>
+                    <Select onSelect={toggleDrawer} />
+                  </nav>
+                </OutsideAlerter>
+              </aside>
+            </CSSTransition>
+          )}
+        </TransitionGroup>
       </>
     );
   }

@@ -3,6 +3,11 @@
 @import 'src/sass/mixins/index';
 @import 'src/sass/variables/index';
 
+html {
+  overflow: auto;
+  overflow-x: hidden;
+}
+
 html,
 body {
   margin: 0;
@@ -95,4 +100,19 @@ span {
 
 .flex-spacer {
   flex-grow: 1;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  @include skeleton;
+  animation: skeleton-pulse 1500ms ease-out infinite alternate-reverse;
 }
