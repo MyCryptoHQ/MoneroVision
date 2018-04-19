@@ -1,0 +1,19 @@
+.Page-Not-Found {
+  padding: 1rem;
+  text-align: center;
+  &-title {
+    font-size: 3rem;
+    @media screen and (max-width: 600px) {
+      font-size: 2rem;
+    }
+    font-weight: 400;
+    color: #606474;
+    margin-bottom: 1rem;
+  }
+  &-description {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #828799;
+    margin-bottom: 1rem;
+  }
+}
