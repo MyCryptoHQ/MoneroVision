@@ -171,9 +171,9 @@ export class TxDetailsClass extends React.Component<Props, State> {
                       </tr>
                     </thead>
                     <tbody>
-                      {transaction.inputs.map((input: any, i: number) => {
+                      {transaction.inputs.map((input: any) => {
                         return (
-                          <tr key={i}>
+                          <tr key={Math.random()}>
                             <td className="">{input.key_image}</td>
                             {transaction.tx_version === 1 && <td>{input.amount}</td>}
                           </tr>
@@ -193,9 +193,9 @@ export class TxDetailsClass extends React.Component<Props, State> {
                     </tr>
                   </thead>
                   <tbody>
-                    {transaction.outputs.map((output: any, i: number) => {
+                    {transaction.outputs.map((output: any) => {
                       return (
-                        <tr key={i}>
+                        <tr key={Math.random()}>
                           <td>
                             <div className="wrap">{output.public_key}</div>
                           </td>

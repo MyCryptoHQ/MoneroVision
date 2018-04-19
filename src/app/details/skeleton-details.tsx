@@ -87,9 +87,9 @@ export const DetailsSkeleton = ({ type }: Props) => (
           <tbody>
             {Array(7)
               .fill('')
-              .map((i: number) => {
+              .map(() => {
                 return (
-                  <tr key={i}>
+                  <tr key={Math.random()}>
                     <td>
                       <div className="wrap skeleton">
                         19e38d7406e2fa7bc924cee7e72841286d6a55d80d678db589e18b8ad2595343
