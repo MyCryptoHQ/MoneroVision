@@ -27,7 +27,6 @@ interface State {
   nameError: string;
   urlError: string;
   pending: boolean;
-  validUrl: boolean | null;
   index: number;
 }
 
@@ -57,7 +56,6 @@ class ConfigureNodeClass extends React.Component<Props, State> {
     nameError: '',
     urlError: '',
     pending: false,
-    validUrl: null,
     index: -1
   };
 
@@ -79,30 +77,26 @@ class ConfigureNodeClass extends React.Component<Props, State> {
   };
 
   public validateURL = (validateAPI = false) => {
-    this.setState({ validUrl: false });
     if (this.state.node.url.length > 0) {
       if (ValidUrl.isWebUri(this.state.node.url)) {
-        if (!validateAPI) {
-          this.setInputError('url', '');
-        }
-        if (validateAPI && !this.state.validUrl) {
+        if (validateAPI) {
           this.setState({ pending: true });
           const url = `${this.state.node.url}/mempool?limit=${1}&page=${0}`;
           fetchAsync(url)
             .then(() => {
               this.setState({ pending: false });
-              this.setState({ validUrl: true });
               this.setInputError('url', '');
             })
             .catch(error => {
               console.log(error);
               this.setState({ pending: false });
-              this.setState({ validUrl: false });
               this.setInputError(
                 'url',
                 'Unable to connect to node. Make sure your node is configured properly.'
               );
             });
+        } else {
+          this.setInputError('url', '');
         }
       } else {
         this.setInputError('url', 'A valid url is required');

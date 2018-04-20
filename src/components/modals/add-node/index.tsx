@@ -29,7 +29,6 @@ interface State {
   url: string;
   urlError: string;
   pending: boolean;
-  validUrl: boolean | null;
 }
 
 class AddNodeClass extends React.Component<Props, State> {
@@ -38,8 +37,7 @@ class AddNodeClass extends React.Component<Props, State> {
     url: '',
     nameError: '',
     urlError: '',
-    pending: false,
-    validUrl: null
+    pending: false
   };
 
   public resetInputs() {
@@ -69,34 +67,32 @@ class AddNodeClass extends React.Component<Props, State> {
 
   public validateForm = () => {
     this.checkInputLength();
-    this.validateURL();
+    this.validateURL(true);
   };
 
   public validateURL = (validateAPI = false) => {
-    this.setState({ validUrl: false });
     if (this.state.url.length > 0) {
       if (ValidUrl.isWebUri(this.state.url)) {
-        if (!validateAPI) {
-          this.setInputError('url', '');
-        }
-        if (validateAPI && !this.state.validUrl) {
+        if (validateAPI) {
           this.setState({ pending: true });
           const url = `${this.state.url}/mempool?limit=${1}&page=${0}`;
           fetchAsync(url)
             .then(() => {
               this.setState({ pending: false });
-              this.setState({ validUrl: true });
+
               this.setInputError('url', '');
             })
             .catch(error => {
               console.log(error);
               this.setState({ pending: false });
-              this.setState({ validUrl: false });
+
               this.setInputError(
                 'url',
                 'Unable to connect to node. Make sure your node is configured properly.'
               );
             });
+        } else {
+          this.setInputError('url', '');
         }
       } else {
         this.setInputError('url', 'A valid url is required');
