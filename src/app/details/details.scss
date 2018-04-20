@@ -25,9 +25,33 @@
       color: #5f6478;
     }
     &-timestamp {
+      margin-left: 1rem;
+      text-align: right;
       font-size: 1rem;
       font-weight: 400;
       color: #828799;
+    }
+
+    @media screen and (max-width: 700px) {
+      flex-wrap: wrap;
+      &-title,
+      &-timestamp {
+        text-align: left;
+      }
+      > .Tag {
+        margin: 0;
+      }
+      &-timestamp {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      > .Tag {
+        order: 1;
+      }
     }
   }
   &-body {

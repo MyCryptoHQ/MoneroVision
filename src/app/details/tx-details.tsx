@@ -9,6 +9,7 @@ import { Node } from 'redux/nodes/actions';
 import { minutesUntilMined } from 'utils/heuristic';
 import { Link } from 'react-router-dom';
 import { DetailsSkeleton } from './skeleton-details';
+import { Tag } from 'components/tag';
 
 type Props = NodeState & RouteComponentProps<{ transaction: string }>;
 
@@ -38,15 +39,17 @@ export class TxDetailsClass extends React.Component<Props, State> {
   }
 
   public setConfirmationDuration = () => {
+    const { selectedNode, nodes } = this.props;
+    const node = nodes.find(n => n.name === selectedNode) as Node;
     const txHash = this.props.match.params.transaction;
     let mempool: any[];
     let blocks: any[];
-    const getMempool = fetchAsync(`https://xmrchain.net/api/mempool?limit=${10000}&page=${0}`).then(
+    const getMempool = fetchAsync(`${node.url}/mempool?limit=${10000}&page=${0}`).then(
       json => (mempool = json.data.txs)
     );
-    const getBlocks = fetchAsync(
-      `https://xmrchain.net/api/transactions?limit=${100}&page=${0}`
-    ).then(json => (blocks = json.data.blocks));
+    const getBlocks = fetchAsync(`${node.url}/transactions?limit=${100}&page=${0}`).then(
+      json => (blocks = json.data.blocks)
+    );
 
     Promise.all([getMempool, getBlocks])
       .then(() => minutesUntilMined(txHash, mempool, blocks))
@@ -85,10 +88,19 @@ export class TxDetailsClass extends React.Component<Props, State> {
             <div className="Details-header">
               <h1 className="Details-header-title">Transaction Details</h1>
               <div className="flex-spacer" />
+              {!transaction.block_height ? (
+                this.state.data.confirmationDuration ? (
+                  <Tag type="pending" text={`PENDING ~ ${this.state.data.confirmationDuration}m`} />
+                ) : (
+                  <Tag className="skeleton" type="pending" text="PENDING ~ 2m" />
+                )
+              ) : null}
+              {transaction.coinbase && transaction ? (
+                <Tag type="coinbase" text="COINBASE" />
+              ) : (
+                <Tag className="skeleton" type="coinbase" text="COINBASE" />
+              )}
               <div className="Details-header-timestamp">
-                {/* {this.state.data.confirmationDuration && (
-                  <h3>Expected Confirmation: {this.state.data.confirmationDuration} minutes</h3>
-                )} */}
                 {formatApiDateStrings(transaction.timestamp)}
               </div>
             </div>

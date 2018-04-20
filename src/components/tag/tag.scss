@@ -1,0 +1,17 @@
+.Tag {
+  padding: 0.325rem 0.5rem;
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1;
+  border-radius: 6px;
+  margin: 0 1rem;
+  letter-spacing: 0.5px;
+
+  &.pending {
+    background-color: #f0ce60;
+  }
+  &.coinbase {
+    background-color: #64a8f2;
+  }
+}
