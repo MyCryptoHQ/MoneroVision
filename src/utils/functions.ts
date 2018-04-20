@@ -1,9 +1,10 @@
 import * as moment from 'moment';
 
 export const calculateAge = (start: string) => {
-  const timestampUTC = +new Date(start);
+  // Dates should be calculated in unix due to weird issue with firefox parsing dates
+  const timestampUTC = new Date(parseInt(start, 10) * 1000);
   const nowUTC = new Date().toUTCString();
-  const diffMs = +new Date(nowUTC) - timestampUTC;
+  const diffMs = +new Date(nowUTC) - +timestampUTC;
   const diffDays = Math.floor(diffMs / 86400000); // days
   const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
   const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes

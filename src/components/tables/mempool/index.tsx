@@ -158,7 +158,7 @@ class MemPoolClass extends React.Component<Props, State> {
                     </td>
                     <td>{(transaction.tx_fee / 1000000000000).toFixed(3)}</td>
                     <td>{toKB(transaction.tx_size)}</td>
-                    <td>{calculateAge(transaction.timestamp_utc + ' UTC')}</td>
+                    <td>{calculateAge(transaction.timestamp)}</td>
                   </tr>
                 ))}
           </tbody>

@@ -19,6 +19,7 @@
   &::placeholder {
     color: white;
     text-align: center;
+    opacity: 1;
   }
   &:focus {
     box-shadow: $box-shadow;

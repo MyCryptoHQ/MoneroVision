@@ -200,7 +200,7 @@ class BlocksClass extends React.Component<Props, State> {
                     </td>
                     <td>{block.txs.length}</td>
                     <td>{toKB(block.size)}</td>
-                    <td>{calculateAge(block.timestamp_utc + ' UTC')}</td>
+                    <td>{calculateAge(block.timestamp)}</td>
                   </tr>
                 ))}
           </tbody>

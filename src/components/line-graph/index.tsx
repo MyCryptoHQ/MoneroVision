@@ -78,33 +78,28 @@ export class LineGraph extends React.Component<Props, State> {
 
   public makePath = () => {
     const { data } = this.props;
-    let dPath = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
-    dPath += data.map((point: Point) => {
-      const x = this.getSvgX(point[0]);
-      const y = this.getSvgY(point[1]);
-      return 'L ' + x + ' ' + y + ' ';
-    });
+    let d = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
+    d += data
+      .map(point => 'L ' + this.getSvgX(point[0]) + ' ' + this.getSvgY(point[1]) + ' ')
+      .join('');
 
-    if (this.state.path !== dPath) {
-      this.setState({ path: dPath });
+    if (this.state.path !== d) {
+      this.setState({ path: d });
     }
 
-    return <path id="path" className="linechart-path" d={dPath} />;
+    return <path id="path" className="linechart-path" d={d} />;
   };
 
   public makeArea = () => {
     const { data } = this.props;
-    let dPath = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
-
-    dPath += data
-      .map(point => {
-        return 'L ' + this.getSvgX(point[0]) + ' ' + this.getSvgY(point[1]) + ' ';
-      })
+    let d = 'M ' + this.getSvgX(data[0][0]) + ' ' + this.getSvgY(data[0][1]) + ' ';
+    d += data
+      .map(point => 'L ' + this.getSvgX(point[0]) + ' ' + this.getSvgY(point[1]) + ' ')
       .join('');
 
     const x = this.getX();
     const y = this.getY();
-    dPath +=
+    d +=
       'L ' +
       this.getSvgX(x.max) +
       ' ' +
@@ -116,13 +111,11 @@ export class LineGraph extends React.Component<Props, State> {
       this.getSvgY(y.min) +
       ' ';
 
-    if (this.state.area !== dPath) {
-      this.setState({ area: dPath });
+    if (this.state.area !== d) {
+      this.setState({ area: d });
     }
 
-    return (
-      <path id="area" className="linechart-area" d={dPath} style={{ fill: 'url(#Gradient)' }} />
-    );
+    return <path id="area" className="linechart-area" d={d} style={{ fill: 'url(#Gradient)' }} />;
   };
 
   public getCoords = (e: any) => {
