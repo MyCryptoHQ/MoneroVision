@@ -68,7 +68,9 @@
     "precommit": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development --config ./webpack_config/webpack.dev.js",
-    "build": "webpack --mode production --config webpack_config/webpack.prod.js -p"
+    "build": "webpack --mode production --config webpack_config/webpack.prod.js -p",
+    "prettier:diff":
+      "prettier --write --config ./.prettierrc --list-different \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "precommit": "lint-staged",
   "lint-staged": {
