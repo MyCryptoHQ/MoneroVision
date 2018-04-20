@@ -6,13 +6,18 @@ import { NodeState } from 'redux/nodes/reducer';
 import { fetchAsync } from 'utils/functions';
 import { Node } from 'redux/nodes/actions';
 import { withRouter, RouteComponentProps } from 'react-router';
+import { addNotification, AddNotificationType } from 'redux/notifications/actions';
 
 interface State {
   data: any;
   queryStr: string;
 }
 
-type Props = NodeState & RouteComponentProps<{}>;
+interface DispatchProps {
+  addNotification: AddNotificationType;
+}
+
+type Props = NodeState & DispatchProps & RouteComponentProps<{}>;
 class SearchInputClass extends React.Component<Props, State> {
   public state = {
     data: {},
@@ -56,6 +61,7 @@ class SearchInputClass extends React.Component<Props, State> {
           this.node.current.blur();
           this.props.history.push(location);
         } else {
+          this.props.addNotification({ type: 'Error', text: 'No results found' });
           throw new Error('Invalid query string');
         }
       })
@@ -95,4 +101,6 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export const SearchInput = connect(mapStateToProps)(withRouter<Props>(SearchInputClass));
+export const SearchInput = connect(mapStateToProps, { addNotification })(
+  withRouter<Props>(SearchInputClass)
+);

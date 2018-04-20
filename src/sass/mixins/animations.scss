@@ -39,3 +39,23 @@
     transition: opacity $transition, transform 250ms;
   }
 }
+
+@mixin RTG-notification {
+  &-animation-enter {
+    opacity: 0.01;
+    transform: translateY(150%);
+  }
+  &-animation-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity $transition, transform 500ms ease;
+  }
+
+  &-animation-exit {
+    opacity: 1;
+  }
+  &-animation-exit-active {
+    opacity: 0.01;
+    transition: opacity $transition;
+  }
+}

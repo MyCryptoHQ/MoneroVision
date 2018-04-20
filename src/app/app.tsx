@@ -13,6 +13,7 @@ import { createBrowserHistory, createHashHistory } from 'history';
 import { PageNotFound } from 'app/page-not-found';
 import { ConfigureNode } from 'components/modals/configure-node';
 import { AddNode } from 'components/modals/add-node';
+import { Notifications } from 'components/notifications';
 
 export const RouteNotFound = () => <Redirect to={{ state: { error: true } }} />;
 
@@ -37,6 +38,7 @@ const App = () => (
       <main id="App-body" className="App-body">
         <ConfigureNode />
         <AddNode />
+        <Notifications />
         <CaptureRouteNotFound>
           <Switch>
             {/* These routes are 'exact' because they have no subroutes, except for path='/' */}
