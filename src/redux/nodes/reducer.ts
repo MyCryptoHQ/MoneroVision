@@ -9,7 +9,10 @@ export interface NodeState {
 
 export const INITIAL_STATE: NodeState = {
   selectedNode: 'Default',
-  nodes: [{ name: 'Default', url: 'https://xmrchain.net/api' }]
+  nodes: [
+    { name: 'Default', url: 'https://xmrchain.net/api' },
+    { name: 'MyCrypto', url: 'https://monero.mycryptoapi.com/api' }
+  ]
 };
 
 function addNode(state: NodeState, action: AddNodeAction): NodeState {

@@ -68,13 +68,14 @@ class SelectClass extends React.Component<Props> {
                   tabIndex={0}
                 >
                   <div className="selected-marker" />
-                  {node.name !== 'Default' && (
-                    <A11yClick onClick={(e: any) => this.openModal(e, node)}>
-                      <button className="settings">
-                        <i className="nc-icon nc-ic_settings_24px size_16px" />
-                      </button>
-                    </A11yClick>
-                  )}
+                  {node.name !== 'Default' &&
+                    node.name !== 'MyCrypto' && (
+                      <A11yClick onClick={(e: any) => this.openModal(e, node)}>
+                        <button className="settings">
+                          <i className="nc-icon nc-ic_settings_24px size_16px" />
+                        </button>
+                      </A11yClick>
+                    )}
                   <div className="flex-spacer" />
                   <p>{node.name}</p>
                 </div>
