@@ -10,8 +10,8 @@ export interface NodeState {
 export const INITIAL_STATE: NodeState = {
   selectedNode: 'Default',
   nodes: [
-    { name: 'Default', url: 'https://xmrchain.net/api' },
-    { name: 'MyCrypto', url: 'https://monero.mycryptoapi.com/api' }
+    { name: 'Default', url: 'https://xmrchain.net/api' }
+    // { name: 'MyCrypto', url: 'https://monero.mycryptoapi.com/api' }
   ]
 };
 
