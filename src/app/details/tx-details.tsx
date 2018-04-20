@@ -88,18 +88,16 @@ export class TxDetailsClass extends React.Component<Props, State> {
             <div className="Details-header">
               <h1 className="Details-header-title">Transaction Details</h1>
               <div className="flex-spacer" />
+
               {!transaction.block_height ? (
                 this.state.data.confirmationDuration ? (
                   <Tag type="pending" text={`PENDING ~ ${this.state.data.confirmationDuration}m`} />
                 ) : (
                   <Tag className="skeleton" type="pending" text="PENDING ~ 2m" />
                 )
-              ) : null}
-              {transaction.coinbase && transaction ? (
+              ) : transaction.coinbase ? (
                 <Tag type="coinbase" text="COINBASE" />
-              ) : (
-                <Tag className="skeleton" type="coinbase" text="COINBASE" />
-              )}
+              ) : null}
               <div className="Details-header-timestamp">
                 {formatApiDateStrings(transaction.timestamp)}
               </div>
