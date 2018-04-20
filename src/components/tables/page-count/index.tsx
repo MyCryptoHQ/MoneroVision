@@ -12,7 +12,7 @@ interface Props {
 export const PageCount = ({ limit, page, itemCount, pending, className = '' }: Props) => {
   return (
     <p className={`${className} Pages ${(!pending || itemCount > 0) && 'visible'}`}>
-      {limit * page + 1}-{limit * page + limit} of {itemCount}
+      {limit * page + 1}-{itemCount < limit ? itemCount : limit * page + limit} of {itemCount}
     </p>
   );
 };
