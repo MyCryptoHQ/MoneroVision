@@ -44,10 +44,10 @@ export class TxDetailsClass extends React.Component<Props, State> {
     const txHash = this.props.match.params.transaction;
     let mempool: any[];
     let blocks: any[];
-    const getMempool = fetchAsync(`${node.url}/mempool?limit=${10000}&page=${0}`).then(
+    const getMempool = fetchAsync(`${node.url}/api/mempool?limit=${10000}&page=${0}`).then(
       json => (mempool = json.data.txs)
     );
-    const getBlocks = fetchAsync(`${node.url}/transactions?limit=${100}&page=${0}`).then(
+    const getBlocks = fetchAsync(`${node.url}/api/transactions?limit=${100}&page=${0}`).then(
       json => (blocks = json.data.blocks)
     );
 
@@ -63,14 +63,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
     const node = nodes.find(n => n.name === selectedNode) as Node;
 
     this.setState({ data: { ...this.state.data, pending: true } });
-    fetch(node.url + '/transaction/' + this.props.match.params.transaction)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        this.setState({ data: { ...this.state.data, pending: false } });
-        throw new Error('error fetching mempool');
-      })
+    fetchAsync(node.url + '/api/transaction/' + this.props.match.params.transaction)
       .then(json => {
         this.setState({ data: { ...this.state.data, transaction: json.data, pending: false } });
       })

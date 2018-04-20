@@ -49,7 +49,7 @@ class SearchInputClass extends React.Component<Props, State> {
     const { nodes, selectedNode } = this.props;
     const node = nodes.find(n => n.name === selectedNode) as Node;
 
-    fetchAsync(node.url + `/search/${queryStr}`)
+    fetchAsync(node.url + `/api/search/${queryStr}`)
       .then(json => {
         if (json.status === 'success') {
           const location = !!json.data.tx_hash

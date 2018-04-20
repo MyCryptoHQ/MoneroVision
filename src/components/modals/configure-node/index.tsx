@@ -81,8 +81,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
       if (ValidUrl.isWebUri(this.state.node.url)) {
         if (validateAPI) {
           this.setState({ pending: true });
-          const url = `${this.state.node.url}/mempool?limit=${1}&page=${0}`;
-          fetchAsync(url)
+          fetchAsync(`${this.state.node.url}/api/mempool?limit=${1}&page=${0}`)
             .then(() => {
               this.setState({ pending: false });
               this.setInputError('url', '');
@@ -203,7 +202,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
           inlinelabel={pending ? 'Connecting to node...' : ''}
           required={true}
           error={urlError}
-          placeholder="https://api.example.com"
+          placeholder="https://xmrchain.net"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('url', e.target.value)
           }

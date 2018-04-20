@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './details.scss';
-import { formatApiDateStrings, toKB } from 'utils/functions';
+import { formatApiDateStrings, toKB, fetchAsync } from 'utils/functions';
 import { connect } from 'react-redux';
 import { AppState } from 'redux/root-reducer';
 import { NodeState } from 'redux/nodes/reducer';
@@ -38,14 +38,7 @@ export class BlockDetailsClass extends React.Component<Props, State> {
     const node = nodes.find(n => n.name === selectedNode) as Node;
 
     this.setState({ data: { ...this.state.data, pending: true } });
-    fetch(node.url + '/block/' + this.props.match.params.block)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        this.setState({ data: { ...this.state.data, pending: false } });
-        throw new Error('error fetching mempool');
-      })
+    fetchAsync(node.url + '/api/block/' + this.props.match.params.block)
       .then(json => {
         this.setState({ data: { block: json.data, pending: false } });
       })
