@@ -9,6 +9,7 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    pointer-events: none;
     padding: 2rem;
     z-index: 1;
     @media screen and (max-width: 900px) {
