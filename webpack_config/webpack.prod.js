@@ -38,7 +38,7 @@ const config = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': 'production'
     }),
-    new FaviconsWebpackPlugin(path.join(__dirname, '../src/assets/imgs/logo.svg'))
+    new FaviconsWebpackPlugin(path.join(__dirname, '../src/assets/imgs/favicon.png'))
   ]
 });
 
