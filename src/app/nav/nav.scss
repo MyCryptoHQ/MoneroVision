@@ -75,11 +75,17 @@
     margin: auto;
   }
   &-title {
-    display: block;
+    display: flex;
+    align-items: center;
     font-weight: 500;
     color: white;
     white-space: nowrap;
     padding: 0.5rem;
+    > img {
+      height: 2rem;
+      margin: -1rem 0;
+      margin-right: 1rem;
+    }
   }
 
   &-open-drawer {

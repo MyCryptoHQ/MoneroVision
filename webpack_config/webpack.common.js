@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-// const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
@@ -61,12 +60,6 @@ const config = {
       filename: '[name].[hash].css',
       disable: process.env.NODE_ENV === 'development'
     })
-    // TODO: favicons-webpack-plugin not compatible for webpack v4
-    // new FaviconsWebpackPlugin({
-    //   logo: path.join(__dirname, '../src/assets/imgs/favicon.png'),
-    //   background: '#fff',
-    //   inject: true
-    // })
   ]
 };
 
