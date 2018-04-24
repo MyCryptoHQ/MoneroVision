@@ -67,21 +67,58 @@ class ConfigureNodeClass extends React.Component<Props, State> {
     }
   }
 
+  public resetInputs() {
+    const { name, url } = this.props.node as Node;
+    this.setState({ node: { name, url } });
+  }
+
   public onChange = (key: string, value: string) => {
     this.setState({ ...this.state, node: { ...this.state.node, [key]: value } });
   };
 
-  public validateForm = () => {
-    this.checkInputLength();
-    this.validateURL(true);
+  public closeModal = () => {
+    this.setState({ nameError: '' });
+    this.setState({ urlError: '' });
+    this.resetInputs();
+    this.props.closeModal('config_node');
   };
 
-  public validateURL = (validateAPI = false) => {
-    if (this.state.node.url.length > 0) {
-      if (ValidUrl.isWebUri(this.state.node.url)) {
-        if (validateAPI) {
+  public onComplete = () => {
+    const { index, node, urlError, pending } = this.state;
+    const { name, url } = this.state.node;
+
+    this.validateName();
+    this.validateURL();
+    if (name.length > 0 && url.length > 0 && urlError.length === 0 && !pending) {
+      this.props.editNode(index, node);
+      this.closeModal();
+    }
+  };
+
+  public validateName = () => {
+    const { nodes } = this.props;
+    const { name } = this.state.node;
+    if (name.length > 0) {
+      if (!!nodes.filter(n => n.name === name).length) {
+        this.setInputError('name', 'A node with that name already exists');
+      } else {
+        this.setInputError('name', '');
+      }
+    } else {
+      this.setInputError('name', 'A name is required');
+    }
+  };
+
+  public validateURL = () => {
+    const { nodes } = this.props;
+    const { url } = this.state.node;
+    if (url.length > 0) {
+      if (!!nodes.filter(n => n.url === url).length) {
+        this.setInputError('url', 'A node with that url already exists');
+      } else {
+        if (ValidUrl.isWebUri(url)) {
           this.setState({ pending: true });
-          fetchAsync(`${this.state.node.url}/api/mempool?limit=${1}&page=${0}`)
+          fetchAsync(`${url}/api/mempool?limit=${1}&page=${0}`)
             .then(() => {
               this.setState({ pending: false });
               this.setInputError('url', '');
@@ -91,15 +128,15 @@ class ConfigureNodeClass extends React.Component<Props, State> {
               this.setState({ pending: false });
               this.setInputError(
                 'url',
-                'Unable to connect to node. Make sure your node is configured properly.'
+                'Unable to connect to node. Make sure the node is configured properly.'
               );
             });
         } else {
-          this.setInputError('url', '');
+          this.setInputError('url', 'A valid url is required');
         }
-      } else {
-        this.setInputError('url', 'A valid url is required');
       }
+    } else {
+      this.setInputError('url', 'A url is required');
     }
   };
 
@@ -120,29 +157,6 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 
   public setInputError = (input: 'name' | 'url', msg: string) => {
     this.setState({ [(input + 'Error') as any]: msg });
-  };
-
-  public resetInputs() {
-    const { name, url } = this.props.node as Node;
-    this.setState({ node: { name, url } });
-  }
-
-  public closeModal = () => {
-    this.setState({ nameError: '' });
-    this.setState({ urlError: '' });
-    this.resetInputs();
-    this.props.closeModal('config_node');
-  };
-
-  public onComplete = () => {
-    const { index, node, urlError, pending } = this.state;
-    const { name, url } = this.state.node;
-
-    this.validateForm();
-    if (name.length > 0 && url.length > 0 && urlError.length === 0 && !pending) {
-      this.props.editNode(index, node);
-      this.closeModal();
-    }
   };
 
   public render() {
@@ -193,22 +207,21 @@ class ConfigureNodeClass extends React.Component<Props, State> {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('name', e.target.value)
           }
+          onBlur={this.validateName}
           value={!!node ? node.name : ''}
         />
         <Input
           className={pending ? 'pending' : ''}
           type="text"
           label="URL"
-          inlinelabel={pending ? 'Connecting to node...' : ''}
+          // inlinelabel={pending ? 'Connecting to node...' : ''}
           required={true}
           error={urlError}
           placeholder="https://xmrchain.net"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('url', e.target.value)
           }
-          onBlur={() => {
-            this.validateURL(true);
-          }}
+          onBlur={this.validateURL}
           value={!!node ? node.url : ''}
         />
       </Modal>
