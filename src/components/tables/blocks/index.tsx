@@ -112,6 +112,26 @@ class BlocksClass extends React.Component<Props, State> {
       limit,
       page
     } = this.state;
+
+    const Previous = () => (
+      <button
+        className="MemPool-table-footer-paginate"
+        onClick={this.decrementPage}
+        disabled={current_height <= limit || page === 0 || pending}
+      >
+        <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
+      </button>
+    );
+    const Next = () => (
+      <button
+        className="MemPool-table-footer-paginate"
+        onClick={this.incrementPage}
+        disabled={current_height <= limit || limit * page + limit > current_height || pending}
+      >
+        <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
+      </button>
+    );
+
     return (
       <div className="Blocks card">
         <div className="Blocks-header">
@@ -119,21 +139,15 @@ class BlocksClass extends React.Component<Props, State> {
           <div className="flex-spacer" />
           {!!paginated && (
             <>
-              <PageCount pending={pending} limit={limit} page={page} itemCount={current_height} />
-              <button
-                className="MemPool-table-footer-paginate"
-                onClick={this.decrementPage}
-                disabled={current_height <= limit || pending}
-              >
-                <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
-              </button>
-              <button
-                className="MemPool-table-footer-paginate"
-                onClick={this.incrementPage}
-                disabled={current_height <= limit || pending}
-              >
-                <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
-              </button>
+              <PageCount
+                pending={pending}
+                limit={limit}
+                page={page}
+                itemsShown={blocks.length}
+                itemCount={current_height}
+              />
+              <Previous />
+              <Next />
             </>
           )}
           <button className="Blocks-refresh" onClick={this.fetchData}>
@@ -209,21 +223,15 @@ class BlocksClass extends React.Component<Props, State> {
         {!!paginated && (
           <div className="MemPool-table-footer">
             <div className="flex-spacer" />
-            <PageCount pending={pending} limit={limit} page={page} itemCount={current_height} />
-            <button
-              className="MemPool-table-footer-paginate"
-              onClick={this.decrementPage}
-              disabled={current_height <= limit || pending}
-            >
-              <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
-            </button>
-            <button
-              className="MemPool-table-footer-paginate"
-              onClick={this.incrementPage}
-              disabled={current_height <= limit || pending}
-            >
-              <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
-            </button>
+            <PageCount
+              pending={pending}
+              limit={limit}
+              page={page}
+              itemsShown={blocks.length}
+              itemCount={current_height}
+            />
+            <Previous />
+            <Next />
           </div>
         )}
       </div>

@@ -71,6 +71,26 @@ class MemPoolClass extends React.Component<Props, State> {
       limit,
       page
     } = this.state;
+
+    const Previous = () => (
+      <button
+        className="MemPool-table-footer-paginate"
+        onClick={this.decrementPage}
+        disabled={txs_no <= limit || page === 0 || pending}
+      >
+        <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
+      </button>
+    );
+    const Next = () => (
+      <button
+        className="MemPool-table-footer-paginate"
+        onClick={this.incrementPage}
+        disabled={txs_no <= limit || limit * page + limit > txs_no || pending}
+      >
+        <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
+      </button>
+    );
+
     return (
       <div className={`MemPool card ${paginated && 'paginated'}`}>
         <div className="MemPool-header">
@@ -84,21 +104,15 @@ class MemPoolClass extends React.Component<Props, State> {
           <div className="flex-spacer" />
           {!!paginated && (
             <>
-              <PageCount pending={pending} limit={limit} page={page} itemCount={txs_no} />
-              <button
-                className="MemPool-table-footer-paginate"
-                onClick={this.decrementPage}
-                disabled={txs_no <= limit || pending}
-              >
-                <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
-              </button>
-              <button
-                className="MemPool-table-footer-paginate"
-                onClick={this.incrementPage}
-                disabled={txs_no <= limit || pending}
-              >
-                <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
-              </button>
+              <PageCount
+                pending={pending}
+                limit={limit}
+                page={page}
+                itemsShown={txs.length}
+                itemCount={txs_no}
+              />
+              <Previous />
+              <Next />
             </>
           )}
           <button className="MemPool-refresh" onClick={this.fetchData}>
@@ -167,21 +181,15 @@ class MemPoolClass extends React.Component<Props, State> {
         {!!paginated && (
           <div className="MemPool-table-footer">
             <div className="flex-spacer" />
-            <PageCount pending={pending} limit={limit} page={page} itemCount={txs_no} />
-            <button
-              className="MemPool-table-footer-paginate"
-              onClick={this.decrementPage}
-              disabled={txs_no <= limit || pending}
-            >
-              <i className="nc-icon nc-ic_keyboard_arrow_left_24px size_24px" />
-            </button>
-            <button
-              className="MemPool-table-footer-paginate"
-              onClick={this.incrementPage}
-              disabled={txs_no <= limit || pending}
-            >
-              <i className="nc-icon nc-ic_keyboard_arrow_right_24px size_24px" />
-            </button>
+            <PageCount
+              pending={pending}
+              limit={limit}
+              page={page}
+              itemsShown={txs.length}
+              itemCount={txs_no}
+            />
+            <Previous />
+            <Next />
           </div>
         )}
       </div>
