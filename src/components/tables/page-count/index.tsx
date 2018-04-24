@@ -21,11 +21,11 @@ export const PageCount = ({
   const firstPage = page === 0;
   const lastPage = limit * page + limit > itemCount;
   const currentMin = lastPage && !firstPage ? itemCount - itemsShown : limit * page + 1;
-  const currentMax = limit * page + itemsShown;
+  const currentMax =
+    itemCount > limit ? (lastPage ? itemCount : limit * page + itemsShown) : itemCount;
   return (
     <p className={`${className} Pages ${(!pending || itemCount > 0) && 'visible'}`}>
-      {currentMin}-{itemCount > limit ? (lastPage ? itemCount : currentMax) : itemCount} of{' '}
-      {itemCount}
+      {currentMin}-{currentMax} of {itemCount}
     </p>
   );
 };
