@@ -13,13 +13,13 @@ Monero Explorer is a blockchain explorer for Monero
 
 ## Contributing
 
-### [Contributing]()
+### [contributing guide](https://github.com/MyCryptoHQ/monero-explorer/wiki/How-To-Contribute)
 
-Read our [contributing guide]() to learn about our development process, how to propose bug fixes and improvements, and how to build and test your changes.
+Read our [contributing guide](https://github.com/MyCryptoHQ/monero-explorer/wiki/How-To-Contribute) to learn about our development process, how to propose bug fixes and improvements, and how to build and test your changes.
 
 ## Feedback
 
-* Request new features on [GitHub]()
+* Request new features on [GitHub](https://github.com/MyCryptoHQ/monero-explorer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
 * Send us a tweet [@MyCrypto](https://twitter.com/mycrypto?lang=en)
 
 ## Related Projects
