@@ -20,6 +20,7 @@ Read our [contributing guide](https://github.com/MyCryptoHQ/monero-explorer/wiki
 ## Feedback
 
 * Request new features on [GitHub](https://github.com/MyCryptoHQ/monero-explorer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+* Join our [Discord](https://discord.gg/hGV8C5c)
 * Send us a tweet [@MyCrypto](https://twitter.com/mycrypto?lang=en)
 
 ## Related Projects
