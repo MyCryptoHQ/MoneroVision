@@ -48,11 +48,6 @@ This will run a local development server which default to http://localhost:8080
 
 Generates a minified build in `./dist`
 
-### How to Get in Touch
-
-- Open an issue on [Github](https://github.com/MyCryptoHQ/monero-explorer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-- Send us a tweet [@MyCrypto](https://twitter.com/mycrypto?lang=en)
-- Join our [Discord](https://discord.gg/hGV8C5c)
 ## Feedback
 
 * Request new features on [GitHub](https://github.com/MyCryptoHQ/monero-explorer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
