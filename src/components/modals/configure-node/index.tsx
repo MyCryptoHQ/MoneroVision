@@ -61,14 +61,14 @@ class ConfigureNodeClass extends React.Component<Props, State> {
 
   public componentDidUpdate(prevProps: Props) {
     if (prevProps.node !== this.props.node) {
-      const index = this.props.nodes.indexOf(this.props.node as Node);
-      const { name, url } = this.props.node as Node;
+      const index = this.props.nodes.indexOf(this.props.node);
+      const { name, url } = this.props.node;
       this.setState({ node: { name, url }, index });
     }
   }
 
   public resetInputs() {
-    const { name, url } = this.props.node as Node;
+    const { name, url } = this.props.node;
     this.setState({ node: { name, url } });
   }
 
