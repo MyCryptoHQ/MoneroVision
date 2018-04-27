@@ -4,13 +4,6 @@
 
 Monero Explorer is a blockchain explorer for Monero
 
-## Documentation
-
-* [Contributing]()
-* [Feedback]()
-* [Related Products]()
-* [License]()
-
 ## Contributing
 
 ### [contributing guide](https://github.com/MyCryptoHQ/monero-explorer/wiki/How-To-Contribute)
