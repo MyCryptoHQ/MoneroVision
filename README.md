@@ -1,6 +1,6 @@
 # [Monero Explorer]()
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://circleci.com/gh/facebook/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Monero Explorer is a blockchain explorer for Monero
 
