@@ -1,0 +1,29 @@
+dist: trusty
+sudo: required
+language: node_js
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sudo apt-get install libusb-1.0
+  
+install:
+  - npm install --silent
+
+jobs:
+  include:
+    - stage: Prettier Diff
+      script: npm run prettier:diff
+    - stage: Linting
+      script: npm run tslint && npm run tscheck
+    - stage: Testing
+      script: npm run test:coverage -- --maxWorkers=2 && npm run report-coverage
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
