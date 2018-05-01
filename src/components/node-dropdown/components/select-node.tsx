@@ -36,6 +36,7 @@ class SelectClass extends React.Component<Props> {
       return node.classList.remove('selected');
     });
     e.target.classList.add('selected');
+    window.location.reload();
   };
 
   public openModal = (e: React.MouseEvent<HTMLButtonElement>, node: Node) => {
