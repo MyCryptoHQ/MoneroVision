@@ -60,4 +60,4 @@ Generates a minified build in `./dist`
 
 ## License
 
-Monero Explorer is [MIT licensed]().
+Monero Explorer is [MIT licensed](./LICENSE).
