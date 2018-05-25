@@ -2,13 +2,12 @@
 @import 'src/sass/variables/index';
 
 .Navigation {
-  background-color: $Navigation-bg;
+  position: fixed;
+  background-color: $primary-color;
   width: 100%;
-  padding: 0.5rem 2rem;
-  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
   @media screen and (max-width: 800px) {
-    padding: 0 1rem .5rem 1rem;
-    margin-top: 0;
+    padding: 0.75rem 1rem;
   }
   box-shadow: $box-shadow;
   font-size: 1rem;
@@ -26,6 +25,7 @@
       overflow: hidden;
       contain: strict;
       z-index: 1;
+
       &:before {
         content: '';
         position: fixed;
@@ -73,51 +73,40 @@
     max-width: 1280px;
     width: 100%;
     margin: auto;
-    @media screen and (max-width: 800px) {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
   }
   &-title {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: white;
+    white-space: nowrap;
     padding: 0.5rem;
     > img {
-      margin: -4rem 0;
-      height: 8rem;
-      width: auto;
-    }
-    @media screen and (max-width: 800px) {
-      padding: 0;
-      flex-grow: 10;
-      text-align: center;
-      > img {
-        margin: 0;
-        height: 5rem;
-      }
+      height: 2rem;
+      margin: -1rem 0;
+      margin-right: 1rem;
     }
   }
 
   &-open-drawer {
+    display: none;
     @include button-reset;
     color: white;
-    display: none;
-    flex-grow: 1;
+    padding: 0.5rem;
     font-size: 1.5rem;
     line-height: 0;
-    padding: 0.5rem;
-    width: 40px;
+    margin-right: 1rem;
     @media screen and (max-width: 800px) {
       display: block;
     }
   }
 
   @media screen and (max-width: 800px) {
+    & &-title {
+      display: none;
+    }
     .Select-node-button {
       display: none;
     }
-    .flex-spacer {
-      flex-grow: 1;
-      width: 40px;
-    }
   }
-
 }
