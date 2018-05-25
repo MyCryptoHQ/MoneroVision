@@ -9,7 +9,7 @@
   }
   &-path {
     stroke-width: 2;
-    stroke: #77bdf7;
+    stroke: $line-chart-color;
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
@@ -23,18 +23,18 @@
   &-area {
     padding: 0.5rem;
     stroke: none;
-    fill: #77bdf7;
-    opacity: 0.15;
+    fill: $line-chart-color;
+    opacity: 0.75;
   }
   &-line {
-    stroke: lighten(#77bdf7, 10%);
+    stroke: lighten($line-chart-color, 10%);
     stroke-width: 2;
     transition: opacity $transition;
     opacity: 0;
   }
   &-point {
     fill: white;
-    stroke: #77bdf7;
+    stroke: $line-chart-color;
     stroke-width: 2;
     transition: opacity $transition;
     opacity: 0;
@@ -42,7 +42,7 @@
   &-tooltip {
     position: absolute;
     text-align: center;
-    background-color: #77bdf7;
+    background-color: $line-chart-color;
     color: white;
     font-weight: 400;
     font-size: 0.875rem;
@@ -57,9 +57,9 @@
       top: 0;
     }
     &.bottom {
-      color: #77bdf7;
+      color: $line-chart-color;
       background-color: white;
-      border: 1px solid #77bdf7;
+      border: 1px solid $line-chart-color;
       bottom: 0rem;
     }
   }

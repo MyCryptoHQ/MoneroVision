@@ -193,8 +193,8 @@ export class LineGraph extends React.Component<Props, State> {
         >
           <defs>
             <linearGradient id="Gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#77BDF7" stopOpacity={0.75} />
-              <stop offset="100%" stopColor="#77BDF7" stopOpacity={0.25} />
+              <stop offset="0%" stopColor="#FBC14E" stopOpacity={0.9} />
+              <stop offset="100%" stopColor="#FBC14E" stopOpacity={0.65} />
             </linearGradient>
           </defs>
           {this.makePath()}

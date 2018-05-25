@@ -44,13 +44,13 @@
     border-bottom: 1px solid $border-color;
     padding: 0.5rem 1.5rem !important;
     .nc-icon {
-      @include icon-button(#5f6478);
+      @include icon-button($text-color);
       font-size: 1.5rem;
       font-weight: 400;
     }
   }
   &-title {
-    color: #5f6478;
+    color: $text-color;
     font-size: 1.25rem;
     font-weight: 400;
   }

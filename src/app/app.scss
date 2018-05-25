@@ -9,14 +9,10 @@
   height: inherit;
   z-index: 1;
   &-body {
-    padding: 4rem 2rem;
-    margin-top: 4.125rem;
+    padding: 3rem 2rem;
     max-width: 1024px;
     width: 100%;
-  }
-
-  @media screen and (max-width: 900px) {
-    &-body {
+    @media screen and (max-width: 800px) {
       padding: 2rem 1rem;
     }
   }

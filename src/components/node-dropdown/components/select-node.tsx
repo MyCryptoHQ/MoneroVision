@@ -85,7 +85,7 @@ class SelectClass extends React.Component<Props> {
         </ul>
         <div className="flex-spacer" />
         <button className="Select-node-add" onClick={this.addNode}>
-          Add
+          Add Node
         </button>
       </div>
     );

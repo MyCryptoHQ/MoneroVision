@@ -22,14 +22,14 @@
     &-title {
       font-size: 1.25rem;
       font-weight: 500;
-      color: #5f6478;
+      color: $text-color;
     }
     &-timestamp {
       margin-left: 1rem;
       text-align: right;
       font-size: 1rem;
       font-weight: 400;
-      color: #828799;
+      color: $blue-gray;
     }
 
     @media screen and (max-width: 700px) {
@@ -72,7 +72,7 @@
       &-title {
         font-size: 1rem;
         font-weight: 400;
-        color: #5f6478;
+        color: $text-color;
         width: 8rem;
         margin-right: 3rem;
 
@@ -107,11 +107,12 @@
             }
           }
           p {
-            color: #828799;
+            color: $blue-gray;
             font-weight: 400;
-            font-size: 1rem;
+            font-size: 1.1rem;
             &:first-child {
-              color: #5f6478;
+              color: $blue-gray-light;
+              font-size: .9rem;
             }
           }
         }
@@ -125,7 +126,7 @@
         th {
           font-size: 1rem;
           font-weight: 400;
-          color: #5f6478;
+          color: $text-color;
           padding-bottom: 1rem;
           padding-left: 1rem;
           border-bottom: 1px solid $border-color;
@@ -140,7 +141,7 @@
           font-size: 1rem;
           font-weight: 400;
           padding: 1rem 0rem;
-          color: #828799;
+          color: $blue-gray;
           text-align: right;
           white-space: nowrap;
           vertical-align: top;

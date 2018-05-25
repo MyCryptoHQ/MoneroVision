@@ -31,17 +31,17 @@ $table-cell-padding: 3rem;
   &-title {
     font-size: 1.25rem;
     font-weight: 500;
-    color: #5f6478;
+    color: $text-color;
     margin-right: 0.5rem;
   }
   &-view-all {
-    @include button($secondary-color);
+    @include button($btn-background);
     @include button-primary;
     margin-left: 1rem;
     line-height: 1.15;
   }
   &-refresh {
-    @include icon-button(#5f6478);
+    @include icon-button($text-color);
     font-size: 1.5rem;
     margin-left: 1rem;
     line-height: 1.15;
@@ -55,7 +55,7 @@ $table-cell-padding: 3rem;
         padding: 1rem 0;
         font-size: 1rem;
         font-weight: 400;
-        color: #5f6478;
+        color: $text-color;
         border-bottom: 1px solid $border-color;
         white-space: nowrap;
         text-align: left;
@@ -73,7 +73,7 @@ $table-cell-padding: 3rem;
           }
         }
         > td {
-          color: #828799;
+          color: $blue-gray-light;
           padding: 1rem 0;
           box-sizing: content-box;
           white-space: nowrap;

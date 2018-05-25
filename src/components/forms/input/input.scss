@@ -16,19 +16,19 @@
   &-label {
     font-size: 1rem;
     font-weight: 400;
-    color: #636a7d;
+    color: $text-color;
     margin: 0.5rem 0;
   }
   &-inline-label {
     font-size: 0.875rem;
     font-weight: 400;
-    color: #828799;
+    color: $blue-gray-light;
     margin-left: 1rem;
   }
   &-input {
     font-size: 1rem;
     font-weight: 400;
-    color: #636a7d;
+    color: $text-color;
     padding: 1rem 1.5rem;
     border-radius: $border-radius;
     border: 1px solid $border-dark-color;
@@ -43,7 +43,7 @@
       box-shadow: inset 0 0 0 1px $secondary-color;
     }
     &::placeholder {
-      color: #d9d9d9;
+      color: $blue-gray-light;
     }
   }
 

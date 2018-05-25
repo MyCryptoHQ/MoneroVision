@@ -16,14 +16,15 @@
   &-title {
     font-size: 2rem;
     font-weight: 400;
-    color: #5f6478;
+    color: $text-color;
     white-space: nowrap;
     margin-bottom: 0.5rem;
   }
   &-text {
     font-size: 1rem;
-    color: #828799;
+    color: $blue-gray-light;
     margin-bottom: 1rem;
+    line-height: 1.75;
   }
   &-link-wrapper {
     display: flex;
@@ -36,7 +37,7 @@
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    color: #77bdf7;
+    color: #72BAC4;
   }
   &-graph {
     margin: 0.5rem 0;

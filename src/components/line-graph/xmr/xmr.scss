@@ -15,14 +15,13 @@
     align-items: center;
     .title {
       font-size: 1rem;
-      font-weight: 500;
-      color: #77bdf7;
+      color: $gray-light;
     }
     .time {
       font-size: 1rem;
       font-weight: 500;
       border-radius: 6px;
-      background-color: #d9d9d9;
+      background-color: $gray-light;
       color: white;
       padding: 0.25rem 0.5rem;
       line-height: 1;
@@ -44,7 +43,7 @@
     }
 
     &-current {
-      color: #5f6478;
+      color: $text-color;
       font-weight: 400;
       font-size: 1.75rem;
       line-height: 1;
@@ -60,7 +59,7 @@
       font-weight: 400;
       line-height: 1;
       &.positive {
-        color: #8bd948;
+        color: $green;
       }
       &.negative {
         color: #d1715c;
@@ -74,13 +73,13 @@
     &-low {
       font-size: 1rem;
       font-weight: 400;
-      color: #5f6478;
+      color: $text-color;
       text-align: right;
       display: flex;
       align-items: center;
       .label {
         float: left;
-        color: #d9d9d9;
+        color: $gray-light;
         max-width: 50px;
         margin-right: 1rem;
       }

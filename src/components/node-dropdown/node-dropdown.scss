@@ -4,7 +4,8 @@
 .Select-node {
   position: relative;
   &-button {
-    @include button($primary-color);
+    @include button( lighten($Navigation-bg, 10%) );
+    color: $brown-dark;
   }
   &-wrapper {
     display: flex;
@@ -28,7 +29,7 @@
   &-nodes {
     font-size: 1rem;
     font-weight: 400;
-    color: #5f6478;
+    color: $text-color;
     text-align: right;
     margin: 1rem 0;
   }
@@ -43,7 +44,7 @@
     height: 3rem;
     transition: background-color $transition;
     button.settings {
-      @include icon-button(#5f6478);
+      @include icon-button($text-color);
       margin-left: -0.5rem;
       opacity: 0;
       @media screen and (max-width: 800px) {
