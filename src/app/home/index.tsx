@@ -35,18 +35,26 @@ export class Home extends React.Component {
       <>
         <section className="card New-User-CTA">
           <div className="New-User-CTA-text-wrapper">
-            <h2 className="New-User-CTA-title">New to Monero?</h2>
+            <h2 className="New-User-CTA-title">Welcome to MoneroVision!</h2>
             <p className="New-User-CTA-text">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been
-              the industry's standard dummy text ever since the 1500s, when an unknown printer took
-              a galley of type and scrambled it to make a type specimen book.
+              MoneroVision is an open-source Monero block explorer that is offered as a part of the{' '}
+              <a target="_blank" rel="noopener noreferrer" href="https://mycrypto.com">
+                MyCrypto
+              </a>{' '}
+              network. At MyCrypto, we’re focused on building awesome products that put the power in
+              your hands and this is just the beginning of our Monero offerings. Stay tuned to{' '}
+              <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/monerovision">
+                @MoneroVision on Twitter
+              </a>{' '}
+              for updates and{' '}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/MyCryptoHQ/monero-explorer"
+              >
+                check out the Github
+              </a>.
             </p>
-            {/* <div className="flex-spacer" /> */}
-            <div className="New-User-CTA-link-wrapper">
-              <a href="/" className="New-User-CTA-link">
-                Learn More
-              </a>
-            </div>
           </div>
           <MoneroGraph width={width} height={height} />
         </section>
