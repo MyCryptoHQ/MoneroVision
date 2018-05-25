@@ -1,37 +1,36 @@
-$blue-gray-light:   #828799;
-$blue-gray:         #585a63;
-$blue:              #4796bd;
-$brown-dark:        #634f3c;
-$brown:             #7B6551;
-$gray-light:        #afadad;
-$green:             #79c471;
-$orange-dark:       #D67E4C;
-$orange:            #f59f50;
-$purple:            #8E70B1;
-$red:               #F36F5D;
-$teal-light:        #72BAC4;
-$teal:              #418F9B;
-$yellow-light:      #F1DD84;
-$yellow:            #FBC14E;
+$blue-gray-light: #828799;
+$blue-gray: #585a63;
+$blue: #4796bd;
+$brown: #7b6551;
+$green: #79c471;
+$blue: #77bdf7;
+$orange-dark: #d67e4c;
+$orange: #f2a407;
+$purple: #8e70b1;
+$red: #f36f5d;
+$teal-light: #72bac4;
+$teal: #418f9b;
+$yellow-light: #f1dd84;
+$yellow: #fbc14e;
 
+$text-color: $blue-gray;
+$text-color-light: $blue-gray-light;
 
-$text-color:        $blue-gray;
-$text-color-light:  $blue-gray-light;
+$primary-color: $yellow;
+$secondary-color: $blue;
 
-$primary-color:     $yellow;
-$secondary-color:   $blue;
+$btn-background: $blue;
 
-$btn-background:    $red;
+$line-chart-color: $yellow;
+$line-chart-accent: #8493b0;
 
-$line-chart-color:  $yellow;
+$Navigation-bg: $orange;
 
-$Navigation-bg:     $orange;
+$error-color: $red;
+$warning-color: $yellow;
+$hover-color: #f6fbff;
 
-$error-color:       $red;
-$warning-color:     $yellow;
-$hover-color:       #f6fbff;
+$footer-color: $orange-dark;
 
-$footer-color:      $orange-dark;
-
-$border-color:      #f2f2f2;
+$border-color: #f2f2f2;
 $border-dark-color: #e0e0e0;

@@ -5,7 +5,7 @@
   @include input-reset;
   background-color: lighten($Navigation-bg, 6%);
   border-radius: $border-radius;
-  color: $brown-dark;
+  color: white;
   font-size: 1rem;
   font-weight: 400;
   margin: 0 1rem;
@@ -17,7 +17,7 @@
     margin: 0;
   }
   &::placeholder {
-    color: $brown-dark;
+    color: white;
     text-align: center;
     opacity: 1;
   }
