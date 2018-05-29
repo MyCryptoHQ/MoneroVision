@@ -1,4 +1,4 @@
-# [MoneroVision](https://mycryptohq.github.io/monero-explorer/#/)
+# [MoneroVision](https://mycryptohq.github.io/MoneroVision/#/)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
@@ -13,11 +13,11 @@ If your new to open source, check out some of these resources to help you get st
 
 ### Open and Transparent
 
-All our work happens directly on [GitHub](https://github.com/MyCryptoHQ/monero-explorer). All pull requests by core team members and external contributors go through the same review process.
+All our work happens directly on [GitHub](https://github.com/MyCryptoHQ/MoneroVision). All pull requests by core team members and external contributors go through the same review process.
 
 ### Branch Organization
 
-Pull requests should be made against the [master branch](https://github.com/MyCryptoHQ/monero-explorer/tree/master).
+Pull requests should be made against the [master branch](https://github.com/MyCryptoHQ/MoneroVision/tree/master).
 
 ### Build and Run
 
@@ -29,8 +29,8 @@ Pull requests should be made against the [master branch](https://github.com/MyCr
 Get source code and download dependencies:
 
 ```
-git clone https://github.com/MyCryptoHQ/monero-explorer.git
-cd monero-explorer
+git clone https://github.com/MyCryptoHQ/MoneroVision.git
+cd MoneroVision
 npm i
 ```
 
@@ -50,7 +50,7 @@ Generates a minified build in `./dist`
 
 ## Feedback
 
-* Request new features on [GitHub](https://github.com/MyCryptoHQ/monero-explorer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+* Request new features on [GitHub](https://github.com/MyCryptoHQ/MoneroVision/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
 * Join our [Discord](https://discord.gg/hGV8C5c)
 * Send us a tweet [@MyCrypto](https://twitter.com/mycrypto?lang=en)
 
