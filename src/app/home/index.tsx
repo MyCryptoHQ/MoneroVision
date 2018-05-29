@@ -49,7 +49,7 @@ export class Home extends React.Component {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://github.com/MyCryptoHQ/monero-explorer"
+                href="https://github.com/MyCryptoHQ/MoneroVision"
               >
                 Github
               </a>.
