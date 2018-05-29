@@ -1,4 +1,4 @@
-# [MoneroVision](https://mycryptohq.github.io/MoneroVision/#/)
+# [MoneroVision](https://mycryptohq.github.io/MoneroVision/)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
@@ -9,7 +9,7 @@ MoneroVision is a block explorer for Monero
 If your new to open source, check out some of these resources to help you get started.
 
 * [Github - Open Source Guides ](https://opensource.guide)
-* [EggHead.io - How to contribute to open source](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github?utm_content=buffer1fee7&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
+* [EggHead.io - How to contribute to open source](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
 
 ### Open and Transparent
 
