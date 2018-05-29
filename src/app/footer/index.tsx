@@ -35,7 +35,7 @@ export const Footer = () => (
           <i className="nc-icon nc-logo-twitter size_24px" />
         </a>
         <a
-          href="https://github.com/MyCryptoHQ/monero-explorer"
+          href="https://github.com/MyCryptoHQ/MoneroVision"
           className="Footer-social-media-link"
         >
           <i className="nc-icon nc-logo-github size_24px" />
