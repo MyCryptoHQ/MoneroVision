@@ -25,16 +25,17 @@
     stroke: none;
     fill: $line-chart-color;
     opacity: 0.75;
+    opacity: 0.15;
   }
   &-line {
-    stroke: lighten($line-chart-color, 10%);
+    stroke: $line-chart-accent;
     stroke-width: 2;
     transition: opacity $transition;
     opacity: 0;
   }
   &-point {
     fill: white;
-    stroke: $line-chart-color;
+    stroke: $line-chart-accent;
     stroke-width: 2;
     transition: opacity $transition;
     opacity: 0;
@@ -42,7 +43,7 @@
   &-tooltip {
     position: absolute;
     text-align: center;
-    background-color: $line-chart-color;
+    background-color: $line-chart-accent;
     color: white;
     font-weight: 400;
     font-size: 0.875rem;
@@ -57,9 +58,9 @@
       top: 0;
     }
     &.bottom {
-      color: $line-chart-color;
+      color: $line-chart-accent;
       background-color: white;
-      border: 1px solid $line-chart-color;
+      border: 1px solid $line-chart-accent;
       bottom: 0rem;
     }
   }

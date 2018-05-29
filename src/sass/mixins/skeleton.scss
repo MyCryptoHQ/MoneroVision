@@ -1,8 +1,8 @@
 @import 'src/sass/variables/index';
 
 @mixin skeleton {
-  color: transparent;
-  background-color: #e9f3fd;
+  color: transparent !important;
+  background-color: #e9f3fd !important;
   border-radius: 6px;
   line-height: 1;
 }
