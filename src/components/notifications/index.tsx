@@ -47,4 +47,7 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export const Notifications = connect(mapStateToProps, { removeNotification })(NotificationsClass);
+export const Notifications = connect(
+  mapStateToProps,
+  { removeNotification }
+)(NotificationsClass);

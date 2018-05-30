@@ -68,7 +68,7 @@ export class LineGraph extends React.Component<Props, State> {
   public getSvgX = (x: number) => {
     const { width } = this.props;
     const X = this.getX();
-    return x / X.max * width!;
+    return (x / X.max) * width!;
   };
   public getSvgY = (y: number) => {
     const { height } = this.props;
@@ -165,10 +165,13 @@ export class LineGraph extends React.Component<Props, State> {
               style={{ transform: `translateX(calc(${hoverLocation + 'px'} - 50%))` }}
             >
               <p>
-                {(closestPoint as Point)[1].toLocaleString('us-EN', {
-                  style: 'currency',
-                  currency: 'USD'
-                })}
+                {(closestPoint as Point)[1].toLocaleString(
+                  'us-EN',
+                  {
+                    style: 'currency',
+                    currency: 'USD'
+                  }
+                )}
               </p>
             </div>
             <div
