@@ -20,8 +20,6 @@ const config = {
     path: paths.output,
     publicPath: '/'
   },
-  // description < 200 characters
-  // img < 5MB
   module: {
     rules: [
       {
