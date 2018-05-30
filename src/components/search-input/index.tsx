@@ -101,6 +101,7 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export const SearchInput = connect(mapStateToProps, { addNotification })(
-  withRouter<Props>(SearchInputClass)
-);
+export const SearchInput = connect(
+  mapStateToProps,
+  { addNotification }
+)(withRouter<Props>(SearchInputClass));

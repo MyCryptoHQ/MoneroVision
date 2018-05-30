@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A blockchain explorer front-end for Monero",
   "main": "index.js",
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
+  },
   "dependencies": {
     "history": "4.7.2",
     "moment": "2.22.0",
@@ -70,7 +74,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development --config ./webpack_config/webpack.dev.js",
     "build": "webpack --mode production --config webpack_config/webpack.prod.js -p",
-    "prettier:diff": "prettier --write --config ./.prettierrc --list-different \"src/**/*.ts\" \"src/**/*.tsx\""
+    "prettier:diff":
+      "prettier --write --config ./.prettierrc --list-different \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "formatAll":
+      "find ./src/ -name '*.ts*' | xargs prettier --write --config ./.prettierrc --config-precedence file-override"
   },
   "precommit": "lint-staged",
   "lint-staged": {
