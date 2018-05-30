@@ -5,7 +5,7 @@
   background-color: $Navigation-bg;
   width: 100%;
   padding: 0.75rem 2rem;
-  margin-top: .8rem;
+  margin-top: 0.8rem;
   @media screen and (max-width: 800px) {
     padding: 0.75rem 1rem;
     margin-top: 0;
@@ -16,7 +16,6 @@
   &-Drawer {
     @include RTG-side-drawer;
     &-wrapper {
-      color: #000000de;
       position: fixed;
       top: 0;
       left: 0;
