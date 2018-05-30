@@ -59,4 +59,7 @@ class NodeDropdownClass extends React.Component<Props, State> {
   }
 }
 
-export const NodeDropdown = connect(null, { openModal })(NodeDropdownClass);
+export const NodeDropdown = connect(
+  null,
+  { openModal }
+)(NodeDropdownClass);

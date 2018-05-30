@@ -84,9 +84,9 @@ export class TxDetailsClass extends React.Component<Props, State> {
 
               {!transaction.block_height ? (
                 this.state.data.confirmationDuration ? (
-                  <Tag type="pending" text={`PENDING ~ ${this.state.data.confirmationDuration}m`} />
+                  <Tag type="pending" text={`Pending ~ ${this.state.data.confirmationDuration}m`} />
                 ) : (
-                  <Tag className="skeleton" type="pending" text="PENDING ~ 2m" />
+                  <Tag className="skeleton" type="pending" text="Pending ~ 2m" />
                 )
               ) : transaction.coinbase ? (
                 <Tag type="coinbase" text="COINBASE" />

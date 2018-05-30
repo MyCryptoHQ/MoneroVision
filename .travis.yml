@@ -1,5 +1,3 @@
-dist: trusty
-sudo: required
 language: node_js
 
 cache:
@@ -20,8 +18,8 @@ jobs:
       script: npm run prettier:diff
     - stage: Linting
       script: npm run tslint && npm run tscheck
-    - stage: Testing
-      script: npm run test:coverage -- --maxWorkers=2 && npm run report-coverage
+    # - stage: Testing
+    #   script: npm run test:coverage -- --maxWorkers=2 && npm run report-coverage
 
 notifications:
   email:

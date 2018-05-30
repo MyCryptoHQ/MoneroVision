@@ -1,3 +1,5 @@
+@import 'src/sass/variables/index';
+
 .Tag {
   padding: 0.325rem 0.5rem;
   color: white;
@@ -8,8 +10,10 @@
   margin: 0 1rem;
   letter-spacing: 0.5px;
 
-  &.pending {
-    background-color: #FBC14E;
+  &.pending:not(.skeleton) {
+    color: $blue-gray;
+    background-color: #fdfae6;
+    border: 1px solid #ffe564;
   }
   &.coinbase {
     background-color: #64a8f2;

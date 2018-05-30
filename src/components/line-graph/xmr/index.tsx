@@ -53,7 +53,7 @@ export class MoneroGraph extends React.Component<Props, State> {
     const oldest = data[0] ? data[0][1] : 0;
     const diff = current - oldest;
     const diffPercent =
-      oldest < current ? (diff / oldest * 100).toFixed(2) : (diff / current * 100).toFixed(2);
+      oldest < current ? ((diff / oldest) * 100).toFixed(2) : ((diff / current) * 100).toFixed(2);
     const low = data[0] ? data.reduce((min, p) => (p[1] < min ? p[1] : min), data[0][1]) : 0;
     const high = data[0] ? data.reduce((max, p) => (p[1] > max ? p[1] : max), data[0][1]) : 0;
 
@@ -67,10 +67,17 @@ export class MoneroGraph extends React.Component<Props, State> {
         <div className="xmr-price-data">
           <div className="left">
             <h2 className="xmr-price-data-current">
-              {current.toLocaleString('us-EN', { style: 'currency', currency: 'USD' })}
+              {current.toLocaleString(
+                'us-EN',
+                { style: 'currency', currency: 'USD' }
+              )}
             </h2>
             <p className={`xmr-price-data-difference ${diff > 0 ? 'positive' : 'negative'}`}>
-              {diff.toLocaleString('us-EN', { style: 'currency', currency: 'USD' })} ({diffPercent}%)
+              {diff.toLocaleString(
+                'us-EN',
+                { style: 'currency', currency: 'USD' }
+              )}{' '}
+              ({diffPercent}%)
             </p>
           </div>
           <div className="flex-spacer" />
@@ -79,14 +86,20 @@ export class MoneroGraph extends React.Component<Props, State> {
               <span className="label">High</span>
               <div className="flex-spacer" />
               <span className="value">
-                {high.toLocaleString('us-EN', { style: 'currency', currency: 'USD' })}
+                {high.toLocaleString(
+                  'us-EN',
+                  { style: 'currency', currency: 'USD' }
+                )}
               </span>
             </div>
             <div className="xmr-price-data-low">
               <span className="label">Low</span>
               <div className="flex-spacer" />
               <span className="value">
-                {low.toLocaleString('us-EN', { style: 'currency', currency: 'USD' })}
+                {low.toLocaleString(
+                  'us-EN',
+                  { style: 'currency', currency: 'USD' }
+                )}
               </span>
             </div>
           </div>

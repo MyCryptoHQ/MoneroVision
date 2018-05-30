@@ -4,7 +4,7 @@
 .Select-node {
   position: relative;
   &-button {
-    @include button(lighten($Navigation-bg, 10%));
+    @include button(lighten($Navigation-bg, 4%));
     color: white;
   }
   &-wrapper {
