@@ -51,7 +51,7 @@ export class Home extends React.Component {
                 rel="noopener noreferrer"
                 href="https://github.com/MyCryptoHQ/MoneroVision"
               >
-                Github
+                GitHub
               </a>.
             </p>
           </div>
