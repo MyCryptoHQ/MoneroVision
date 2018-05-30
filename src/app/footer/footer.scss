@@ -16,6 +16,9 @@
     margin: auto;
     padding: 1rem 2rem;
     max-width: 1024px;
+    @media screen and (max-width: 886px) {
+      flex-direction: column;
+    }
   }
 
   &-main-content {
@@ -24,6 +27,10 @@
     justify-items: center;
     align-items: center;
     padding: 0rem 1rem;
+    @media screen and (max-width: 886px) {
+      order: 0;
+      margin-bottom: 2rem;
+    }
     &-text {
       text-align: center;
       font-size: 0.8rem;
@@ -38,6 +45,10 @@
 
   &-logo.mycrypto {
     height: 3.6rem;
+    @media screen and (max-width: 886px) {
+      order: 1;
+      margin-bottom: 2rem;
+    }
     & > img {
       height: 3.6rem;
     }
@@ -48,6 +59,15 @@
     flex-direction: column;
     align-items: flex-end;
     width: 160px;
+    @media screen and (max-width: 886px) {
+      order: 2;
+      width: auto;
+      margin: auto;
+      > p {
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
 
   &-wrap {
@@ -65,12 +85,23 @@
     font-size: 1rem;
     font-weight: normal;
     margin: 1rem 0 0.25rem 0;
+    @media screen and (max-width: 886px) {
+      text-align: center;
+      max-width: auto;
+    }
     &-wrapper {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: flex-end;
       max-width: 150px;
+      @media screen and (max-width: 886px) {
+        text-align: center;
+        max-width: inherit;
+        max-width: 100%;
+        width: auto;
+        margin: auto;
+      }
     }
   }
   .nc-icon {
