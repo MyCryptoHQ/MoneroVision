@@ -217,7 +217,7 @@ class ConfigureNodeClass extends React.Component<Props, State> {
           // inlinelabel={pending ? 'Connecting to node...' : ''}
           required={true}
           error={urlError}
-          placeholder="https://xmrchain.net"
+          placeholder="https://monero.mycryptoapi.com"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.onChange('url', e.target.value)
           }
@@ -238,10 +238,13 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export const ConfigureNode = connect(mapStateToProps, {
-  editNode,
-  removeNode,
-  selectNode,
-  closeModal,
-  configureNode
-})(ConfigureNodeClass);
+export const ConfigureNode = connect(
+  mapStateToProps,
+  {
+    editNode,
+    removeNode,
+    selectNode,
+    closeModal,
+    configureNode
+  }
+)(ConfigureNodeClass);

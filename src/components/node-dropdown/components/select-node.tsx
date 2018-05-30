@@ -10,7 +10,7 @@ import {
   SelectNodeType
 } from 'redux/nodes/actions';
 import { AppState } from 'redux/root-reducer';
-import { NodeState as StateProps } from 'redux/nodes/reducer';
+import { NodeState as StateProps, defaultNode } from 'redux/nodes/reducer';
 import { A11yClick } from './a11y-click';
 import { OpenModalType, openModal, configureNode, ConfigureNodeType } from 'redux/modals/actions';
 
@@ -69,7 +69,7 @@ class SelectClass extends React.Component<Props> {
                   tabIndex={0}
                 >
                   <div className="selected-marker" />
-                  {node.name !== 'Default' && (
+                  {node.name !== defaultNode && (
                     <A11yClick onClick={(e: any) => this.openModal(e, node)}>
                       <button className="settings">
                         <i className="nc-icon nc-ic_settings_24px size_16px" />
@@ -99,10 +99,13 @@ const mapStateToProps = (state: AppState): StateProps => {
   };
 };
 
-export const Select = connect(mapStateToProps, {
-  editNode,
-  selectNode,
-  openModal,
-  configureNode,
-  removeNode
-})(SelectClass);
+export const Select = connect(
+  mapStateToProps,
+  {
+    editNode,
+    selectNode,
+    openModal,
+    configureNode,
+    removeNode
+  }
+)(SelectClass);
