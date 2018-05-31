@@ -1,6 +1,7 @@
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const common = require('./webpack.common.js');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
@@ -38,7 +39,29 @@ const config = merge(common, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': 'production'
     }),
-    new FaviconsWebpackPlugin(path.join(__dirname, '../src/assets/imgs/favicon.png'))
+    new FaviconsWebpackPlugin(path.join(__dirname, '../src/assets/imgs/favicon.png')),
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '../src/assets/imgs/og-01.png'),
+        to: path.join(__dirname, '../dist')
+      },
+      {
+        from: path.join(__dirname, '../src/assets/imgs/og-02.png'),
+        to: path.join(__dirname, '../dist')
+      },
+      {
+        from: path.join(__dirname, '../src/assets/imgs/og-03.png'),
+        to: path.join(__dirname, '../dist')
+      },
+      {
+        from: path.join(__dirname, '../src/assets/imgs/og-04.png'),
+        to: path.join(__dirname, '../dist')
+      },
+      {
+        from: path.join(__dirname, '../src/assets/imgs/favicon/safari-pinned-tab.svg'),
+        to: path.join(__dirname, '../dist')
+      }
+    ])
   ]
 });
 

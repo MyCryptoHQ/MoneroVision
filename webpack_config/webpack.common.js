@@ -55,16 +55,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      imgOG01: path.join(paths.assets, 'assets/imgs/og-01.png'),
-      imgOG02: path.join(paths.assets, 'assets/imgs/og-02.png'),
-      imgOG03: path.join(paths.assets, 'assets/imgs/og-03.png'),
-      imgOG04: path.join(paths.assets, 'assets/imgs/og-04.png'),
-
-      appleTouchIcon: path.join(paths.assets, 'assets/imgs/favicon/apple-touch-icon.png'),
-      safariPinnedTab: path.join(paths.assets, 'assets/imgs/favicon/safari-pinned-tab.svg'),
-      favicon3232: path.join(paths.assets, 'assets/imgs/favicon/favicon-32x32.png'),
-      favicon1616: path.join(paths.assets, 'assets/imgs/favicon/favicon-16x16.png')
+      template: 'public/index.html'
     }),
     new CleanWebpackPlugin(),
     new ExtractTextPlugin({
