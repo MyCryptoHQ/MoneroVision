@@ -154,7 +154,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                     <p>{toKB(transaction.tx_size)}</p>
                   </div>
                   <div className="Details-body-section-content-input">
-                    <p>Mixin</p>
+                    <p>Ring Size</p>
                     <p>{transaction.mixin}</p>
                   </div>
                   <div className="Details-body-section-content-input">
@@ -191,7 +191,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                 <table className="Details-body-section-table Details-body-section-content">
                   <thead>
                     <tr>
-                      <th>Public Key</th>
+                      <th>Stealth Address</th>
                       {!!transaction.outputs[0].amount && <th>Amount</th>}
                     </tr>
                   </thead>
