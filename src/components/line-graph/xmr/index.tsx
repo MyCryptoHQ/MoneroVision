@@ -25,11 +25,12 @@ export class MoneroGraph extends React.Component<Props, State> {
 
   public fetchData = () => {
     this.setState({ fetchingData: true });
-    fetchAsync('https://coincap.io/history/1day/XMR')
+    fetchAsync('https://min-api.cryptocompare.com/data/histohour?fsym=XMR&tsym=USD&limit=200')
       .then((json: any) => {
         if (json) {
+          console.log(json);
           this.setState({ fetchingData: false });
-          this.setState({ data: this.formatRawData(json.price) });
+          this.setState({ data: this.formatRawData(json.Data) });
         } else {
           throw new Error('Failed to fetch XMR data');
         }
@@ -41,8 +42,8 @@ export class MoneroGraph extends React.Component<Props, State> {
   };
 
   public formatRawData = (data: any) => {
-    return data.map((arr: number[], i: number) => {
-      return [i, arr[1], arr[0]];
+    return data.map((each: any[any], i: number) => {
+      return [i, each.close, each.time * 100];
     });
   };
 
