@@ -71,17 +71,17 @@ export const Footer = () => (
             className="Footer-social-media-link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.facebook.com/mycryptoHQ"
+            href="https://www.instagram.com/mycryptohq"
           >
-            <i className="nc-icon nc-logo-facebook size_24px" />
+            <i className="nc-icon nc-logo-instagram size_24px" />
           </a>
           <a
             className="Footer-social-media-link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.instagram.com/mycryptohq"
+            href="https://www.facebook.com/mycryptoHQ"
           >
-            <i className="nc-icon nc-logo-instagram size_24px" />
+            <i className="nc-icon nc-logo-facebook size_24px" />
           </a>
           <a
             className="Footer-social-media-link"
