@@ -25,10 +25,7 @@ export const toKB = (bytes: number | string) => {
 };
 
 export const formatApiDateStrings = (str: string) => {
-  return moment
-    .unix(parseInt(str, 10))
-    .utc()
-    .format('YYYY / MM / DD – HH:MM UTC');
+  return moment(str).format('YYYY / MM / DD  HH:mm UTC');
 };
 
 export const createReducer = (initialState: any, handlers: any) => {

@@ -92,7 +92,7 @@ export class TxDetailsClass extends React.Component<Props, State> {
                 <Tag type="coinbase" text="COINBASE" />
               ) : null}
               <div className="Details-header-timestamp">
-                {formatApiDateStrings(transaction.timestamp)}
+                {formatApiDateStrings(transaction.timestamp_utc)}
               </div>
             </div>
             <div className="Details-body">
