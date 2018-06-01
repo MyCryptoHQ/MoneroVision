@@ -28,7 +28,6 @@ export class MoneroGraph extends React.Component<Props, State> {
     fetchAsync('https://min-api.cryptocompare.com/data/histohour?fsym=XMR&tsym=USD&limit=200')
       .then((json: any) => {
         if (json) {
-          console.log(json);
           this.setState({ fetchingData: false });
           this.setState({ data: this.formatRawData(json.Data) });
         } else {
