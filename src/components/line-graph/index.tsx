@@ -149,7 +149,8 @@ export class LineGraph extends React.Component<Props, State> {
   );
 
   public getDate = (point: Point) => {
-    return moment(point[2]).format('MMM DD, LT');
+    const date = point[2];
+    return moment.unix(date).format('MMM DD, LT');
   };
 
   public render() {

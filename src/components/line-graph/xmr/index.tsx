@@ -25,7 +25,7 @@ export class MoneroGraph extends React.Component<Props, State> {
 
   public fetchData = () => {
     this.setState({ fetchingData: true });
-    fetchAsync('https://min-api.cryptocompare.com/data/histohour?fsym=XMR&tsym=USD&limit=200')
+    fetchAsync('https://proxy.mycryptoapi.com/mv')
       .then((json: any) => {
         if (json) {
           this.setState({ fetchingData: false });
@@ -41,8 +41,8 @@ export class MoneroGraph extends React.Component<Props, State> {
   };
 
   public formatRawData = (data: any) => {
-    return data.map((each: any[any], i: number) => {
-      return [i, each.close, each.time * 100];
+    return data.map((_: any[any], i: number) => {
+      return [i, _.close, _.time];
     });
   };
 
@@ -62,7 +62,7 @@ export class MoneroGraph extends React.Component<Props, State> {
         <div className="xmr-price-header">
           <p className="title">Monero Price</p>
           <div className="flex-spacer" />
-          <p className="time">24h</p>
+          <p className="time">7d</p>
         </div>
         <div className="xmr-price-data">
           <div className="left">
@@ -113,7 +113,7 @@ export class MoneroGraph extends React.Component<Props, State> {
         <div className="xmr-price-header">
           <p className="title">Monero Price</p>
           <div className="flex-spacer" />
-          <p className="time">24h</p>
+          <p className="time">7d</p>
         </div>
         <div className="xmr-price-data" aria-hidden={true}>
           <div className="left">
