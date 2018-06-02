@@ -41,8 +41,8 @@ export class MoneroGraph extends React.Component<Props, State> {
   };
 
   public formatRawData = (data: any) => {
-    return data.map((_: any[any], i: number) => {
-      return [i, _.close, _.time];
+    return data.map((point: { [key: string]: number }, i: number) => {
+      return [i, point.close, point.time];
     });
   };
 
