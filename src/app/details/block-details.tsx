@@ -56,7 +56,9 @@ export class BlockDetailsClass extends React.Component<Props, State> {
             <div className="Details-header">
               <h1 className="Details-header-title">Block Details</h1>
               <div className="flex-spacer" />
-              <p className="Details-header-timestamp">{formatApiDateStrings(block.timestamp)}</p>
+              <p className="Details-header-timestamp">
+                {formatApiDateStrings(block.timestamp_utc)}
+              </p>
             </div>
             <div className="Details-body">
               <div className="Details-body-section">

@@ -23,8 +23,8 @@ export class Home extends React.Component {
     const clientWidth = document.documentElement.clientWidth;
     // take rem into account when adjusting width for padding
     const width =
-      clientWidth < 900 ? (clientWidth > 600 ? clientWidth - 32 : clientWidth - 26) : 400;
-    const height = clientWidth > 600 && clientWidth < 900 ? 150 : 100;
+      clientWidth <= 1016 ? (clientWidth > 600 ? clientWidth - 64 : clientWidth - 26) : 400;
+    const height = clientWidth > 600 && clientWidth <= 1016 ? 150 : 100;
     // adjust for border width
     this.setState({ width: width - 2, height });
   };
