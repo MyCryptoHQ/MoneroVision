@@ -6,14 +6,14 @@ MoneroVision is a block explorer for Monero
 
 ## Contributing
 
-If your new to open source, check out some of these resources to help you get started.
+If you're new to open source, check out some of these resources to help you get started.
 
 * [Github - Open Source Guides ](https://opensource.guide)
 * [EggHead.io - How to contribute to open source](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github)
 
 ### Open and Transparent
 
-All our work happens directly on [GitHub](https://github.com/MyCryptoHQ/MoneroVision). All pull requests by core team members and external contributors go through the same review process.
+All of our work happens directly on [GitHub](https://github.com/MyCryptoHQ/MoneroVision). All pull requests by core team members and external contributors go through the same review process.
 
 ### Branch Organization
 
